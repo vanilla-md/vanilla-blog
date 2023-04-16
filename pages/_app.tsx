@@ -1,21 +1,26 @@
 import type { AppProps } from 'next/app';
-import { ThemeProvider, DefaultTheme } from 'styled-components';
+import { SSRProvider, ThemeProvider, theme, BaseStyles } from '@primer/react';
+import deepmerge from 'deepmerge';
 import GlobalStyle from '../components/globalstyles';
 
-const theme: DefaultTheme = {
-  colors: {
-    primary: '#111',
-    secondary: '#0070f3',
+const customTheme = deepmerge(theme, {
+  fonts: {
+    normal: 'system-ui',
+    mono: 'ui-monospace',
   },
-};
+});
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <SSRProvider>
+        <ThemeProvider theme={customTheme} colorMode="auto" preventSSRMismatch>
+          <BaseStyles>
+            <GlobalStyle />
+            <Component {...pageProps} />
+          </BaseStyles>
+        </ThemeProvider>
+      </SSRProvider>
     </>
   );
 }
