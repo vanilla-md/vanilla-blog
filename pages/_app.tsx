@@ -2,12 +2,15 @@ import type { AppProps } from 'next/app';
 import { SSRProvider, ThemeProvider, theme, BaseStyles } from '@primer/react';
 import deepmerge from 'deepmerge';
 import GlobalStyle from '../components/globalstyles';
+import Layout from '@/components/layout';
 
 const customTheme = deepmerge(theme, {
   fonts: {
     normal: 'system-ui',
-    mono: 'ui-monospace',
+    mono: 'monospace, ui-monospace',
   },
+  // not working
+  // breakpoints: ['768px', '1012px'],
 });
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -17,7 +20,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <ThemeProvider theme={customTheme} colorMode="auto" preventSSRMismatch>
           <BaseStyles>
             <GlobalStyle />
-            <Component {...pageProps} />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
           </BaseStyles>
         </ThemeProvider>
       </SSRProvider>
