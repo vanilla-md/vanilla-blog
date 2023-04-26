@@ -1,15 +1,15 @@
 import { PageHeader } from '@primer/react/drafts';
-import Link from './link';
+import viewer from '@/generated/viewer.json';
 
 export default function Header() {
   return (
     <>
       <PageHeader sx={{ gap: 0 }}>
         <PageHeader.TitleArea>
-          <PageHeader.Title sx={{ fontSize: 4 }}>Blog</PageHeader.Title>
+          <PageHeader.Title sx={{ fontSize: 4 }}>{viewer.name ?? viewer.login}</PageHeader.Title>
         </PageHeader.TitleArea>
         <PageHeader.Description sx={{ fontSize: 3, color: 'fg.muted' }}>
-          Welcome to my blog.
+          {viewer.bio}
         </PageHeader.Description>
       </PageHeader>
     </>

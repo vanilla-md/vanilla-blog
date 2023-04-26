@@ -3,10 +3,11 @@ import {
   UnderlineNav,
   UnderlineNavItemProps as PrimerUnderlineNavItemProps,
 } from '@primer/react/drafts';
-import { HomeIcon, BookIcon, RepoIcon, PersonIcon } from '@primer/octicons-react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import profile from '../generated/profile.json';
+import { HomeIcon, BookIcon, RepoIcon } from '@primer/octicons-react';
+import OctofaceIcon from './octofaceIcon';
+import viewer from '../generated/viewer.json';
 
 export default function Navigation() {
   const items = [
@@ -15,7 +16,7 @@ export default function Navigation() {
       navigation: 'Repositories',
       href: '/repositories',
       icon: RepoIcon,
-      counter: profile.public_repos,
+      counter: viewer.repositories.totalCount,
     },
     {
       navigation: 'Posts',
@@ -26,7 +27,7 @@ export default function Navigation() {
     {
       navigation: 'About',
       href: '/about',
-      icon: PersonIcon,
+      icon: OctofaceIcon,
     },
   ];
   return (
@@ -40,6 +41,7 @@ export default function Navigation() {
           'calc(296px + 24px * 2)',
           'calc((100vw - 1280px) / 2 + 296px + 24px * 2)',
         ],
+        bg: 'canvas.default',
       }}
     >
       {items.map((item) => (
