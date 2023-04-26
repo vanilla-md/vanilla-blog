@@ -1,15 +1,16 @@
 import { Box } from '@primer/react';
 import Header from './header';
 import Navigation from './navigation';
-import Profile from './profile';
 import Avatar from './avatar';
+import Profile from './profile';
+import Footer from './footer';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <Box
       sx={{
         display: 'grid',
-        gridTemplateRows: 'auto auto auto auto 1fr',
+        gridTemplateRows: 'auto auto auto auto auto 1fr',
         gridTemplateColumns: [
           'calc(100% / 6 + 36px) 1fr',
           'calc(100% / 6 + 36px) 1fr',
@@ -61,8 +62,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       >
         <Profile />
       </Box>
-      <Box sx={{ gridRow: ['3', '3', '3 / 6'], gridColumn: ['1 / 3', '1 / 3', '3 / 4'] }}>
+      <Box sx={{ gridRow: ['3', '3', '3 / -1'], gridColumn: ['1 / 3', '1 / 3', '3 / 4'] }}>
         {children}
+      </Box>
+      <Box
+        sx={{
+          display: ['none', 'none', 'block'],
+          gridRow: [undefined, undefined, '5 / 6'],
+          gridColumn: [undefined, undefined, '2 / 3'],
+        }}
+      >
+        <Footer />
       </Box>
     </Box>
   );

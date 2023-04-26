@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prepare": "node -r @swc-node/register scripts/prepare.ts",
+    "prefetch": "node -r @swc-node/register scripts/prefetch.ts",
     "build": "next build",
     "dev": "next dev -H 127.0.0.1",
     "lint": "next lint",
