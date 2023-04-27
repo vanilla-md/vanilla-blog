@@ -1,7 +1,8 @@
 import type { AppProps } from 'next/app';
 import { SSRProvider, ThemeProvider, theme, BaseStyles } from '@primer/react';
+import { StyleSheetManager } from 'styled-components';
 import deepmerge from 'deepmerge';
-import GlobalStyle from '../components/globalstyles';
+import GlobalStyle from '@/components/globalstyles';
 import Layout from '@/components/layout';
 
 const customTheme = deepmerge(theme, {
@@ -16,16 +17,18 @@ const customTheme = deepmerge(theme, {
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <SSRProvider>
-        <ThemeProvider theme={customTheme} colorMode="auto" preventSSRMismatch>
-          <BaseStyles>
-            <GlobalStyle />
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </BaseStyles>
-        </ThemeProvider>
-      </SSRProvider>
+      <StyleSheetManager disableVendorPrefixes={process.env.NODE_ENV === 'development'}>
+        <SSRProvider>
+          <ThemeProvider theme={customTheme} colorMode="auto" preventSSRMismatch>
+            <BaseStyles>
+              <GlobalStyle />
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </BaseStyles>
+          </ThemeProvider>
+        </SSRProvider>
+      </StyleSheetManager>
     </>
   );
 }

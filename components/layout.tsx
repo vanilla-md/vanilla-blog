@@ -62,7 +62,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       >
         <Profile />
       </Box>
-      <Box sx={{ gridRow: ['3', '3', '3 / -1'], gridColumn: ['1 / 3', '1 / 3', '3 / 4'] }}>
+      <Box
+        sx={{
+          gridRow: ['3', '3', '3 / -1'],
+          gridColumn: ['1 / 3', '1 / 3', '3 / 4'],
+          padding: [3, 3, 0],
+        }}
+      >
         {children}
       </Box>
       <Box
