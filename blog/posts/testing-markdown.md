@@ -1,6 +1,7 @@
 ---
 title: 'Sample GFM for testing'
 date: '2023-04-28'
+tags: [GFM, Testing]
 ---
 
 [Quickstart for writing on GitHub](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/quickstart-for-writing-on-github)

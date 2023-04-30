@@ -5,6 +5,9 @@ import type { VFile } from 'vfile';
 export interface Matter {
   title?: string;
   date?: string | Date;
+  published?: string | Date;
+  modified?: string | Date;
+  tags?: string[];
 }
 
 export interface Meta {

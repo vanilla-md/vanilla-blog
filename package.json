@@ -19,6 +19,7 @@
     "@octokit/graphql-schema": "^14.4.0",
     "@primer/octicons-react": "^18.3.0",
     "@primer/react": "^35.24.0",
+    "@primer/styled-octicons": "^18.3.0",
     "@styled-system/css": "^5.1.5",
     "@wooorm/starry-night": "^2.0.0",
     "deepmerge": "^4.3.1",

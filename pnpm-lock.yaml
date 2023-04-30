@@ -16,6 +16,9 @@ dependencies:
   '@primer/react':
     specifier: ^35.24.0
     version: 35.24.0(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.9)
+  '@primer/styled-octicons':
+    specifier: ^18.3.0
+    version: 18.3.0(react@18.2.0)(styled-components@5.3.9)
   '@styled-system/css':
     specifier: ^5.1.5
     version: 5.1.5
@@ -732,6 +735,22 @@ packages:
       styled-system: 5.1.5
     dev: false
 
+  /@primer/styled-octicons@18.3.0(react@18.2.0)(styled-components@5.3.9):
+    resolution: {integrity: sha512-brEF+EKo3Sm7LheX8SxfQWDgUomF6bDHZQ04q1U894dgloe1EMXg/GrFBxQtF88NyF3MqGbcUl9ROUg6SKhCow==}
+    engines: {node: '>=8'}
+    peerDependencies:
+      react: '>=15'
+      styled-components: 4.x || 5.x
+    dependencies:
+      '@styled-system/css': 5.1.5
+      '@styled-system/prop-types': 5.1.5(styled-system@5.1.5)
+      '@types/styled-system': 5.1.16
+      '@types/styled-system__css': 5.0.17
+      react: 18.2.0
+      styled-components: 5.3.9(react-dom@18.2.0)(react-is@16.13.1)(react@18.2.0)
+      styled-system: 5.1.5
+    dev: false
+
   /@puppeteer/browsers@0.5.0(typescript@5.0.4):
     resolution: {integrity: sha512-Uw6oB7VvmPRLE4iKsjuOh8zgDabhNX67dzo8U/BB0f9527qx+4eeUs+korU98OhG5C4ubg7ufBgVi63XYwS6TQ==}
     engines: {node: '>=14.1.0'}
@@ -810,6 +829,15 @@ packages:
     resolution: {integrity: sha512-60IZfMXEOOZe3l1mCu6sj/2NAyUmES2kR9Kzp7s2D3P4qKsZWxD1Se1+wJvevb+1TP+ZMkGPEYYXRyU8M1aF5A==}
     dependencies:
       '@styled-system/core': 5.1.2
+
+  /@styled-system/prop-types@5.1.5(styled-system@5.1.5):
+    resolution: {integrity: sha512-D/0d0ltp8QGhwrRifivQeIdoKkQDpFIGi98DXdpRXOaJStYXLx6aBSfS/YYIijbF1nZs1hWlAgXxYvDhCxHLSA==}
+    peerDependencies:
+      styled-system: ^5.0.0-8
+    dependencies:
+      prop-types: 15.8.1
+      styled-system: 5.1.5
+    dev: false
 
   /@styled-system/props@5.1.5:
     resolution: {integrity: sha512-FXhbzq2KueZpGaHxaDm8dowIEWqIMcgsKs6tBl6Y6S0njG9vC8dBMI6WSLDnzMoSqIX3nSKHmOmpzpoihdDewg==}
@@ -4989,7 +5017,6 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       react-is: 16.13.1
-    dev: true
 
   /property-information@6.2.0:
     resolution: {integrity: sha512-kma4U7AFCTwpqq5twzC1YVIDXSqg6qQK6JN0smOw8fgRy1OkMi0CYSzFmsy6dnqSenamAtj0CyXMUJ1Mf6oROg==}
