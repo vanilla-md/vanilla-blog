@@ -5,6 +5,8 @@ import deepmerge from 'deepmerge';
 import GlobalStyle from '@/components/globalstyles';
 import Layout from '@/components/layout';
 
+import 'github-markdown-css/github-markdown.css';
+
 const customTheme = deepmerge(theme, {
   fonts: {
     normal: 'system-ui',

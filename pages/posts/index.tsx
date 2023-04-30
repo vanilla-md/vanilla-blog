@@ -1,25 +1,19 @@
 import Link from '@/components/link';
 import { getSortedPostsData } from '@/lib/posts';
+import { PostData } from '@/types';
 import { GetStaticProps } from 'next';
 
-export default function Posts({
-  allPostsData,
-}: {
-  allPostsData: {
-    date: string;
-    title: string;
-    slug: string;
-  }[];
-}) {
+export default function Posts({ allPostsData }: { allPostsData: (PostData & { slug: string })[] }) {
   return (
     <>
       <div>Posts</div>
       <ul>
-        {allPostsData.map(({ slug: id, date, title }) => (
-          <li key={id}>
-            <Link href={`/posts/${id}`}>{title}</Link>
+        {allPostsData.map(({ slug, published, title, description }) => (
+          <li key={slug}>
+            <Link href={`/posts/${slug}`}>{title}</Link>
             <br />
-            {date}
+            {published}
+            {description}
           </li>
         ))}
       </ul>
@@ -28,7 +22,7 @@ export default function Posts({
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const allPostsData = getSortedPostsData();
+  const allPostsData = await getSortedPostsData();
   return {
     props: {
       allPostsData,

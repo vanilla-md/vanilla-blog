@@ -1,5 +1,6 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 import Head from 'next/head';
+import { Box } from '@primer/react';
 import { getAllPostSlugs, getPostData } from '@/lib/posts';
 
 export default function Post({
@@ -16,11 +17,19 @@ export default function Post({
       <Head>
         <title>{postData.title}</title>
       </Head>
-      <article>
-        <h1>{postData.title}</h1>
-
-        <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
-      </article>
+      <Box
+        as="article"
+        sx={{
+          borderWidth: 1,
+          borderStyle: 'solid',
+          borderColor: 'border.default',
+          borderRadius: 2,
+          px: 5,
+          py: 4,
+        }}
+      >
+        <div className="markdown-body" dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+      </Box>
     </>
   );
 }

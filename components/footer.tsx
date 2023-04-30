@@ -24,7 +24,8 @@ function Footer({ sx, className }: Props) {
       <Text sx={{ fontSize: 1 }}>
         <MutedLink href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">
           CC BY-NC-SA 4.0
-        </MutedLink>
+        </MutedLink>{' '}
+        (unless otherwise stated)
       </Text>
     </FooterBase>
   );

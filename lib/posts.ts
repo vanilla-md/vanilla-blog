@@ -1,34 +1,45 @@
 import fs from 'fs';
 import path from 'path';
-import matter from 'gray-matter';
-import { remark } from 'remark';
-import html from 'remark-html';
+import { read } from 'to-vfile';
+import { createMarkdownProcessor } from './markdown';
+import { generatePageDate } from './postData';
+import { Matter } from '@/types';
 
 const postsDirectory = path.join(process.cwd(), './blog/posts');
+const processor = createMarkdownProcessor();
+const metaOnlyProcessor = createMarkdownProcessor(true);
 
-export function getSortedPostsData() {
+export async function getSortedPostsData() {
   // Get file names under /posts
   const fileNames = fs.readdirSync(postsDirectory);
-  const allPostsData = fileNames.map((fileName) => {
-    // Remove ".md" from file name to get id
-    const slug = fileName.replace(/\.md$/, '');
+  const allPostsData = await Promise.all(
+    fileNames.map(async (fileName) => {
+      // Remove ".md" from file name to get id
+      const slug = fileName.replace(/\.md$/, '');
 
-    // Read markdown file as string
-    const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
+      // Read markdown file as string
+      const fullPath = path.join(postsDirectory, fileName);
+      const file = await read(fullPath);
 
-    // Use gray-matter to parse the post metadata section
-    const matterResult = matter(fileContents);
+      const label = `Remark: processed meta of ${fullPath}`;
+      console.time(label);
+      const processedFile = await metaOnlyProcessor.process(file);
+      const pageData = generatePageDate(
+        processedFile.data.matter ?? {},
+        processedFile.data.meta ?? {}
+      );
+      console.timeEnd(label);
 
-    // Combine the data with the id
-    return {
-      slug: slug,
-      ...(matterResult.data as { date: string; title: string }),
-    };
-  });
-  // Sort posts by date
+      // Combine the data with the id
+      return {
+        slug,
+        ...pageData,
+      };
+    })
+  );
+  // Sort posts by published
   return allPostsData.sort((a, b) => {
-    if (a.date < b.date) {
+    if (a.published < b.published) {
       return 1;
     } else {
       return -1;
@@ -49,19 +60,17 @@ export function getAllPostSlugs() {
 
 export async function getPostData(slug: string) {
   const fullPath = path.join(postsDirectory, `${slug}.md`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const file = await read(fullPath);
+  const label = `Remark: processed ${fullPath}`;
+  console.time(label);
+  const processedFile = await processor.process(file);
+  const matterResult = processedFile.data.matter;
+  const contentHtml = processedFile.toString();
+  console.timeEnd(label);
 
-  // Use gray-matter to parse the post metadata section
-  const matterResult = matter(fileContents);
-
-  // Use remark to convert markdown into HTML string
-  const processedContent = await remark().use(html).process(matterResult.content);
-  const contentHtml = processedContent.toString();
-
-  // Combine the data with the id and contentHtml
   return {
     slug: slug,
     contentHtml,
-    ...(matterResult.data as { date: string; title: string }),
+    ...(matterResult as Matter),
   };
 }

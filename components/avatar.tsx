@@ -23,7 +23,7 @@ type AvatarProps = {} & ComponentProps<typeof AvatarWrapper>;
 export default function Avatar({ sx, className, href }: AvatarProps) {
   return (
     <AvatarWrapper sx={{ verticalAlign: 'middle', ...sx }} href={href} className={className}>
-      <StyledAvatarImg src={viewer.avatarUrl} fill alt="logo" />
+      <StyledAvatarImg src={viewer.avatarUrl} fill alt="avatar" />
     </AvatarWrapper>
   );
 }

@@ -66,8 +66,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         sx={{
           gridRow: ['3', '3', '3 / -1'],
           gridColumn: ['1 / 3', '1 / 3', '3 / 4'],
-          padding: [3, 3, 0],
+          padding: 3,
         }}
+        as="main"
       >
         {children}
       </Box>

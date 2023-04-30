@@ -116,7 +116,7 @@ async function prefetch() {
   const avatarFilename =
     path.basename(new URL(viewer.avatarUrl).pathname) + (avatarMime ? '.' + avatarMime : '');
   // await outputFile(
-  //   path.join('./public', avatarFilename),
+  //   path.join('./public/images', avatarFilename),
   //   Buffer.from(await avatarBlob.arrayBuffer())
   // );
   viewer.avatarUrl = path.join('/', avatarFilename);
