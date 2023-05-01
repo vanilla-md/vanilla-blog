@@ -4,6 +4,7 @@ import { StyleSheetManager } from 'styled-components';
 import deepmerge from 'deepmerge';
 import GlobalStyle from '@/components/globalstyles';
 import Layout from '@/components/layout';
+import Head from 'next/head';
 
 import 'github-markdown-css/github-markdown.css';
 
@@ -19,6 +20,9 @@ const customTheme = deepmerge(theme, {
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
+      <Head>
+        <meta name="generator" content="vanilla" />
+      </Head>
       <StyleSheetManager disableVendorPrefixes={process.env.NODE_ENV === 'development'}>
         <SSRProvider>
           <ThemeProvider theme={customTheme} colorMode="auto" preventSSRMismatch>

@@ -2,13 +2,13 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 import Head from 'next/head';
 import { Box } from '@primer/react';
 import { getAllPostSlugs, getPostData } from '@/lib/posts';
+import { PostData } from '@/types';
 
 export default function Post({
   postData,
 }: {
-  postData: {
-    title: string;
-    date: string;
+  postData: PostData & {
+    slug: string;
     contentHtml: string;
   };
 }) {
@@ -16,6 +16,9 @@ export default function Post({
     <>
       <Head>
         <title>{postData.title}</title>
+        <meta name="description" content={postData.description} />
+        <meta name="date" content={postData.published}></meta>
+        {postData.tags && <meta name="keywords" content={postData.tags.join(', ')}></meta>}
       </Head>
       <Box
         as="article"

@@ -3,7 +3,6 @@ import path from 'path';
 import { read } from 'to-vfile';
 import { createMarkdownProcessor } from './markdown';
 import { generatePageDate } from './postData';
-import { Matter } from '@/types';
 
 const postsDirectory = path.join(process.cwd(), './blog/posts');
 const processor = createMarkdownProcessor();
@@ -24,13 +23,13 @@ export async function getSortedPostsData() {
       const label = `Remark: processed meta of ${fullPath}`;
       console.time(label);
       const processedFile = await metaOnlyProcessor.process(file);
+      console.timeEnd(label);
       const pageData = generatePageDate(
         processedFile.data.matter ?? {},
         processedFile.data.meta ?? {}
       );
-      console.timeEnd(label);
 
-      // Combine the data with the id
+      // Combine the data with the slug
       return {
         slug,
         ...pageData,
@@ -64,13 +63,13 @@ export async function getPostData(slug: string) {
   const label = `Remark: processed ${fullPath}`;
   console.time(label);
   const processedFile = await processor.process(file);
-  const matterResult = processedFile.data.matter;
-  const contentHtml = processedFile.toString();
   console.timeEnd(label);
+  const contentHtml = processedFile.toString();
+  const pageData = generatePageDate(processedFile.data.matter ?? {}, processedFile.data.meta ?? {});
 
   return {
     slug: slug,
     contentHtml,
-    ...(matterResult as Matter),
+    ...pageData,
   };
 }
