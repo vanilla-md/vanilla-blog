@@ -13,7 +13,6 @@ export default function Home() {
         <title>My Blog</title>
         <meta name="description" content="Welcome to my personal blog" />
         <meta name="keywords" content="blog" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Box>

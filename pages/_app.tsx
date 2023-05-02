@@ -26,6 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <meta name="author" content={name} />
         <meta name="generator" content="lonr/vanilla" />
+        <link rel="icon" href={viewer.avatarUrl} />
       </Head>
       <StyleSheetManager disableVendorPrefixes={process.env.NODE_ENV === 'development'}>
         <SSRProvider>
