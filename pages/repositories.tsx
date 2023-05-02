@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next';
 import repos from '@/generated/repos.json';
+import Head from 'next/head';
 
 export default function Repositories({
   repos,
@@ -11,6 +12,11 @@ export default function Repositories({
 }) {
   return (
     <>
+      <Head>
+        <title>My GitHub Repositories</title>
+        <meta name="description" content="Check out my open source projects" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div>Repositories</div>
       <ul>
         {repos.map(({ id, full_name }) => (

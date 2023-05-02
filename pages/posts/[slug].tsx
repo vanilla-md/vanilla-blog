@@ -18,7 +18,7 @@ export default function Post({
         <title>{postData.title}</title>
         <meta name="description" content={postData.description} />
         <meta name="date" content={postData.published}></meta>
-        {postData.tags && <meta name="keywords" content={postData.tags.join(', ')}></meta>}
+        {postData.tags?.length && <meta name="keywords" content={postData.tags.join(', ')}></meta>}
       </Head>
       <Box
         as="article"

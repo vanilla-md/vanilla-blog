@@ -1,8 +1,20 @@
-// 请用 TypeScript 写一个 unified.js 插件 remarkAddH1，如果 mdast 中没有 level 1 的 heading，则根据 file.data.matter.title 添加 h1 heading
+import { select } from 'unist-util-select';
+import { noCase } from 'no-case';
+import { titleCase } from 'title-case';
 import type { VFile } from 'vfile';
 import type { Plugin } from 'unified';
 import type { Root } from 'mdast';
-import { select } from 'unist-util-select';
+
+export function titleFromBasename(basename: string): string {
+  const regex = /^(?:\d{4}-\d{2}-\d{2}-)?(.*)\.md$/;
+  const matches = basename!.match(regex);
+
+  if (matches !== null) {
+    return titleCase(noCase(matches[1]));
+  }
+
+  return '';
+}
 
 interface RemarkAddH1Options {
   title?: string;
@@ -18,7 +30,12 @@ const remarkAddH1: Plugin<[RemarkAddH1Options?], Root, Root> = (options = {}) =>
       tree.children.unshift({
         type: 'heading',
         depth: 1,
-        children: [{ type: 'text', value: title || file.data.matter?.title || '' }],
+        children: [
+          {
+            type: 'text',
+            value: title || file.data.matter?.title || titleFromBasename(file.basename!),
+          },
+        ],
       });
     }
   };

@@ -60,7 +60,7 @@ export const createMarkdownProcessor = (
         content: h('span.octicon.octicon-link'),
       })
       .use(rehypeInferTitleMeta)
-      .use(rehypeInferDescriptionMeta)
+      .use(rehypeInferDescriptionMeta, { inferDescriptionHast: true })
       .use(rehypeInferReadingTimeMeta)
       .use(rehypeStringify)
   );

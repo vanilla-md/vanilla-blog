@@ -1,7 +1,8 @@
-import { Box, Heading, Label, LabelGroup, RelativeTime, Truncate, themeGet } from '@primer/react';
+import { Box, Heading, LabelGroup, RelativeTime } from '@primer/react';
+import { CalendarIcon, ClockIcon, PencilIcon } from '@primer/octicons-react';
 import Link from './link';
-import { PostData } from '@/types';
 import SolidLabel from './solidLabel';
+import { PostData } from '@/types';
 import { isSameDay } from '@/utils';
 
 type PostItemProps = PostData & { slug: string };
@@ -51,14 +52,16 @@ export function PostItem({
       </Box>
       <Box sx={{ mt: 2, fontSize: 0, color: 'fg.muted' }}>
         <Box as="span" sx={{ mr: 3 }}>
-          Published <RelativeTime datetime={published} />
+          <CalendarIcon /> Published <RelativeTime datetime={published} />
         </Box>
         {!isSameDay(new Date(published), new Date(modified)) && (
           <Box as="span" sx={{ mr: 3 }}>
-            Modified <RelativeTime datetime={modified} />
+            <PencilIcon /> Modified <RelativeTime datetime={modified} />
           </Box>
         )}
-        <Box as="span">Reading Time: {readingTime}</Box>
+        <Box as="span">
+          <ClockIcon /> Reading Time: {readingTime}
+        </Box>
       </Box>
     </Box>
   );

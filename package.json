@@ -2,6 +2,7 @@
   "name": "vanilla",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/lonr/vanilla"
@@ -10,7 +11,8 @@
     "build": "next build",
     "dev": "next dev -H 127.0.0.1",
     "lint": "next lint",
-    "prefetch": "node -r @swc-node/register scripts/prefetch.ts",
+    "gen-rss": "tsx scripts/genRss.ts",
+    "prefetch": "tsx scripts/prefetch.ts",
     "start": "next start"
   },
   "dependencies": {
@@ -28,10 +30,12 @@
     "github-slugger": "^2.0.0",
     "gray-matter": "^4.0.3",
     "hast-util-select": "^5.0.5",
+    "hast-util-to-html": "^8.0.4",
     "hast-util-to-string": "^2.0.0",
     "hastscript": "^7.2.0",
     "mime": "^3.0.0",
     "next": "13.3.0",
+    "no-case": "^3.0.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "rehype-autolink-headings": "^6.1.1",
@@ -56,6 +60,7 @@
     "sharp": "^0.32.0",
     "styled-components": "^5.3.9",
     "styled-system": "^5.1.5",
+    "title-case": "^3.0.3",
     "to-vfile": "^7.2.4",
     "unified": "^10.1.2",
     "unified-infer-git-meta": "^1.2.0",
@@ -63,10 +68,10 @@
     "unist-util-visit": "^4.1.2",
     "vfile": "^5.3.7",
     "vfile-matter": "^4.0.1",
-    "xast-util-feed": "^1.2.2"
+    "xast-util-feed": "^1.2.2",
+    "xast-util-to-xml": "^3.0.2"
   },
   "devDependencies": {
-    "@swc-node/register": "^1.6.4",
     "@types/fs-extra": "^11.0.1",
     "@types/hast": "^2.3.4",
     "@types/mdast": "^3.0.11",
@@ -81,6 +86,7 @@
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
     "eslint-plugin-primer-react": "^3.0.0",
+    "tsx": "^3.12.7",
     "typescript": "5.0.4"
   }
 }

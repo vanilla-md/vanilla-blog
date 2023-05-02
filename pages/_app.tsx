@@ -5,6 +5,7 @@ import deepmerge from 'deepmerge';
 import GlobalStyle from '@/components/globalstyles';
 import Layout from '@/components/layout';
 import Head from 'next/head';
+import viewer from '@/generated/viewer.json';
 
 import 'github-markdown-css/github-markdown.css';
 
@@ -17,11 +18,14 @@ const customTheme = deepmerge(theme, {
   // breakpoints: ['768px', '1012px'],
 });
 
+const name = viewer.name ?? viewer.login;
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <meta name="generator" content="vanilla" />
+        <meta name="author" content={name} />
+        <meta name="generator" content="lonr/vanilla" />
       </Head>
       <StyleSheetManager disableVendorPrefixes={process.env.NODE_ENV === 'development'}>
         <SSRProvider>
