@@ -1,10 +1,10 @@
 import Head from 'next/head';
 import { Box, Text } from '@primer/react';
-import viewer from '@/generated/viewer.json';
+import siteData from '@/generated/siteData.json';
 import Showcase from '@/components/showcase';
 import { ProfileItemShowcase } from '@octokit/graphql-schema';
 
-const itemShowcase = viewer.itemShowcase;
+const itemShowcase = siteData.itemShowcase;
 
 export default function Home() {
   return (

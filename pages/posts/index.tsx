@@ -4,12 +4,10 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { PostItem } from '@/components/postItem';
 import { getSortedPostsData } from '@/lib/posts';
-import type { PostData } from '@/types';
-import viewer from '@/generated/viewer.json';
+import siteData from '@/generated/siteData.json';
+import { PageData } from '@/lib/pageData';
 
-const name = viewer.name ?? viewer.login;
-
-export default function Posts({ allPostsData }: { allPostsData: (PostData & { slug: string })[] }) {
+export default function Posts({ allPostsData }: { allPostsData: (PageData & { slug: string })[] }) {
   return (
     <>
       <Head>

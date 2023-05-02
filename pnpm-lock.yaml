@@ -28,6 +28,9 @@ dependencies:
   deepmerge:
     specifier: ^4.3.1
     version: 4.3.1
+  dotenv:
+    specifier: ^16.0.3
+    version: 16.0.3
   fs-extra:
     specifier: ^11.1.1
     version: 11.1.1
@@ -158,8 +161,8 @@ dependencies:
     specifier: ^4.0.1
     version: 4.0.1
   xast-util-feed:
-    specifier: ^1.2.2
-    version: 1.2.2
+    specifier: ^1.2.3
+    version: 1.2.3
   xast-util-to-xml:
     specifier: ^3.0.2
     version: 3.0.2
@@ -2479,6 +2482,11 @@ packages:
       dom-serializer: 2.0.0
       domelementtype: 2.3.0
       domhandler: 5.0.3
+    dev: false
+
+  /dotenv@16.0.3:
+    resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
+    engines: {node: '>=12'}
     dev: false
 
   /electron-to-chromium@1.4.368:
@@ -6563,8 +6571,8 @@ packages:
         optional: true
     dev: false
 
-  /xast-util-feed@1.2.2:
-    resolution: {integrity: sha512-Tr32ggR8bdZkeLDbR0fT7Vgr/shbLf/teapU249wEyY0K4juZSnVIefdfsHdhwPwmtrepy1hs842nIvxZGCQfA==}
+  /xast-util-feed@1.2.3:
+    resolution: {integrity: sha512-a3ffKbqvjlCQeCvREM9i6b5DpaB9fGt1d1FLXghipbvE77ImSvygaiLaLwhcS8y7p1skrCaXqi22LcW9co1xGw==}
     dependencies:
       '@types/xast': 1.0.2
       bcp-47-normalize: 2.2.0

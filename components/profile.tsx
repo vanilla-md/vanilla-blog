@@ -3,7 +3,7 @@ import sx, { SxProp } from '@primer/react/lib-esm/sx';
 import styled from 'styled-components';
 import { padHttp } from '@/utils/helpers';
 import { Icon } from './icon';
-import viewer from '@/generated/viewer.json';
+import siteData from '@/generated/siteData.json';
 import MutedLink from './mutedLink';
 
 const ProfileBase = styled.address<SxProp>`
@@ -33,36 +33,36 @@ export function VCard() {
   return (
     <VCardList>
       {[
-        viewer.name && (
-          <VCardListItem key={'github:' + viewer.login}>
+        siteData.name && (
+          <VCardListItem key={'github:' + siteData.login}>
             <VCardListIcon iconName="mark-github" />
-            <MutedLink href={viewer.url} sx={{ fontWeight: 'bold' }}>
-              @{viewer.login}
+            <MutedLink href={siteData.url} sx={{ fontWeight: 'bold' }}>
+              @{siteData.login}
             </MutedLink>
           </VCardListItem>
         ),
-        viewer.company && (
-          <VCardListItem key={'company:' + viewer.company}>
+        siteData.company && (
+          <VCardListItem key={'company:' + siteData.company}>
             <VCardListIcon iconName="organization" />
-            {viewer.company}
+            {siteData.company}
           </VCardListItem>
         ),
-        viewer.location && (
-          <VCardListItem key={'location:' + viewer.location}>
+        siteData.location && (
+          <VCardListItem key={'location:' + siteData.location}>
             <VCardListIcon iconName="location" />
-            {viewer.location}
+            {siteData.location}
           </VCardListItem>
         ),
-        viewer.websiteUrl && (
-          <VCardListItem key={'websiteUrl:' + viewer.websiteUrl}>
+        siteData.websiteUrl && (
+          <VCardListItem key={'websiteUrl:' + siteData.websiteUrl}>
             <VCardListIcon iconName="link" />
-            <MutedLink href={padHttp(viewer.websiteUrl)}>{viewer.websiteUrl}</MutedLink>
+            <MutedLink href={padHttp(siteData.websiteUrl)}>{siteData.websiteUrl}</MutedLink>
           </VCardListItem>
         ),
-        viewer.email && (
-          <VCardListItem key={'email:' + viewer.email}>
+        siteData.email && (
+          <VCardListItem key={'email:' + siteData.email}>
             <VCardListIcon iconName="mail" />
-            <MutedLink href={`mailto:${viewer.email}`}>{viewer.email}</MutedLink>
+            <MutedLink href={`mailto:${siteData.email}`}>{siteData.email}</MutedLink>
           </VCardListItem>
         ),
       ]}

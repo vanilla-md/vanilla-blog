@@ -32,9 +32,8 @@ export default function Showcase({ sx, className, itemShowcase }: ShowcaseProps)
             {itemShowcase.hasPinnedItems ? 'Pinned' : 'Popular'}
           </Heading>
           <List>
-            {itemShowcase.items.edges?.map(
-              (edge) =>
-                edge?.node && <PinnedItem pinnedItem={edge.node as Repository} key={edge.node.id} />
+            {itemShowcase.items.nodes?.map(
+              (node) => node && <PinnedItem pinnedItem={node as Repository} key={node.id} />
             )}
           </List>
         </ShowcaseBase>

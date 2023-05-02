@@ -1,16 +1,17 @@
-import fs from 'fs';
+import { readdir } from 'node:fs/promises';
 import path from 'path';
 import { read } from 'to-vfile';
 import { createMarkdownProcessor } from './markdown';
-import { generatePageDate } from './postData';
+import { generatePageDate } from './pageData';
 
 const postsDirectory = path.join(process.cwd(), './blog/posts');
 const processor = createMarkdownProcessor();
 const metaOnlyProcessor = createMarkdownProcessor(true);
 
+// Used by `pages/posts/index.ts` and `scripts/genRss.ts`
 export async function getSortedPostsData() {
   // Get file names under /posts
-  const fileNames = fs.readdirSync(postsDirectory);
+  const fileNames = await readdir(postsDirectory);
   const allPostsData = await Promise.all(
     fileNames.map(async (fileName) => {
       // Remove ".md" from file name to get id
@@ -43,8 +44,13 @@ export async function getSortedPostsData() {
   });
 }
 
-export function getAllPostSlugs() {
-  const fileNames = fs.readdirSync(postsDirectory);
+export async function getPostsCount() {
+  const fileNames = await readdir(postsDirectory);
+  return fileNames.filter((fileName) => fileName.endsWith('.md')).length;
+}
+
+export async function getAllPostSlugs() {
+  const fileNames = await readdir(postsDirectory);
   return fileNames.map((fileName) => {
     return {
       params: {

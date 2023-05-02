@@ -2,10 +2,10 @@ import { Box, Heading, LabelGroup, RelativeTime } from '@primer/react';
 import { CalendarIcon, ClockIcon, PencilIcon } from '@primer/octicons-react';
 import Link from './link';
 import SolidLabel from './solidLabel';
-import { PostData } from '@/types';
 import { isSameDay } from '@/utils';
+import { PageData } from '@/lib/pageData';
 
-type PostItemProps = PostData & { slug: string };
+type PostItemProps = PageData & { slug: string };
 
 export function PostItem({
   slug,

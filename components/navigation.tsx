@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { HomeIcon, BookIcon, RepoIcon } from '@primer/octicons-react';
 import OctofaceIcon from './octofaceIcon';
-import viewer from '../generated/viewer.json';
+import siteData from '@/generated/siteData.json';
 
 export default function Navigation() {
   const items = [
@@ -16,13 +16,13 @@ export default function Navigation() {
       navigation: 'Repositories',
       href: '/repositories',
       icon: RepoIcon,
-      counter: viewer.repositories.totalCount,
+      counter: siteData.repositories.totalCount,
     },
     {
       navigation: 'Posts',
       href: '/posts',
       icon: BookIcon,
-      counter: 13,
+      counter: siteData.posts.totalCount,
     },
     {
       navigation: 'About',

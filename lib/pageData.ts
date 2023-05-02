@@ -1,12 +1,25 @@
 import { basename } from 'path';
-import viewer from '@/generated/viewer.json';
+import siteData from '@/generated/siteData.json';
 import { padHttp } from '@/utils';
 import { toHtml } from 'hast-util-to-html';
 import type { VFile } from 'vfile';
-import type { Matter, Meta, PostData } from '@/types';
+import type { Matter, Meta } from '@/types';
+import type { Entry } from 'xast-util-feed';
+
+export interface PageData extends Entry {
+  title: string;
+  published: string;
+  modified: string;
+  description: string;
+  readingTime: string;
+  tags: string[];
+}
 
 function getUrl(file: VFile) {
-  return new URL(basename(file.basename!, file.extname), padHttp(viewer.websiteUrl)).toString();
+  if (!siteData.websiteUrl) {
+    throw new Error('`siteData.websiteUrl must be provided');
+  }
+  return new URL(basename(file.basename!, file.extname), padHttp(siteData.websiteUrl)).toString();
 }
 
 function getReadingTime(meta: Meta): string {
@@ -72,7 +85,7 @@ function getModifiedTime(matter: Matter, meta: Meta): string {
   return stringifyDate(new Date(0));
 }
 
-export function generatePageDate(file: VFile): PostData {
+export function generatePageDate(file: VFile): PageData {
   const { matter = {}, meta = {} } = file.data;
   return {
     title: matter.title ?? meta.title ?? '',

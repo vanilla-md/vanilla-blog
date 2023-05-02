@@ -2,12 +2,12 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 import Head from 'next/head';
 import { Box } from '@primer/react';
 import { getAllPostSlugs, getPostData } from '@/lib/posts';
-import { PostData } from '@/types';
+import { PageData } from '@/lib/pageData';
 
 export default function Post({
   postData,
 }: {
-  postData: PostData & {
+  postData: PageData & {
     slug: string;
     contentHtml: string;
   };
@@ -38,7 +38,7 @@ export default function Post({
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = getAllPostSlugs();
+  const paths = await getAllPostSlugs();
   return {
     paths,
     fallback: false,

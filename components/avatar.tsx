@@ -3,7 +3,7 @@ import Image from 'next/image';
 import styled from 'styled-components';
 import sx, { SxProp } from '@primer/react/lib-esm/sx';
 import { ComponentProps } from '@primer/react/lib-esm/utils/types';
-import viewer from '../generated/viewer.json';
+import siteData from '@/generated/siteData.json';
 
 const StyledAvatarImg = styled(Image)`
   border-radius: 50%;
@@ -23,7 +23,7 @@ type AvatarProps = {} & ComponentProps<typeof AvatarWrapper>;
 export default function Avatar({ sx, className, href }: AvatarProps) {
   return (
     <AvatarWrapper sx={{ verticalAlign: 'middle', ...sx }} href={href} className={className}>
-      <StyledAvatarImg src={viewer.avatarUrl} fill alt="avatar" />
+      <StyledAvatarImg src={siteData.avatarUrl} fill alt="avatar" />
     </AvatarWrapper>
   );
 }
