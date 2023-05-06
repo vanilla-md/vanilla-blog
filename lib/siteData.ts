@@ -3,6 +3,7 @@ import mime from 'mime';
 import { User } from '@octokit/graphql-schema';
 import { getUserInfo } from './github';
 import { getPostsCount } from './posts';
+import { padHttp } from '@/utils';
 
 // Temporary solution
 export type SiteData = User & {
@@ -23,7 +24,9 @@ export async function resolveSiteData(): Promise<SiteData> {
   //   path.join('./public/images', avatarFilename),
   //   Buffer.from(await avatarBlob.arrayBuffer())
   // );
-  viewer.avatarUrl = path.join('/images/', avatarFilename);
+  viewer.avatarUrl = path.join('images/', avatarFilename);
+
+  viewer.websiteUrl = padHttp(viewer.websiteUrl ?? `${viewer.login}.github.io`);
 
   const postsCount = await getPostsCount();
   return Object.assign(viewer, { posts: { totalCount: postsCount } });

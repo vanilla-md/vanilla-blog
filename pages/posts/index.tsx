@@ -1,13 +1,11 @@
-import Link from '@/components/link';
 import { Box } from '@primer/react';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { PostItem } from '@/components/postItem';
 import { getSortedPostsData } from '@/lib/posts';
-import siteData from '@/generated/siteData.json';
-import { PageData } from '@/lib/pageData';
+import type { PageData } from '@/types';
 
-export default function Posts({ allPostsData }: { allPostsData: (PageData & { slug: string })[] }) {
+export default function Posts({ allPostsData }: { allPostsData: PageData[] }) {
   return (
     <>
       <Head>

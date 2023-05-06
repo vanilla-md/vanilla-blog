@@ -27,6 +27,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           gridColumn: ['2 / -1', '2 / -1', '3 / -1'],
           alignSelf: 'center',
           py: '16px',
+          zIndex: 2,
         }}
       >
         <Header />
@@ -49,6 +50,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           ml: ['16px', '16px', 0],
           mr: ['16px', '16px', 0],
           mt: [0, 0, '16px'],
+          zIndex: 3,
         }}
       >
         <Avatar href="/" sx={{ width: '100%' }} />
@@ -63,13 +65,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <Profile />
       </Box>
       <Box
+        as="main"
         sx={{
           gridRow: ['3', '3', '3 / -1'],
           gridColumn: ['1 / 3', '1 / 3', '3 / 4'],
           py: 3,
           px: [3, 3, 0],
+          overflow: 'auto',
         }}
-        as="main"
       >
         {children}
       </Box>

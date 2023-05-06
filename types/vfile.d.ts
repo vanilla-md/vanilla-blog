@@ -1,7 +1,7 @@
 import type { VFile } from 'vfile';
 
 // VFile.data.matter/meta set by unified plugins
-// The final post meta(./meta.d.ts) is based on them
+// The final post data will be based on them
 export interface Matter {
   title?: string;
   date?: string | Date;
@@ -66,6 +66,11 @@ export interface Meta {
 
 declare module 'vfile' {
   interface DataMap {
+    // from plugins/vFileInferPaths
+    url: string;
+    slug: string;
+    relativePath: string;
+
     // https://github.com/vfile/vfile-matter#types
     matter: Matter;
     meta: Meta;

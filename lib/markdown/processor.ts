@@ -22,18 +22,28 @@ import rehypeStringify from 'rehype-stringify';
 import type { Root as MdastRoot } from 'mdast';
 import type { Root as HastRoot } from 'hast';
 import { h } from 'hastscript';
+import vFileResolvePaths from './plugins/vFileResolvePaths';
 
 // const p1 = unified().use(remarkParse);
 // const p2 = unified().use(remarkParse).use(remarkRehype);
 // const p3 = unified().use(remarkParse).use(remarkRehype).use(rehypeStringify);
 
-export const createMarkdownProcessor = (
-  metaOnly = false
-): Processor<MdastRoot, HastRoot, HastRoot, string> => {
-  const SKIP = () => undefined;
+export interface MarkdownOptions {
+  srcDir: string;
+  websiteUrl: string;
+  metaOnly?: boolean;
+}
 
+export const createProcessor = ({
+  srcDir,
+  websiteUrl,
+  metaOnly = false,
+}: MarkdownOptions): Processor<MdastRoot, HastRoot, HastRoot, string> => {
+  const SKIP = () => undefined;
   return (
     unified()
+      .data({ srcDir, websiteUrl })
+      .use(vFileResolvePaths)
       .use(vFileMatter)
       .use(unifiedInferGitMeta)
       .use(remarkParse)
@@ -62,6 +72,7 @@ export const createMarkdownProcessor = (
       .use(rehypeInferTitleMeta)
       .use(rehypeInferDescriptionMeta, { inferDescriptionHast: true })
       .use(rehypeInferReadingTimeMeta)
+      // TODO: add a dumb stringify plugin when in metaOnly mode
       .use(rehypeStringify)
   );
 };

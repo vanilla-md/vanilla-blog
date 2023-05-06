@@ -5,9 +5,9 @@ import type { VFile } from 'vfile';
 import type { Plugin } from 'unified';
 import type { Root } from 'mdast';
 
-export function titleFromBasename(basename: string): string {
-  const regex = /^(?:\d{4}-\d{2}-\d{2}-)?(.*)\.md$/;
-  const matches = basename!.match(regex);
+export function titleFromStem(stem: string): string {
+  const regex = /^(?:\d{4}-\d{2}-\d{2}-)?(.*)$/;
+  const matches = stem!.match(regex);
 
   if (matches !== null) {
     return titleCase(noCase(matches[1]));
@@ -33,7 +33,7 @@ const remarkAddH1: Plugin<[RemarkAddH1Options?], Root, Root> = (options = {}) =>
         children: [
           {
             type: 'text',
-            value: title || file.data.matter?.title || titleFromBasename(file.basename!),
+            value: title || file.data.matter?.title || titleFromStem(file.stem!),
           },
         ],
       });

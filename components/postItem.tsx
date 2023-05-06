@@ -1,11 +1,9 @@
-import { Box, Heading, LabelGroup, RelativeTime } from '@primer/react';
+import { Box, Text, Heading, LabelGroup, RelativeTime } from '@primer/react';
 import { CalendarIcon, ClockIcon, PencilIcon } from '@primer/octicons-react';
 import Link from './link';
 import SolidLabel from './solidLabel';
 import { isSameDay } from '@/utils';
-import { PageData } from '@/lib/pageData';
-
-type PostItemProps = PageData & { slug: string };
+import type { PageData } from '@/types';
 
 export function PostItem({
   slug,
@@ -15,7 +13,7 @@ export function PostItem({
   description,
   readingTime,
   tags,
-}: PostItemProps) {
+}: PageData) {
   return (
     <Box
       as="li"
@@ -33,13 +31,13 @@ export function PostItem({
         </Heading>
       </Box>
       <Box>
-        <Box
+        <Text
           as="p"
           title={description}
           sx={{ fontSize: 1, maxWidth: '70%', mt: 0, mb: 2, color: 'fg.muted' }}
         >
           {description}
-        </Box>
+        </Text>
       </Box>
       <Box sx={{ my: 1, verticalAlign: 'middle' }}>
         <LabelGroup sx={{ lineHeight: 1.8 }}>
@@ -51,17 +49,17 @@ export function PostItem({
         </LabelGroup>
       </Box>
       <Box sx={{ mt: 2, fontSize: 0, color: 'fg.muted' }}>
-        <Box as="span" sx={{ mr: 3 }}>
+        <Text sx={{ mr: 3 }}>
           <CalendarIcon /> Published <RelativeTime datetime={published} />
-        </Box>
+        </Text>
         {!isSameDay(new Date(published), new Date(modified)) && (
-          <Box as="span" sx={{ mr: 3 }}>
+          <Text sx={{ mr: 3 }}>
             <PencilIcon /> Modified <RelativeTime datetime={modified} />
-          </Box>
+          </Text>
         )}
-        <Box as="span">
+        <Text>
           <ClockIcon /> Reading Time: {readingTime}
-        </Box>
+        </Text>
       </Box>
     </Box>
   );

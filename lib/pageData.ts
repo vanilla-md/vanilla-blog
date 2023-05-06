@@ -1,26 +1,7 @@
-import { basename } from 'path';
-import siteData from '@/generated/siteData.json';
-import { padHttp } from '@/utils';
 import { toHtml } from 'hast-util-to-html';
 import type { VFile } from 'vfile';
 import type { Matter, Meta } from '@/types';
-import type { Entry } from 'xast-util-feed';
-
-export interface PageData extends Entry {
-  title: string;
-  published: string;
-  modified: string;
-  description: string;
-  readingTime: string;
-  tags: string[];
-}
-
-function getUrl(file: VFile) {
-  if (!siteData.websiteUrl) {
-    throw new Error('`siteData.websiteUrl must be provided');
-  }
-  return new URL(basename(file.basename!, file.extname), padHttp(siteData.websiteUrl)).toString();
-}
+import type { PageData } from '@/types';
 
 function getReadingTime(meta: Meta): string {
   const { readingTime } = meta;
@@ -75,26 +56,38 @@ function parseDateFromFilename(file: VFile) {
   return null;
 }
 
-function getModifiedTime(matter: Matter, meta: Meta): string {
+function getModifiedTime(matter: Matter, meta: Meta): string | undefined {
   if (matter.modified) {
     return stringifyDate(matter.modified);
   }
   if (meta.modified) {
     return stringifyDate(meta.modified);
   }
-  return stringifyDate(new Date(0));
+  return undefined;
 }
 
-export function generatePageDate(file: VFile): PageData {
+export function resolvePageDate(file: VFile): PageData {
   const { matter = {}, meta = {} } = file.data;
+  const published = getPublishedTime(file, matter, meta);
   return {
-    title: matter.title ?? meta.title ?? '',
-    url: getUrl(file),
+    slug: file.data.slug!,
+    relativePath: file.data.relativePath!,
+    url: file.data.url!,
+    /**
+     * Title priority:
+     *   1. `matter.title`
+     *   2. h1 of the MKD (which `meta.title` would be inferred from)
+     *   3. Slug of the filename
+     *     - Which would be title cased and insert as h1 by remarkAddH1
+     *     - Then `meta.title` would be inferred from the h1 added
+     */
+    title: matter.title ?? meta.title!,
     description: meta.description ?? '',
     descriptionHtml: toHtml(meta.descriptionHast),
-    published: getPublishedTime(file, matter, meta),
-    modified: getModifiedTime(matter, meta),
+    published: published,
+    modified: getModifiedTime(matter, meta) ?? published,
     readingTime: getReadingTime(meta),
     tags: matter.tags ?? [],
+    author: meta.author ?? '',
   };
 }
