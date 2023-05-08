@@ -30,6 +30,17 @@ export default function Navigation() {
       icon: OctofaceIcon,
     },
   ];
+
+  const router = useRouter();
+
+  const isCurrent = (href: string | URL) => {
+    const pathname = typeof href === 'string' ? href : href.pathname;
+    if (pathname === '/posts') {
+      return router.pathname.startsWith(pathname);
+    }
+    return pathname === router.pathname;
+  };
+
   return (
     <UnderlineNav
       aria-label="BlogNav"
@@ -47,6 +58,7 @@ export default function Navigation() {
       {items.map((item) => (
         <UnderlineNavItem
           href={item.href}
+          aria-current={isCurrent(item.href) ? 'page' : undefined}
           key={item.navigation}
           icon={item.icon}
           counter={item.counter}
@@ -63,16 +75,8 @@ type UnderlineNavItemProps = Omit<PrimerUnderlineNavItemProps, 'as' | 'href'> & 
 };
 
 function UnderlineNavItem({ href, children, ...rest }: UnderlineNavItemProps) {
-  const router = useRouter();
-  const isCurrent =
-    typeof href === 'string' ? router.asPath === href : router.pathname === href.pathname;
   return (
-    <UnderlineNav.Item
-      as={Link}
-      href={String(href)}
-      aria-current={isCurrent ? 'page' : undefined}
-      {...rest}
-    >
+    <UnderlineNav.Item as={Link} href={String(href)} {...rest}>
       {children}
     </UnderlineNav.Item>
   );
