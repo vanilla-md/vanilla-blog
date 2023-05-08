@@ -25,6 +25,13 @@ const GridBox = styled(Box)`
     'heading       yearList'
     'activityList  yearList'/
     1fr 165px;
+
+  @media (max-width: ${themeGet('breakpoints.1')}) {
+    grid:
+      'heading     '
+      'activityList'/
+      1fr;
+  }
 `;
 
 function inferYearRangeArray(groupedPosts: GroupedPosts): number[] {
@@ -195,7 +202,7 @@ function BlogArchive({
         Archive
       </Heading>
       <Box sx={{ gridArea: 'activityList' }}>{timelines}</Box>
-      <FilterList sx={{ gridArea: 'yearList', ml: 4, px: 3 }}>
+      <FilterList sx={{ gridArea: 'yearList', display: ['none', 'none', 'block'], ml: 4, px: 3 }}>
         {years.map((year) => (
           <FilterList.Item
             key={year}
