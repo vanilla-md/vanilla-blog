@@ -14,6 +14,7 @@ import {
   StarIcon,
   RepoIcon,
   RepoForkedIcon,
+  LawIcon,
 } from '@primer/octicons-react';
 
 import OctofaceIcon from './octofaceIcon';
@@ -34,6 +35,7 @@ const importedOcticons = new Map<string, IconFC>(
     star: StarIcon,
     repo: RepoIcon,
     'repo-forked': RepoForkedIcon,
+    law: LawIcon,
   })
 );
 

@@ -82,7 +82,10 @@ export async function getUserInfo() {
             }
           }
         }
-        repositories(privacy: PUBLIC) {
+        repositories(orderBy: {field: STARGAZERS, direction: DESC}, first: 10, privacy: PUBLIC) {
+          nodes {
+            ...RepoInfo
+          }
           totalCount
         }
       }
@@ -94,7 +97,8 @@ export async function getUserInfo() {
         used
         nodeCount
       }
-    }`);
+    }
+    ${repoInfoFragment}`);
   console.log(
     `octokit: viewer data fetched. login: ${response.viewer.login} cost: ${response.rateLimit.cost}`
   );

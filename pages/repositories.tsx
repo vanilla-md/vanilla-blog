@@ -1,36 +1,16 @@
-import { GetStaticProps } from 'next';
-import repos from '@/generated/repos.json';
 import Head from 'next/head';
+import siteData from '@/generated/siteData.json';
+import { RepoList } from '@/components/repoList';
+import { Repository } from '@octokit/graphql-schema';
 
-export default function Repositories({
-  repos,
-}: {
-  repos: {
-    id: number;
-    full_name: string;
-  }[];
-}) {
+export default function Repositories() {
   return (
     <>
       <Head>
         <title>My GitHub Repositories</title>
         <meta name="description" content="Check out my open source projects" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>Repositories</div>
-      <ul>
-        {repos.map(({ id, full_name }) => (
-          <li key={id}>{full_name}</li>
-        ))}
-      </ul>
+      {siteData.repositories.totalCount > 0 && <RepoList repos={siteData.repositories.nodes} />}
     </>
   );
 }
-
-export const getStaticProps: GetStaticProps = async () => {
-  return {
-    props: {
-      repos,
-    },
-  };
-};

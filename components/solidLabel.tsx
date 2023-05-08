@@ -1,7 +1,15 @@
-import { Label, themeGet } from '@primer/react';
+import { Label, LabelGroup, themeGet } from '@primer/react';
 import styled from 'styled-components';
 
-const SolidLabel = styled(Label)`
+export const SolidLabelGroup = styled(LabelGroup)`
+  display: flex;
+  align-items: center;
+  margin: ${themeGet('space.1')} 0;
+  font-size: ${themeGet('fontSizes.0')};
+  height: 30px;
+`;
+
+export const SolidLabel = styled(Label)`
   font-weight: ${themeGet('fontWeights.semibold')};
   color: ${themeGet('colors.accent.fg')};
   border: 1px solid ${themeGet('colors.topicTag.border')};
@@ -13,4 +21,3 @@ const SolidLabel = styled(Label)`
     background-color: ${themeGet('colors.accent.emphasis')};
   }
 `;
-export default SolidLabel;

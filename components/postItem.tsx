@@ -1,7 +1,7 @@
 import { Box, Text, Heading, LabelGroup, RelativeTime } from '@primer/react';
 import { CalendarIcon, ClockIcon, PencilIcon } from '@primer/octicons-react';
 import Link from './link';
-import SolidLabel from './solidLabel';
+import { SolidLabel, SolidLabelGroup } from './solidLabel';
 import { isSameDay } from '@/utils';
 import type { PageData } from '@/types';
 
@@ -39,15 +39,17 @@ export function PostItem({
           {description}
         </Text>
       </Box>
-      <Box sx={{ my: 1, verticalAlign: 'middle' }}>
-        <LabelGroup sx={{ lineHeight: 1.8 }}>
-          {tags.map((tag) => (
-            <SolidLabel key={tag} size="large">
-              {tag}
-            </SolidLabel>
-          ))}
-        </LabelGroup>
-      </Box>
+      {tags.length > 0 && (
+        <Box sx={{ my: 1, verticalAlign: 'middle' }}>
+          <SolidLabelGroup>
+            {tags.map((tag) => (
+              <SolidLabel key={tag} size="large">
+                {tag}
+              </SolidLabel>
+            ))}
+          </SolidLabelGroup>
+        </Box>
+      )}
       <Box sx={{ mt: 2, fontSize: 0, color: 'fg.muted' }}>
         <Text sx={{ mr: 3 }}>
           <CalendarIcon /> Published <RelativeTime datetime={published} />

@@ -35,7 +35,7 @@ function inferYearRangeArray(groupedPosts: GroupedPosts): number[] {
 
 type RangeDate = { year: string; month: string; day: string };
 
-function RangeDateToDate(rangeDate: RangeDate) {
+function rangeDateToDate(rangeDate: RangeDate) {
   const { year, month, day } = rangeDate;
   return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
 }
@@ -155,7 +155,7 @@ function BlogArchive({
   }
 
   if (postsOfSelectedDate) {
-    const lastDay = lastDayInPreviousMonth(RangeDateToDate(toDate));
+    const lastDay = lastDayInPreviousMonth(rangeDateToDate(toDate));
     toDate.year = lastDay.getFullYear().toString();
     toDate.month = pad0(lastDay.getMonth() + 1);
     toDate.day = pad0(lastDay.getDate());
@@ -293,9 +293,7 @@ function TimelineItem({ post, date }: { post: PageData; date: RangeDate }) {
             <Heading as="h3" sx={{ fontSize: 3 }}>
               <Link href={post.relativePath.replace(/\.md$/, '')}>{post.title}</Link>
             </Heading>
-            <Box sx={{ my: 2, fontSize: 1, lineHeight: 1.25, color: 'fg.muted' }}>
-              {post.description}
-            </Box>
+            <Box sx={{ my: 2, fontSize: 1, color: 'fg.muted' }}>{post.description}</Box>
           </Box>
         </BorderBox>
       </Timeline.Body>

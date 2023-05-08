@@ -171,7 +171,7 @@ export function YMDToMDY(ymd: string) {
   return dateToMDY(parseYMD(ymd));
 }
 
-export function YMDToLocalTime(ymd: string) {
+export function YMDToLocalDate(ymd: string) {
   const [year, month, day] = ymd.split('-');
   return new Date(Number(year), Number(month) - 1, Number(day));
 }

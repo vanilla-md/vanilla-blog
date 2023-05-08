@@ -4,9 +4,10 @@ import { read } from 'to-vfile';
 import { createProcessor } from './markdown';
 import { resolvePageDate } from './pageData';
 import siteDate from '@/generated/siteData.json';
+import { padHttp } from '@/utils';
 
 // TODO: Get these from some configuration
-const websiteUrl = siteDate.websiteUrl;
+const websiteUrl = padHttp(siteDate.websiteUrl);
 const rootDir = 'blog';
 const srcDir = path.join(process.cwd(), rootDir);
 const postsDir = path.join(srcDir, 'posts');

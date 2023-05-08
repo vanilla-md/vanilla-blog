@@ -3,6 +3,7 @@ import { Label, Link, themeGet } from '@primer/react';
 import styled from 'styled-components';
 import { Icon } from './icon';
 import BorderBox from './borderBox';
+import { RepoMeta, Meta, PrimaryLanguage, LanguageCircle } from './repoList';
 
 type PinnedItemProps = {
   pinnedItem: Repository;
@@ -41,39 +42,11 @@ const Desc = styled.p`
   font-size: ${themeGet('fontSizes.0')};
 `;
 
-const Metas = styled.p`
-  margin-top: ${themeGet('space.2')};
-  margin-bottom: 0;
-  font-size: ${themeGet('fontSizes.0')};
-`;
-
-const Meta = styled(Link)`
-  & + & {
-    margin-left: ${themeGet('space.3')};
-  }
-`;
-
-const PrimaryLanguage = styled.span`
-  margin-right: ${themeGet('space.3')};
-`;
-
-const LanguageCircle = styled.span<{ languageColor: string }>`
-  position: relative;
-  top: 1px;
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  border: 1px solid ${themeGet('colors.primer.border.contrast')};
-  border-radius: 50%;
-  background-color: ${(props) => props.languageColor};
-`;
-
 // repo for now
 export function PinnedItem({ pinnedItem }: PinnedItemProps) {
   const {
     isPrivate,
     name,
-    nameWithOwner,
     isFork,
     parent,
     url,
@@ -104,7 +77,7 @@ export function PinnedItem({ pinnedItem }: PinnedItemProps) {
         </Parent>
       )}
       <Desc>{description}</Desc>
-      <Metas>
+      <RepoMeta>
         {primaryLanguage?.color && (
           <PrimaryLanguage>
             <LanguageCircle languageColor={primaryLanguage.color}></LanguageCircle>{' '}
@@ -112,16 +85,20 @@ export function PinnedItem({ pinnedItem }: PinnedItemProps) {
           </PrimaryLanguage>
         )}
         {stargazerCount > 0 && (
-          <Meta href={url + '/stargazers'} muted>
-            <Icon iconName="star" /> {stargazerCount}
+          <Meta>
+            <Link href={url + '/stargazers'} muted>
+              <Icon iconName="star" /> {stargazerCount}
+            </Link>
           </Meta>
         )}
         {forkCount > 0 && (
-          <Meta href={url + '/network/members'} muted>
-            <Icon iconName="repo-forked" /> {forkCount}
+          <Meta>
+            <Link href={url + '/network/members'} muted>
+              <Icon iconName="repo-forked" /> {forkCount}
+            </Link>
           </Meta>
         )}
-      </Metas>
+      </RepoMeta>
     </PinnedItemBase>
   );
 }
