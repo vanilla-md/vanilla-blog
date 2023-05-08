@@ -27,7 +27,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           gridColumn: ['2 / -1', '2 / -1', '3 / -1'],
           alignSelf: 'center',
           py: '16px',
-          zIndex: 2,
         }}
       >
         <Header />
@@ -38,6 +37,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           top: [undefined, undefined, 0],
           gridRow: ['2 / 3'],
           gridColumn: ['1 / -1'],
+          zIndex: 2,
         }}
       >
         <Navigation />
