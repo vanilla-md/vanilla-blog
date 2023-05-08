@@ -1,1 +1,15 @@
+import { padHttp } from '@/utils';
+import path from 'path';
+import { createProcessor } from './processor';
+import siteDate from '@/generated/siteData.json';
+
+// TODO: Get these from some configuration
+const websiteUrl = padHttp(siteDate.websiteUrl);
+const rootDir = 'blog';
+const srcDir = path.join(process.cwd(), rootDir);
+
+const processor = createProcessor({ srcDir, websiteUrl });
+const metaOnlyProcessor = createProcessor({ srcDir, websiteUrl, metaOnly: true });
+
 export * from './processor';
+export { processor, metaOnlyProcessor, srcDir };

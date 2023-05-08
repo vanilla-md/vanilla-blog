@@ -25,7 +25,7 @@ export async function resolveSiteData(): Promise<SiteData> {
   //   path.join('./public/images', avatarFilename),
   //   Buffer.from(await avatarBlob.arrayBuffer())
   // );
-  // viewer.avatarUrl = path.join('images/', avatarFilename);
+  // viewer.avatarUrl = path.join('/images/', avatarFilename);
 
   // viewer.websiteUrl = padHttp(viewer.websiteUrl ?? `${viewer.login}.github.io`);
 
