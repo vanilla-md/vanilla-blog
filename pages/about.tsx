@@ -3,6 +3,7 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { getAboutPageDate } from '@/lib/about';
 import { PageData } from '@/types';
+import Article from '@/components/article';
 
 export default function About({
   postData,
@@ -19,19 +20,7 @@ export default function About({
         <meta name="date" content={postData.published}></meta>
         {postData.tags?.length && <meta name="keywords" content={postData.tags.join(', ')}></meta>}
       </Head>
-      <Box
-        as="article"
-        sx={{
-          borderWidth: 1,
-          borderStyle: 'solid',
-          borderColor: 'border.default',
-          borderRadius: 2,
-          px: 5,
-          py: 4,
-        }}
-      >
-        <div className="markdown-body" dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
-      </Box>
+      <Article html={postData.contentHtml} />
     </>
   );
 }
