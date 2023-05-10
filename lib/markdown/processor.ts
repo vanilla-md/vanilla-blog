@@ -6,7 +6,6 @@ import remarkFrontmatter from 'remark-frontmatter';
 import remarkAddH1 from './plugins/remarkAddH1';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
-// import remarkMermaid from 'remark-mermaidjs';
 import remarkGithub from 'remark-github';
 import remarkGemoji from 'remark-gemoji';
 import remarkRehype from 'remark-rehype';
@@ -15,6 +14,7 @@ import rehypeMathjax from 'rehype-mathjax';
 import rehypeStarryNight from './plugins/rehypeStarryNight';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeExternalLinks from 'rehype-external-links';
 import rehypeInferTitleMeta from 'rehype-infer-title-meta';
 import rehypeInferDescriptionMeta from 'rehype-infer-description-meta';
 import rehypeInferReadingTimeMeta from 'rehype-infer-reading-time-meta';
@@ -69,6 +69,7 @@ export const createProcessor = ({
         properties: { ariaHidden: true, tabIndex: -1, class: 'anchor' },
         content: h('span.octicon.octicon-link'),
       })
+      .use(rehypeExternalLinks, { rel: ['nofollow noopener noreferrer'] })
       .use(rehypeInferTitleMeta)
       .use(rehypeInferDescriptionMeta, { inferDescriptionHast: true })
       .use(rehypeInferReadingTimeMeta)
