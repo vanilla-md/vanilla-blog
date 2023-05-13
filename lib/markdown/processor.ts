@@ -1,4 +1,6 @@
 import { unified, type Processor } from 'unified';
+import vFileResolvePaths from './plugins/vFileResolvePaths';
+import remarkResolveAssets from './plugins/remarkResolveAssets';
 import vFileMatter from './plugins/vFileMatter';
 import unifiedInferGitMeta from 'unified-infer-git-meta';
 import remarkParse from 'remark-parse';
@@ -22,7 +24,6 @@ import rehypeStringify from 'rehype-stringify';
 import type { Root as MdastRoot } from 'mdast';
 import type { Root as HastRoot } from 'hast';
 import { h } from 'hastscript';
-import vFileResolvePaths from './plugins/vFileResolvePaths';
 
 // const p1 = unified().use(remarkParse);
 // const p2 = unified().use(remarkParse).use(remarkRehype);
@@ -44,6 +45,7 @@ export const createProcessor = ({
     unified()
       .data({ srcDir, websiteUrl })
       .use(vFileResolvePaths)
+      .use(remarkResolveAssets)
       .use(vFileMatter)
       .use(unifiedInferGitMeta)
       .use(remarkParse)

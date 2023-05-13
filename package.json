@@ -13,6 +13,7 @@
     "lint": "next lint",
     "gen-rss": "tsx scripts/genRss.ts",
     "gen-site-data": "tsx scripts/genSiteData.ts",
+    "move-assets": "tsx scripts/moveAssetsToPublic.ts",
     "start": "next start"
   },
   "dependencies": {
