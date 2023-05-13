@@ -1,7 +1,7 @@
 import { Box } from '@primer/react';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
-import { getAboutPageDate } from '@/lib/about';
+import { getAboutPageDate } from '@/lib/readme';
 import { PageData } from '@/types';
 import Article from '@/components/article';
 
@@ -15,7 +15,7 @@ export default function About({
   return (
     <>
       <Head>
-        <title>About Me</title>
+        <title>Readme.md</title>
         <meta name="description" content="Learn more about the author of this blog" />
         <meta name="date" content={postData.published}></meta>
         {postData.tags?.length && <meta name="keywords" content={postData.tags.join(', ')}></meta>}

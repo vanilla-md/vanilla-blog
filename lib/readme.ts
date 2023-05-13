@@ -4,7 +4,7 @@ import { processor, srcDir } from './markdown';
 import { resolvePageDate } from './pageData';
 
 export async function getAboutPageDate() {
-  const fullPath = path.join(srcDir, `about.md`);
+  const fullPath = path.join(srcDir, `README.md`);
   const file = await read(fullPath);
 
   const label = `unified: processed ${fullPath}`;

@@ -25,8 +25,8 @@ export default function Navigation() {
       counter: siteData.posts.totalCount,
     },
     {
-      navigation: 'About',
-      href: '/about',
+      navigation: 'Readme',
+      href: '/readme',
       icon: OctofaceIcon,
     },
   ];
