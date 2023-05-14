@@ -10,7 +10,9 @@ export function titleFromStem(stem: string): string {
   const matches = stem!.match(regex);
 
   if (matches !== null) {
-    return titleCase(noCase(matches[1]));
+    // return titleCase(noCase(matches[1]));
+    // titleCase doesn't work with CJK
+    return matches[1].split('-').join(' ');
   }
 
   return '';
