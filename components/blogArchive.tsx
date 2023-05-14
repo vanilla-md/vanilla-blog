@@ -47,6 +47,14 @@ function rangeDateToDate(rangeDate: RangeDate) {
   return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
 }
 
+function dateToRangeDate(date: Date) {
+  return {
+    year: String(date.getFullYear()),
+    month: String(date.getMonth() + 1),
+    day: String(date.getDate()),
+  };
+}
+
 // TODO: [Temporal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) to help
 function isDateMaybeInRange(
   { year, month, day }: { year: string; month?: string; day?: string },
@@ -129,16 +137,17 @@ function BlogArchive({
   const years = inferYearRangeArray(groupedPosts);
   const [fromDate, toDate] = inferDateRange(years, selectedYear, selectedDate);
   const postsOfSelectedDate =
-    toDate.day !== undefined && groupedPosts.get(toDate.year)?.get(toDate.month)?.get(toDate.day);
+    selectedDate && groupedPosts.get(toDate.year)?.get(toDate.month)?.get(toDate.day);
 
   const timelines: JSX.Element[] = [];
 
   if (postsOfSelectedDate) {
+    const date = dateToRangeDate(new Date(selectedDate));
     timelines.push(
-      <Timeline key={selectedDate!} sx={{ pb: 4 }}>
-        <TimelineHeading date={toDate} type="selected" />
+      <Timeline key={`${selectedDate!}-selected`} sx={{ pb: 4 }}>
+        <TimelineHeading date={date} type="selected" />
         {postsOfSelectedDate.map((post) => (
-          <TimelineItem key={post.slug} date={toDate} post={post} />
+          <TimelineItem key={post.slug} date={date} post={post} />
         ))}
       </Timeline>
     );
