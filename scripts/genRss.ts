@@ -11,8 +11,6 @@ const name = siteData.name ?? siteData.login;
 
 const websiteUrl = padHttp(siteData.websiteUrl ?? `${siteData.login}.github.io`);
 
-console.log(websiteUrl);
-
 const channel = {
   title: `${name}'s Blog`,
   url: websiteUrl,
