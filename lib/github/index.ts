@@ -18,11 +18,12 @@ const octokit = new Octokit({
 
 export async function getUserInfo() {
   const response = await octokit.graphql<{
-    viewer: User;
+    user: User;
     rateLimit: RateLimit;
-  }>(`
-    {
-      viewer {
+  }>(
+    `
+    query getUserInfo($login: String!) {
+      user(login: $login) {
         websiteUrl
         avatarUrl
         bio
@@ -98,11 +99,13 @@ export async function getUserInfo() {
         nodeCount
       }
     }
-    ${repoInfoFragment}`);
-  console.log(
-    `octokit: viewer data fetched. login: ${response.viewer.login} cost: ${response.rateLimit.cost}`
+    ${repoInfoFragment}`,
+    { login: process.env.LOGIN }
   );
-  return response.viewer;
+  console.log(
+    `octokit: user data fetched. login: ${response.user.login} cost: ${response.rateLimit.cost}`
+  );
+  return response.user;
 }
 
 const repoInfoFragment = `
@@ -157,9 +160,10 @@ const repoInfoFragment = `
 
 // Only get first 10
 export async function getUserRepos() {
-  const response = await octokit.graphql<{ viewer: User; rateLimit: RateLimit }>(`
-    {
-      viewer {
+  const response = await octokit.graphql<{ user: User; rateLimit: RateLimit }>(
+    `
+    query getUserInfo($login: String!) {
+      user(login: $login) {
         repositories(orderBy: {field: STARGAZERS, direction: DESC}, first: 10, privacy: PUBLIC) {
           nodes {
             ...RepoInfo
@@ -180,8 +184,10 @@ export async function getUserRepos() {
         nodeCount
       }
     }
-    ${repoInfoFragment}`);
-  return response.viewer.repositories;
+    ${repoInfoFragment}`,
+    { login: process.env.LOGIN }
+  );
+  return response.user.repositories;
 }
 
 function createRopeQuery(namesWithOwner: string[]) {
