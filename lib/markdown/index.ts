@@ -1,10 +1,10 @@
 import { padHttp } from '@/utils';
 import path from 'path';
 import { createProcessor } from './processor';
-import siteDate from '@/generated/siteData.json';
+import siteData from '@/generated/siteData.json';
 
 // TODO: Get these from some configuration
-const websiteUrl = padHttp(siteDate.websiteUrl);
+const websiteUrl = padHttp(siteData.websiteUrl ?? `${siteData.login}.github.io`);
 const rootDir = 'blog';
 const srcDir = path.join(process.cwd(), rootDir);
 

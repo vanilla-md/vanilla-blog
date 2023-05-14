@@ -3,11 +3,15 @@ import { atom } from 'xast-util-feed';
 import { toXml } from 'xast-util-to-xml';
 import siteData from '@/generated/siteData.json';
 import { getSortedPostsData } from '@/lib/posts';
+import { padHttp } from '@/utils';
 
 // TODO: Configuration
 const feedPath = 'feed.xml';
 const name = siteData.name ?? siteData.login;
-const websiteUrl = siteData.websiteUrl;
+
+const websiteUrl = padHttp(siteData.websiteUrl ?? `${siteData.login}.github.io`);
+
+console.log(websiteUrl);
 
 const channel = {
   title: `${name}'s Blog`,
