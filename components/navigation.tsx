@@ -50,7 +50,7 @@ export default function Navigation() {
           0,
           'calc(256px + 24px * 2)',
           'calc(296px + 24px * 2)',
-          'calc((100vw - 1280px) / 2 + 296px + 24px * 2)',
+          'calc((100% - 1280px) / 2 + 296px + 24px * 2)',
         ],
         bg: 'canvas.default',
       }}

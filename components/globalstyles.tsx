@@ -3,6 +3,7 @@ import { themeGet } from '@primer/react';
 
 const GlobalStyle = createGlobalStyle`
   html {
+    scrollbar-gutter: stable;
     scroll-padding-top: 55px;
   }
 
@@ -37,7 +38,6 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    overflow-y: overlay;
     background-color: ${themeGet('colors.canvas.default')};
     font-size: ${themeGet('fontSizes.1')}
   }
