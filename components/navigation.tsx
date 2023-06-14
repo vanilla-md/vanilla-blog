@@ -22,7 +22,7 @@ export default function Navigation() {
       navigation: 'Posts',
       href: '/posts',
       icon: BookIcon,
-      counter: siteData.posts.totalCount,
+      counter: siteData.posts?.totalCount ?? 0,
     },
     {
       navigation: 'Readme',

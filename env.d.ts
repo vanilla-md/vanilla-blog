@@ -5,9 +5,7 @@ namespace NodeJS {
   }
 }
 
-import { SiteData } from '@/types';
-
 declare module '@/generated/siteData.json' {
-  const siteData: SiteData;
+  const siteData: import('@/types').SiteData;
   export default siteData;
 }
