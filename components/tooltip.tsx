@@ -2,7 +2,7 @@
 
 import { sx, SxProp, themeGet } from '@primer/react';
 import { ComponentProps } from '@primer/react/lib-esm/utils/types';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { forwardRef, Ref } from 'react';
 import styled from 'styled-components';
 
@@ -87,7 +87,7 @@ const Tooltip = forwardRef(
     { direction = 'center', children, className, ...rest }: TooltipProps,
     ref: Ref<HTMLDivElement>
   ) => {
-    const classes = classnames(className, direction);
+    const classes = clsx(className, direction);
     return (
       <TooltipBase
         role="tooltip"

@@ -20,7 +20,9 @@ export type Props = {
 function Footer({ sx, className }: Props) {
   return (
     <FooterBase sx={sx} className={className}>
-      <Heading sx={{ mb: 2, fontSize: 2 }}>License</Heading>
+      <Heading as="h2" sx={{ mb: 2, fontSize: 2 }}>
+        License
+      </Heading>
       <Text sx={{ fontSize: 1 }}>
         <MutedLink href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">
           CC BY-NC-SA 4.0

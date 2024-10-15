@@ -18,13 +18,18 @@ export default function rehypeStarryNight(options: Options = {}) {
     const starryNight = await starryNightPromise;
 
     visit(tree, 'element', function (node, index, parent) {
-      if (!parent || index === null || node.tagName !== 'pre') {
+      if (!parent || index === undefined || node.tagName !== 'pre') {
         return;
       }
 
       const head = node.children[0];
 
-      if (!head || head.type !== 'element' || head.tagName !== 'code' || !head.properties) {
+      if (
+        !head ||
+        head.type !== 'element' ||
+        head.tagName !== 'code' ||
+        !head.properties
+      ) {
         return;
       }
 
@@ -32,7 +37,9 @@ export default function rehypeStarryNight(options: Options = {}) {
 
       if (!Array.isArray(classes)) return;
 
-      const language = classes.find((d) => typeof d === 'string' && d.startsWith(prefix));
+      const language = classes.find(
+        (d) => typeof d === 'string' && d.startsWith(prefix)
+      );
 
       if (typeof language !== 'string') return;
 
@@ -53,7 +60,9 @@ export default function rehypeStarryNight(options: Options = {}) {
             'highlight-' + scope.replace(/^source\./, '').replace(/\./g, '-'),
           ],
         },
-        children: [{ type: 'element', tagName: 'pre', properties: {}, children }],
+        children: [
+          { type: 'element', tagName: 'pre', properties: {}, children },
+        ],
       });
     });
   };

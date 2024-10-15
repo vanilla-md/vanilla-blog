@@ -13,7 +13,10 @@ export default function Article({ html }: { html: string }) {
         py: 4,
       }}
     >
-      <div className="markdown-body" dangerouslySetInnerHTML={{ __html: html }} />
+      <div
+        className="markdown-body"
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
     </Box>
   );
 }

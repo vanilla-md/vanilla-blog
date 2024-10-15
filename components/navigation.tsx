@@ -1,9 +1,10 @@
+'use client';
 // copied from https://primer.style/react/drafts/UnderlineNav2#with-nextjs
 import {
   UnderlineNav,
   UnderlineNavItemProps as PrimerUnderlineNavItemProps,
-} from '@primer/react/drafts';
-import { useRouter } from 'next/router';
+} from '@primer/react';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { HomeIcon, BookIcon, RepoIcon } from '@primer/octicons-react';
 import OctofaceIcon from './octofaceIcon';
@@ -31,14 +32,14 @@ export default function Navigation() {
     },
   ];
 
-  const router = useRouter();
+  const routerPathname = usePathname();
 
   const isCurrent = (href: string | URL) => {
     const pathname = typeof href === 'string' ? href : href.pathname;
     if (pathname === '/posts') {
-      return router.pathname.startsWith(pathname);
+      return routerPathname.startsWith(pathname);
     }
-    return pathname === router.pathname;
+    return pathname === routerPathname;
   };
 
   return (
@@ -70,7 +71,10 @@ export default function Navigation() {
   );
 }
 
-type UnderlineNavItemProps = Omit<PrimerUnderlineNavItemProps, 'as' | 'href'> & {
+type UnderlineNavItemProps = Omit<
+  PrimerUnderlineNavItemProps,
+  'as' | 'href'
+> & {
   href: string | URL;
 };
 

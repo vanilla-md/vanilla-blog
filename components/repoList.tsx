@@ -1,4 +1,13 @@
-import { Box, Text, Heading, Label, Link, RelativeTime, themeGet } from '@primer/react';
+'use client';
+import {
+  Box,
+  Text,
+  Heading,
+  Label,
+  Link,
+  RelativeTime,
+  themeGet,
+} from '@primer/react';
 import styled from 'styled-components';
 import { SolidLabelGroup, SolidLabel } from './solidLabel';
 import { Icon } from './icon';
@@ -76,7 +85,12 @@ export function RepoList({ repos }: { repos: Repository[] }) {
                 {!isPrivate && (
                   <Label
                     variant="secondary"
-                    sx={{ ml: 1, mb: 1, fontWeight: 'normal', verticalAlign: 'middle' }}
+                    sx={{
+                      ml: 1,
+                      mb: 1,
+                      fontWeight: 'normal',
+                      verticalAlign: 'middle',
+                    }}
                   >
                     Public
                   </Label>
@@ -92,7 +106,7 @@ export function RepoList({ repos }: { repos: Repository[] }) {
               )}
             </Box>
 
-            <Box>
+            <div>
               <Text
                 as="p"
                 sx={{
@@ -106,7 +120,7 @@ export function RepoList({ repos }: { repos: Repository[] }) {
               >
                 {description}
               </Text>
-            </Box>
+            </div>
             {repositoryTopics.totalCount > 0 && (
               <SolidLabelGroup as="div">
                 {repositoryTopics.nodes.map((topicNode) => (
@@ -119,7 +133,9 @@ export function RepoList({ repos }: { repos: Repository[] }) {
             <RepoMeta>
               {primaryLanguage?.color && (
                 <Meta>
-                  <LanguageCircle languageColor={primaryLanguage.color}></LanguageCircle>{' '}
+                  <LanguageCircle
+                    languageColor={primaryLanguage.color}
+                  ></LanguageCircle>{' '}
                   <span>{primaryLanguage.name}</span>
                 </Meta>
               )}

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import styled from 'styled-components';
-import sx, { SxProp } from '@primer/react/lib-esm/sx';
+import sx from '@primer/react/lib-esm/sx';
 import { ComponentProps } from '@primer/react/lib-esm/utils/types';
 import siteData from '@/generated/siteData.json';
 
@@ -22,7 +22,11 @@ type AvatarProps = {} & ComponentProps<typeof AvatarWrapper>;
 
 export default function Avatar({ sx, className, href }: AvatarProps) {
   return (
-    <AvatarWrapper sx={{ verticalAlign: 'middle', ...sx }} href={href} className={className}>
+    <AvatarWrapper
+      sx={{ verticalAlign: 'middle', ...sx }}
+      href={href}
+      className={className}
+    >
       <StyledAvatarImg src={siteData.avatarUrl} fill alt="avatar" />
     </AvatarWrapper>
   );

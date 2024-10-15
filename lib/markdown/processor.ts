@@ -15,7 +15,9 @@ import rehypeRaw from 'rehype-raw';
 import rehypeMathjax from 'rehype-mathjax';
 import rehypeStarryNight from './plugins/rehypeStarryNight';
 import rehypeSlug from 'rehype-slug';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeAutolinkHeadings, {
+  Options as AutolinkHeadingsOptions,
+} from 'rehype-autolink-headings';
 import rehypeExternalLinks from 'rehype-external-links';
 import rehypeInferTitleMeta from 'rehype-infer-title-meta';
 import rehypeInferDescriptionMeta from 'rehype-infer-description-meta';
@@ -39,7 +41,13 @@ export const createProcessor = ({
   srcDir,
   websiteUrl,
   metaOnly = false,
-}: MarkdownOptions): Processor<MdastRoot, HastRoot, HastRoot, string> => {
+}: MarkdownOptions): Processor<
+  MdastRoot,
+  HastRoot,
+  HastRoot,
+  HastRoot,
+  string
+> => {
   const SKIP = () => undefined;
   return (
     unified()
@@ -66,11 +74,12 @@ export const createProcessor = ({
       .use(metaOnly ? SKIP : rehypeMathjax)
       .use(metaOnly ? SKIP : rehypeStarryNight)
       .use(metaOnly ? SKIP : rehypeSlug)
+      // https://github.com/rehypejs/rehype-autolink-headings?tab=readme-ov-file#example-building-content-with-hastscript
       .use(metaOnly ? SKIP : rehypeAutolinkHeadings, {
         behavior: 'prepend',
         properties: { ariaHidden: true, tabIndex: -1, class: 'anchor' },
         content: h('span.octicon.octicon-link'),
-      })
+      } as AutolinkHeadingsOptions)
       .use(rehypeExternalLinks, { rel: ['nofollow noopener noreferrer'] })
       .use(rehypeInferTitleMeta)
       .use(rehypeInferDescriptionMeta, { inferDescriptionHast: true })

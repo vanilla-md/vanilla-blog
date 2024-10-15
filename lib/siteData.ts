@@ -1,6 +1,6 @@
 import { User } from '@octokit/graphql-schema';
 import { getUserInfo } from './github';
-import { padHttp } from '@/utils';
+// import { padHttp } from '@/utils';
 import mime from 'mime';
 import { outputFile } from 'fs-extra';
 import path from 'path';
@@ -19,8 +19,9 @@ export async function resolveSiteData(): Promise<SiteData> {
   const avatarBlob = await (await fetch(viewer.avatarUrl)).blob();
   const avatarMime = mime.getExtension(avatarBlob.type);
   const avatarFilename =
-    path.basename(new URL(viewer.avatarUrl).pathname) + (avatarMime ? '.' + avatarMime : '');
-  await outputFile(
+    path.basename(new URL(viewer.avatarUrl).pathname) +
+    (avatarMime ? '.' + avatarMime : '');
+  outputFile(
     path.join('./public/images', avatarFilename),
     Buffer.from(await avatarBlob.arrayBuffer())
   );

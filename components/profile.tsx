@@ -1,4 +1,4 @@
-import { Heading, Link, themeGet } from '@primer/react';
+import { Heading, themeGet } from '@primer/react';
 import sx, { SxProp } from '@primer/react/lib-esm/sx';
 import styled from 'styled-components';
 import { padHttp } from '@/utils/helpers';
@@ -56,13 +56,17 @@ export function VCard() {
         siteData.websiteUrl && (
           <VCardListItem key={'websiteUrl:' + siteData.websiteUrl}>
             <VCardListIcon iconName="link" />
-            <MutedLink href={padHttp(siteData.websiteUrl)}>{siteData.websiteUrl}</MutedLink>
+            <MutedLink href={padHttp(siteData.websiteUrl)}>
+              {siteData.websiteUrl}
+            </MutedLink>
           </VCardListItem>
         ),
         siteData.email && (
           <VCardListItem key={'email:' + siteData.email}>
             <VCardListIcon iconName="mail" />
-            <MutedLink href={`mailto:${siteData.email}`}>{siteData.email}</MutedLink>
+            <MutedLink href={`mailto:${siteData.email}`}>
+              {siteData.email}
+            </MutedLink>
           </VCardListItem>
         ),
       ]}
@@ -74,7 +78,9 @@ export default function Profile() {
   return (
     <>
       <ProfileBase>
-        <Heading sx={{ mb: 2, fontSize: 2 }}>Profile</Heading>
+        <Heading as="h2" sx={{ mb: 2, fontSize: 2 }}>
+          Profile
+        </Heading>
         <VCard />
       </ProfileBase>
     </>

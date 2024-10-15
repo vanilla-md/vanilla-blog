@@ -1,9 +1,10 @@
+import { cache } from 'react';
 import path from 'path';
 import { read } from 'to-vfile';
 import { processor, srcDir } from './markdown';
 import { resolvePageDate } from './pageData';
 
-export async function getAboutPageDate() {
+export const getReadmePageData = cache(async () => {
   const fullPath = path.join(srcDir, `README.md`);
   const file = await read(fullPath);
 
@@ -19,4 +20,4 @@ export async function getAboutPageDate() {
     ...pageData,
     contentHtml,
   };
-}
+});

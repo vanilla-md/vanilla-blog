@@ -23,17 +23,24 @@ export type ShowcaseProps = {
   itemShowcase: Required<ProfileItemShowcase>;
 } & ComponentProps<typeof ShowcaseBase>;
 
-export default function Showcase({ sx, className, itemShowcase }: ShowcaseProps) {
+export default function Showcase({
+  sx,
+  className,
+  itemShowcase,
+}: ShowcaseProps) {
   return (
     <>
       {itemShowcase.items.totalCount > 0 && (
         <ShowcaseBase sx={sx} className={className}>
-          <Heading sx={{ mb: 2, fontSize: 2, fontWeight: 'normal' }}>
+          <Heading as="h2" sx={{ mb: 2, fontSize: 2, fontWeight: 'normal' }}>
             {itemShowcase.hasPinnedItems ? 'Pinned' : 'Popular'}
           </Heading>
           <List>
             {itemShowcase.items.nodes?.map(
-              (node) => node && <PinnedItem pinnedItem={node as Repository} key={node.id} />
+              (node) =>
+                node && (
+                  <PinnedItem pinnedItem={node as Repository} key={node.id} />
+                )
             )}
           </List>
         </ShowcaseBase>

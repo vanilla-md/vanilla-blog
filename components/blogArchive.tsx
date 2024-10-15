@@ -1,18 +1,23 @@
 import {
   Box,
   Text,
-  FilterList,
+  ActionList,
   Heading,
-  StyledOcticon,
-  SxProp,
   Timeline,
   themeGet,
 } from '@primer/react';
 import styled from 'styled-components';
 import type { PageData } from '@/types';
 import { type GroupedPosts } from '@/lib/blogManager';
-import { FileIcon, FlameIcon } from '@primer/octicons-react';
-import { sundayWeeksAgo, dateToYMD, pad0, months, lastDayInPreviousMonth, trim0 } from '@/utils';
+import { FileIcon } from '@primer/octicons-react';
+import { FlameIcon } from '@primer/styled-octicons';
+import {
+  sundayWeeksAgo,
+  pad0,
+  months,
+  lastDayInPreviousMonth,
+  trim0,
+} from '@/utils';
 import BorderBox from './borderBox';
 import Link from './link';
 
@@ -35,7 +40,9 @@ const GridBox = styled(Box)`
 `;
 
 function inferYearRangeArray(groupedPosts: GroupedPosts): number[] {
-  const from = Math.min(...Array.from(groupedPosts.keys()).map((year) => parseInt(year)));
+  const from = Math.min(
+    ...Array.from(groupedPosts.keys()).map((year) => parseInt(year))
+  );
   const to = new Date().getFullYear();
   return Array.from({ length: to - from + 1 }, (_, i) => to - i);
 }
@@ -61,14 +68,20 @@ function isDateMaybeInRange(
   [from, to]: [RangeDate, RangeDate]
 ) {
   // `year` may be less than 4 digits. We don't pad 0s. ？？？😄
-  if (parseInt(year) < parseInt(from.year) || parseInt(year) > parseInt(to.year)) {
+  if (
+    parseInt(year) < parseInt(from.year) ||
+    parseInt(year) > parseInt(to.year)
+  ) {
     return false;
   }
   // Don't want more `parseInt`. '03' < '11' should just work
   if (month === undefined) {
     return true;
   }
-  if ((year === from.year && month < from.month) || (year === to.year && month > to.month)) {
+  if (
+    (year === from.year && month < from.month) ||
+    (year === to.year && month > to.month)
+  ) {
     return false;
   }
   if (day === undefined) {
@@ -137,7 +150,8 @@ function BlogArchive({
   const years = inferYearRangeArray(groupedPosts);
   const [fromDate, toDate] = inferDateRange(years, selectedYear, selectedDate);
   const postsOfSelectedDate =
-    selectedDate && groupedPosts.get(toDate.year)?.get(toDate.month)?.get(toDate.day);
+    selectedDate &&
+    groupedPosts.get(toDate.year)?.get(toDate.month)?.get(toDate.day);
 
   const timelines: JSX.Element[] = [];
 
@@ -152,7 +166,7 @@ function BlogArchive({
       </Timeline>
     );
 
-    const selectedMonth = groupedPosts.get(toDate.year)?.get(toDate.month)!;
+    const selectedMonth = groupedPosts.get(toDate.year)!.get(toDate.month)!;
     const remainingDaysInMonth = Array.from(selectedMonth.entries()).filter(
       ([day]) => Number(day) < Number(toDate.day)
     );
@@ -162,7 +176,11 @@ function BlogArchive({
           <TimelineHeading date={{ ...toDate }} type="remaining" />
           {remainingDaysInMonth.map(([day, posts]) =>
             posts.map((post) => (
-              <TimelineItem key={post.slug} date={{ ...toDate, day }} post={post} />
+              <TimelineItem
+                key={post.slug}
+                date={{ ...toDate, day }}
+                post={post}
+              />
             ))
           )}
         </Timeline>
@@ -187,7 +205,11 @@ function BlogArchive({
             if (isDateMaybeInRange({ year, month, day }, [fromDate, toDate])) {
               for (const post of posts) {
                 timelineItems.push(
-                  <TimelineItem key={post.slug} date={{ year, month, day }} post={post} />
+                  <TimelineItem
+                    key={post.slug}
+                    date={{ year, month, day }}
+                    post={post}
+                  />
                 );
               }
             }
@@ -195,7 +217,10 @@ function BlogArchive({
           if (timelineItems.length > 0) {
             timelines.push(
               <Timeline key={`${year}-${month}`} sx={{ pb: 4 }}>
-                <TimelineHeading date={{ year, month, day: '01' }} type="month" />
+                <TimelineHeading
+                  date={{ year, month, day: '01' }}
+                  type="month"
+                />
                 {timelineItems}
               </Timeline>
             );
@@ -207,23 +232,34 @@ function BlogArchive({
 
   return (
     <GridBox as="section">
-      <Heading sx={{ mb: 3, fontSize: 2, fontWeight: 'normal', gridArea: 'heading' }}>
+      <Heading
+        as="h2"
+        sx={{ mb: 3, fontSize: 2, fontWeight: 'normal', gridArea: 'heading' }}
+      >
         Archive
       </Heading>
       <Box sx={{ gridArea: 'activityList' }}>{timelines}</Box>
-      <FilterList sx={{ gridArea: 'yearList', display: ['none', 'none', 'block'], ml: 4, px: 3 }}>
+      <ActionList
+        selectionVariant="single"
+        sx={{
+          gridArea: 'yearList',
+          display: ['none', 'none', 'block'],
+          ml: 4,
+          px: 3,
+        }}
+      >
         {years.map((year) => (
-          <FilterList.Item
+          <ActionList.Item
             key={year}
             selected={year === (selectedYear ?? years[0])}
             // href={`?from=${year.from}&to=${year.to}`}
-            onClick={() => onYearSelect(year)}
+            onSelect={() => onYearSelect(year)}
             sx={{ borderRadius: 2, fontSize: 0, mb: 2 }}
           >
             {year}
-          </FilterList.Item>
+          </ActionList.Item>
         ))}
-      </FilterList>
+      </ActionList>
     </GridBox>
   );
 }
@@ -259,7 +295,8 @@ function TimelineHeading({
         )}
         {type === 'remaining' && (
           <>
-            {months[Number(date.month) - 1]} 1 <Text sx={{ color: 'fg.muted' }}>to</Text>{' '}
+            {months[Number(date.month) - 1]} 1{' '}
+            <Text sx={{ color: 'fg.muted' }}>to</Text>{' '}
             {months[Number(date.month) - 1]} {trim0(date.day) + ','}
             <Text sx={{ color: 'fg.muted' }}> {date.year}</Text>
           </>
@@ -285,7 +322,7 @@ function TimelineItem({ post, date }: { post: PageData; date: RangeDate }) {
   return (
     <Timeline.Item key={post.slug}>
       <Timeline.Badge>
-        <StyledOcticon icon={FlameIcon} />
+        <FlameIcon />
       </Timeline.Badge>
       <Timeline.Body sx={{ color: 'fg.default' }}>
         <Heading
@@ -298,7 +335,7 @@ function TimelineItem({ post, date }: { post: PageData; date: RangeDate }) {
             fontWeight: 'normal',
           }}
         >
-          <Text>Published a post</Text>
+          <span>Published a post</span>
           <Text sx={{ fontSize: 0, color: 'fg.muted' }}>
             {months[Number(date.month) - 1].slice(0, 3) + ' ' + trim0(date.day)}
           </Text>
@@ -307,9 +344,13 @@ function TimelineItem({ post, date }: { post: PageData; date: RangeDate }) {
           <StyledFileIcon />
           <Box sx={{ mx: 4 }}>
             <Heading as="h3" sx={{ fontSize: 3 }}>
-              <Link href={post.relativePath.replace(/\.md$/, '')}>{post.title}</Link>
+              <Link href={post.relativePath.replace(/\.md$/, '')}>
+                {post.title}
+              </Link>
             </Heading>
-            <Box sx={{ my: 2, fontSize: 1, color: 'fg.muted' }}>{post.description}</Box>
+            <Box sx={{ my: 2, fontSize: 1, color: 'fg.muted' }}>
+              {post.description}
+            </Box>
           </Box>
         </BorderBox>
       </Timeline.Body>

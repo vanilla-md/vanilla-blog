@@ -1,31 +1,29 @@
-import { useEffect, useMemo, useReducer, useState } from 'react';
-import Head from 'next/head';
-import { Box, Text } from '@primer/react';
+'use client';
+import { useMemo, useState } from 'react';
 import siteData from '@/generated/siteData.json';
 import Showcase from '@/components/showcase';
 import { ProfileItemShowcase } from '@octokit/graphql-schema';
 import CalendarWithTooltip from '@/components/calendar';
 import BlogArchive from '@/components/blogArchive';
-import { getSortedPostsData } from '@/lib/posts';
-import type { GetStaticProps } from 'next';
 import type { PageData } from '@/types';
 import { groupPostsByDate } from '@/lib/blogManager';
 
 const itemShowcase = siteData.itemShowcase;
 
-export default function Home({ allPostsData }: { allPostsData: PageData[] }) {
+export default function Overview({
+  allPostsData,
+}: {
+  allPostsData: PageData[];
+}) {
   const [selectedYear, setSelectedYear] = useState<number>();
   const [selectedDate, setSelectedDate] = useState<string>();
-  const groupedPosts = useMemo(() => groupPostsByDate(allPostsData), [allPostsData]);
+  const groupedPosts = useMemo(
+    () => groupPostsByDate(allPostsData),
+    [allPostsData]
+  );
 
   return (
     <>
-      <Head>
-        <title>My Blog</title>
-        <meta name="description" content="Welcome to my personal blog" />
-        <meta name="keywords" content="blog" />
-      </Head>
-
       {/* <Box
         sx={{
           border: '1px solid',
@@ -39,14 +37,14 @@ export default function Home({ allPostsData }: { allPostsData: PageData[] }) {
         <Text> mona/README.md</Text>
       </Box> */}
 
-      <Box>
+      <div>
         {itemShowcase.items.totalCount && (
           <Showcase
             sx={{ marginTop: 4 }}
             itemShowcase={itemShowcase as Required<ProfileItemShowcase>}
           />
         )}
-      </Box>
+      </div>
 
       <CalendarWithTooltip
         groupedPosts={groupedPosts}
@@ -65,12 +63,3 @@ export default function Home({ allPostsData }: { allPostsData: PageData[] }) {
     </>
   );
 }
-
-export const getStaticProps: GetStaticProps = async () => {
-  const allPostsData = await getSortedPostsData();
-  return {
-    props: {
-      allPostsData,
-    },
-  };
-};

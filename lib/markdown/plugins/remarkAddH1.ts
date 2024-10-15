@@ -1,6 +1,6 @@
 import { select } from 'unist-util-select';
-import { noCase } from 'no-case';
-import { titleCase } from 'title-case';
+// import { noCase } from 'no-case';
+// import { titleCase } from 'title-case';
 import type { VFile } from 'vfile';
 import type { Plugin } from 'unified';
 import type { Root } from 'mdast';
@@ -22,11 +22,13 @@ interface RemarkAddH1Options {
   title?: string;
 }
 
-const remarkAddH1: Plugin<[RemarkAddH1Options?], Root, Root> = (options = {}) => {
+const remarkAddH1: Plugin<[RemarkAddH1Options?], Root, Root> = (
+  options = {}
+) => {
   const { title = '' } = options;
 
   return (tree: Root, file: VFile) => {
-    const heading1 = select('heading[depth=1]', tree);
+    const heading1 = select('heading[depth="1"]', tree);
 
     if (!heading1) {
       tree.children.unshift({
@@ -35,7 +37,8 @@ const remarkAddH1: Plugin<[RemarkAddH1Options?], Root, Root> = (options = {}) =>
         children: [
           {
             type: 'text',
-            value: title || file.data.matter?.title || titleFromStem(file.stem!),
+            value:
+              title || file.data.matter?.title || titleFromStem(file.stem!),
           },
         ],
       });

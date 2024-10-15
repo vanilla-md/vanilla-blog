@@ -1,0 +1,19 @@
+@import '@primer/primitives/dist/css/primitives.css';
+@import '@primer/primitives/dist/css/functional/themes/light.css';
+@import '@primer/primitives/dist/css/functional/themes/dark.css';
+@import 'github-markdown-css/github-markdown.css';
+
+html {
+  scrollbar-gutter: stable;
+  scroll-padding-top: 55px;
+}
+
+body {
+  color: var(--fgColor-default);
+  background-color: var(--bgColor-default);
+  font-size: var(--base-size-14);
+}
+
+.markdown-body {
+  font-family: system-ui;
+}

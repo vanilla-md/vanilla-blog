@@ -1,4 +1,4 @@
-import { PageHeader } from '@primer/react/drafts';
+import { PageHeader } from '@primer/react';
 import siteData from '@/generated/siteData.json';
 
 export default function Header() {

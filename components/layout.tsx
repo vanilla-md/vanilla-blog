@@ -1,3 +1,5 @@
+'use client';
+
 import { Box } from '@primer/react';
 import Header from './header';
 import Navigation from './navigation';

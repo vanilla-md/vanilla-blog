@@ -1,7 +1,7 @@
 import { outputFile } from 'fs-extra';
 import { resolveSiteData } from '@/lib/siteData';
 
-async function saveJsonObj(jsonObj: {}, filePath: string) {
+async function saveJsonObj(jsonObj: object, filePath: string) {
   await outputFile(filePath, JSON.stringify(jsonObj, undefined, 2));
 }
 

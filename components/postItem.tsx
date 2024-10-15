@@ -1,4 +1,6 @@
-import { Box, Text, Heading, LabelGroup, RelativeTime } from '@primer/react';
+'use client';
+
+import { Box, Text, Heading, RelativeTime } from '@primer/react';
 import { CalendarIcon, ClockIcon, PencilIcon } from '@primer/octicons-react';
 import Link from './link';
 import { SolidLabel, SolidLabelGroup } from './solidLabel';
@@ -30,7 +32,7 @@ export function PostItem({
           <Link href={`/posts/${slug}`}>{title}</Link>
         </Heading>
       </Box>
-      <Box>
+      <div>
         <Text
           as="p"
           title={description}
@@ -38,7 +40,7 @@ export function PostItem({
         >
           {description}
         </Text>
-      </Box>
+      </div>
       {tags.length > 0 && (
         <Box sx={{ my: 1, verticalAlign: 'middle' }}>
           <SolidLabelGroup>
@@ -59,9 +61,9 @@ export function PostItem({
             <PencilIcon /> Modified <RelativeTime datetime={modified} />
           </Text>
         )}
-        <Text>
+        <span>
           <ClockIcon /> Reading Time: {readingTime}
-        </Text>
+        </span>
       </Box>
     </Box>
   );

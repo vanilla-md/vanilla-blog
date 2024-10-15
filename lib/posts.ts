@@ -3,6 +3,7 @@ import path from 'path';
 import { read } from 'to-vfile';
 import { metaOnlyProcessor, processor, srcDir } from './markdown';
 import { resolvePageDate } from './pageData';
+import { cache } from 'react';
 
 const postsDir = path.join(srcDir, 'posts');
 
@@ -43,14 +44,12 @@ export async function getAllPostSlugs() {
   const fileNames = await readdir(postsDir);
   return fileNames.map((fileName) => {
     return {
-      params: {
-        slug: fileName.replace(/\.md$/, ''),
-      },
+      slug: fileName.replace(/\.md$/, ''),
     };
   });
 }
 
-export async function getPostDataBySlug(slug: string) {
+export const getPostDataBySlug = cache(async (slug: string) => {
   const fullPath = path.join(postsDir, `${slug}.md`);
   const file = await read(fullPath);
 
@@ -66,4 +65,4 @@ export async function getPostDataBySlug(slug: string) {
     ...pageData,
     contentHtml,
   };
-}
+});

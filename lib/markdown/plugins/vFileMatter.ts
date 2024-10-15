@@ -4,7 +4,7 @@ import type { VFile } from 'vfile';
 import { matter } from 'vfile-matter';
 
 const vFileMatter: Plugin<Array<void>> = function vFileMatter() {
-  function transformer(_: any, file: VFile) {
+  function transformer(_: unknown, file: VFile) {
     matter(file);
   }
 

@@ -1,8 +1,8 @@
 // refer to https://github.com/grubersjoe/react-activity-calendar/blob/bd9b2712846442b8f2ee09d9e45ab887d9785ef8/src/component/ActivityCalendar.tsx#L150
-
-import { Box, Heading, themeGet, useColorSchemeVar, useTheme } from '@primer/react';
-import React, { DOMAttributes, forwardRef, useLayoutEffect, useRef } from 'react';
-import { MouseEventHandler, useCallback, useEffect, useState } from 'react';
+'use client';
+import { Box, Heading, themeGet, useTheme } from '@primer/react';
+import React, { forwardRef, useRef } from 'react';
+import { MouseEventHandler, useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { flushSync } from 'react-dom';
 import BorderBox from './borderBox';
@@ -22,7 +22,11 @@ import {
   sundayWeeksAgo,
 } from '@/utils';
 import Tooltip, { tooltipLabelText, TooltipProps } from './tooltip';
-import { GroupedPosts, getPostCountInPastYear, getPostCountInYear } from '@/lib/blogManager';
+import {
+  GroupedPosts,
+  getPostCountInPastYear,
+  getPostCountInYear,
+} from '@/lib/blogManager';
 
 export interface Day {
   date: string;
@@ -48,7 +52,13 @@ type Range = {
   to: Date;
 };
 
-const halloweenPalette = ['#ebedf0', '#ffee4a', '#ffc501', '#fe9600', '#03001c'];
+const halloweenPalette = [
+  '#ebedf0',
+  '#ffee4a',
+  '#ffc501',
+  '#fe9600',
+  '#03001c',
+];
 
 // Moved to `_app.ts`
 // const doodlePalette = ['#ebedf0', '#0a659e', '#f59a61', '#e51a4c'];
@@ -142,7 +152,9 @@ function groupByWeeks(dataDays: Day[], range: Range) {
   while (startOfDay(from) <= startOfDay(to)) {
     // pad the first week
     const days: Array<MaybeDay> =
-      weeks.length === 0 ? new Array<undefined>(from.getDay()).fill(undefined) : [];
+      weeks.length === 0
+        ? new Array<undefined>(from.getDay()).fill(undefined)
+        : [];
     while (days.length < 7 && startOfDay(from) <= startOfDay(to)) {
       const ymd = dateToYMD(from);
       days.push(
@@ -168,7 +180,10 @@ const monthLabelHeight = rectStep;
 const paletteHeight = rectStep * 2 - rectGap;
 
 const Calendar = forwardRef<SVGSVGElement, CalendarProps>(
-  ({ groupedPosts, selectedYear, onDateSelect, onMouseEnter, onMouseLeave }, ref) => {
+  (
+    { groupedPosts, selectedYear, onDateSelect, onMouseEnter, onMouseLeave },
+    ref
+  ) => {
     const [isHovered, setIsHovered] = useState(false);
     const { theme } = useTheme();
     const range = selectedYear
@@ -176,11 +191,15 @@ const Calendar = forwardRef<SVGSVGElement, CalendarProps>(
       : normalizeRange();
     const data = postsToDataDays(groupedPosts);
     const postsWeeks = groupByWeeks(data ?? [], range);
-    const doodleWeeks = groupByWeeks(getDoodleDays(startOfWeek(range.from)), range);
+    const doodleWeeks = groupByWeeks(
+      getDoodleDays(startOfWeek(range.from)),
+      range
+    );
     const weeks = isHovered || selectedYear ? postsWeeks : doodleWeeks;
 
     return (
       <svg
+        aria-label="Activity calendar for posts"
         ref={ref}
         width={weekdayLabelWidth + weeks.length * rectStep - rectGap}
         height={monthLabelHeight + 7 * rectStep - rectGap + paletteHeight}
@@ -189,7 +208,10 @@ const Calendar = forwardRef<SVGSVGElement, CalendarProps>(
       >
         <g transform={`translate(${weekdayLabelWidth}, ${monthLabelHeight})`}>
           {weeks.map((week, index) => (
-            <g transform={`translate(${index * rectStep}, 0)`} key={range.from.getTime() + index}>
+            <g
+              transform={`translate(${index * rectStep}, 0)`}
+              key={range.from.getTime() + index}
+            >
               {week.map(
                 (day, index) =>
                   day && (
@@ -237,24 +259,27 @@ const Calendar = forwardRef<SVGSVGElement, CalendarProps>(
         </g>
         <g transform={`translate(${weekdayLabelWidth}, 0)`}>
           {weeks
-            .reduce((monthObjects, week, index, arr) => {
-              // The first week may have padding undefined items
-              const firstDay = week.find((day) => day !== undefined)!;
-              const month = months[parseYMD(firstDay.date).getMonth()];
-              // prevMonth of the first month is undefined
-              // [][-1] === undefined
-              const prevMonth = monthObjects[monthObjects.length - 1]?.month;
-              if (month !== prevMonth && index < arr.length - 1) {
-                // If the first month label has been added above col 1, (monthObjects.length === 1)
-                // and the second month label is going to be added above col 2 (index === 1)
-                // We delete the first one to avoid overlapping
-                if (monthObjects.length === 1 && index === 1) {
-                  monthObjects = [];
+            .reduce(
+              (monthObjects, week, index, arr) => {
+                // The first week may have padding undefined items
+                const firstDay = week.find((day) => day !== undefined)!;
+                const month = months[parseYMD(firstDay.date).getMonth()];
+                // prevMonth of the first month is undefined
+                // [][-1] === undefined
+                const prevMonth = monthObjects[monthObjects.length - 1]?.month;
+                if (month !== prevMonth && index < arr.length - 1) {
+                  // If the first month label has been added above col 1, (monthObjects.length === 1)
+                  // and the second month label is going to be added above col 2 (index === 1)
+                  // We delete the first one to avoid overlapping
+                  if (monthObjects.length === 1 && index === 1) {
+                    monthObjects = [];
+                  }
+                  monthObjects.push({ month, index });
                 }
-                monthObjects.push({ month, index });
-              }
-              return monthObjects;
-            }, [] as Array<{ month: (typeof months)[number]; index: number }>)
+                return monthObjects;
+              },
+              [] as Array<{ month: (typeof months)[number]; index: number }>
+            )
             .map(({ month, index }) => (
               <text
                 dominantBaseline="hanging"
@@ -270,7 +295,8 @@ const Calendar = forwardRef<SVGSVGElement, CalendarProps>(
         </g>
         <g
           transform={`translate(${
-            weekdayLabelWidth + (weeks.length - halloweenPalette.length - 1) * rectStep
+            weekdayLabelWidth +
+            (weeks.length - halloweenPalette.length - 1) * rectStep
           }, ${monthLabelHeight + 8 * rectStep - rectGap})`}
         >
           {
@@ -354,7 +380,9 @@ function CalendarWithTooltip({ ...props }: CalendarWithTooltipProps) {
     y: number;
   } | null>(null);
 
-  const showTooltip: MouseEventHandler<SVGRectElement> = useCallback(function (e) {
+  const showTooltip: MouseEventHandler<SVGRectElement> = useCallback(function (
+    e
+  ) {
     const rect = e.target as SVGRectElement;
     const rectBounds = rect.getBoundingClientRect();
     const x = rectBounds.left + window.scrollX - rectBounds.width / 2 + 11;
@@ -388,9 +416,12 @@ function CalendarWithTooltip({ ...props }: CalendarWithTooltipProps) {
     }
   }, []);
 
-  const hideTooltip: MouseEventHandler<SVGRectElement> = useCallback(function () {
-    setTooltip(null);
-  }, []);
+  const hideTooltip: MouseEventHandler<SVGRectElement> = useCallback(
+    function () {
+      setTooltip(null);
+    },
+    []
+  );
 
   return (
     <Box
@@ -399,7 +430,7 @@ function CalendarWithTooltip({ ...props }: CalendarWithTooltipProps) {
         mt: 4,
       }}
     >
-      <Heading sx={{ mb: 2, fontSize: 2, fontWeight: 'normal' }}>
+      <Heading as="h2" sx={{ mb: 2, fontSize: 2, fontWeight: 'normal' }}>
         {postCount === 1 ? '1 post' : `${postCount} posts`} in{' '}
         {selectedYear ? selectedYear : 'the last year'}
       </Heading>
@@ -415,7 +446,11 @@ function CalendarWithTooltip({ ...props }: CalendarWithTooltipProps) {
         ref={tooltipRef}
         direction={tooltip?.direction}
         hidden={tooltip === null}
-        style={tooltip ? { display: 'inline-block', left: tooltip.x, top: tooltip.y } : {}}
+        style={
+          tooltip
+            ? { display: 'inline-block', left: tooltip.x, top: tooltip.y }
+            : {}
+        }
       >
         <strong>{tooltip && tooltipLabelText(tooltip.count)}</strong>
         {tooltip && ` on ${YMDToWMDY(tooltip.date)}`}

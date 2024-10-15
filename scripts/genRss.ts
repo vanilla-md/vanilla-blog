@@ -9,7 +9,9 @@ import { padHttp } from '@/utils';
 const feedPath = 'feed.xml';
 const name = siteData.name ?? siteData.login;
 
-const websiteUrl = padHttp(siteData.websiteUrl ?? `${siteData.login}.github.io`);
+const websiteUrl = padHttp(
+  siteData.websiteUrl ?? `${siteData.login}.github.io`
+);
 
 const channel = {
   title: `${name}'s Blog`,

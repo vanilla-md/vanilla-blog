@@ -30,10 +30,13 @@ export function groupPostsByDate(posts: PageData[]): GroupedPosts {
   return result;
 }
 
-export function getPostCountInYear(groupedPosts: GroupedPosts, year: number): number {
+export function getPostCountInYear(
+  groupedPosts: GroupedPosts,
+  year: number
+): number {
   let postCount = 0;
-  for (const [_, days] of groupedPosts.get(year.toString()) ?? []) {
-    for (const [_, posts] of days) {
+  for (const [, days] of groupedPosts.get(year.toString()) ?? []) {
+    for (const [, posts] of days) {
       postCount += posts.length;
     }
   }

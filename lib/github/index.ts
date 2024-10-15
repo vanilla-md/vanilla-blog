@@ -210,7 +210,7 @@ export async function getReposByName(namesWithOwner: string[]) {
   let response = await octokit.graphql<Record<string, Repository>>(query);
   // make sure all repos are PUBLIC
   response = Object.fromEntries(
-    Object.entries(response).filter(([_, repo]) => repo.isPrivate !== true)
+    Object.entries(response).filter(([, repo]) => repo.isPrivate !== true)
   );
   return response;
 }
