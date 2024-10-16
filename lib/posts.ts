@@ -23,7 +23,7 @@ export async function getSortedPostsData() {
       console.timeEnd(label);
 
       return resolvePageDate(processedFile);
-    })
+    }),
   );
   // Sort posts data by published
   return allPostsData.sort((a, b) => {

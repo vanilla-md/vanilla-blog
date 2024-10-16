@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 // https://github.com/you-dont-need/You-Dont-Need-Momentjs/blob/master/README.md#add
 // https://github.com/date-fns/date-fns/blob/master/src
 export const weekdays = [
@@ -25,10 +26,10 @@ export const months = [
   'December',
 ] as const;
 
-const dayTab = [
-  [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
-  [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
-] as const;
+// const dayTab = [
+//   [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
+//   [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
+// ] as const;
 
 export function startOfDay(date: Date, local = true) {
   date = new Date(date);
@@ -44,7 +45,9 @@ export function endOfDay(date: Date, local = true) {
 
 export function addDays(date: Date, days: number, local = true) {
   date = new Date(date);
-  local ? date.setDate(date.getDate() + days) : date.setUTCDate(date.getUTCDate() + days);
+  local
+    ? date.setDate(date.getDate() + days)
+    : date.setUTCDate(date.getUTCDate() + days);
   return date;
 }
 
@@ -76,7 +79,9 @@ export function nextDay(date: Date, local = true) {
 
 export function subWeeks(date: Date, weeks: number, local = true) {
   date = new Date(date);
-  local ? date.setDate(date.getDate() - 7 * weeks) : date.setUTCDate(date.getUTCDate() - 7 * weeks);
+  local
+    ? date.setDate(date.getDate() - 7 * weeks)
+    : date.setUTCDate(date.getUTCDate() - 7 * weeks);
   return date;
 }
 
@@ -126,7 +131,9 @@ export function endOfYear(date: Date, local = true) {
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#several_ways_to_create_a_date_object
 export function parseYMD(ymd: string, local = true) {
   const [year, month, day] = ymd.split('-').map((str) => +str);
-  return local ? new Date(year, month - 1, day) : new Date(Date.UTC(year, month - 1, day));
+  return local
+    ? new Date(year, month - 1, day)
+    : new Date(Date.UTC(year, month - 1, day));
 }
 
 export function pad0(num: number, length = 2): string {

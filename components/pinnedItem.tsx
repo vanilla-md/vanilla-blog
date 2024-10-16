@@ -80,7 +80,9 @@ export function PinnedItem({ pinnedItem }: PinnedItemProps) {
       <RepoMeta>
         {primaryLanguage?.color && (
           <PrimaryLanguage>
-            <LanguageCircle languageColor={primaryLanguage.color}></LanguageCircle>{' '}
+            <LanguageCircle
+              languageColor={primaryLanguage.color}
+            ></LanguageCircle>{' '}
             <span>{primaryLanguage.name}</span>
           </PrimaryLanguage>
         )}

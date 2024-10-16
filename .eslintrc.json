@@ -2,6 +2,7 @@
   "extends": [
     "next/core-web-vitals",
     "next/typescript",
-    "plugin:primer-react/recommended"
+    "plugin:primer-react/recommended",
+    "prettier"
   ]
 }

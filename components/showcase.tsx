@@ -40,7 +40,7 @@ export default function Showcase({
               (node) =>
                 node && (
                   <PinnedItem pinnedItem={node as Repository} key={node.id} />
-                )
+                ),
             )}
           </List>
         </ShowcaseBase>

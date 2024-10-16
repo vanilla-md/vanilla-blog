@@ -23,7 +23,7 @@ export async function resolveSiteData(): Promise<SiteData> {
     (avatarMime ? '.' + avatarMime : '');
   outputFile(
     path.join('./public/images', avatarFilename),
-    Buffer.from(await avatarBlob.arrayBuffer())
+    Buffer.from(await avatarBlob.arrayBuffer()),
   );
   viewer.avatarUrl = path.join('/images/', avatarFilename);
 

@@ -41,7 +41,7 @@ const GridBox = styled(Box)`
 
 function inferYearRangeArray(groupedPosts: GroupedPosts): number[] {
   const from = Math.min(
-    ...Array.from(groupedPosts.keys()).map((year) => parseInt(year))
+    ...Array.from(groupedPosts.keys()).map((year) => parseInt(year)),
   );
   const to = new Date().getFullYear();
   return Array.from({ length: to - from + 1 }, (_, i) => to - i);
@@ -65,7 +65,7 @@ function dateToRangeDate(date: Date) {
 // TODO: [Temporal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) to help
 function isDateMaybeInRange(
   { year, month, day }: { year: string; month?: string; day?: string },
-  [from, to]: [RangeDate, RangeDate]
+  [from, to]: [RangeDate, RangeDate],
 ) {
   // `year` may be less than 4 digits. We don't pad 0s. ？？？😄
   if (
@@ -99,7 +99,7 @@ function isDateMaybeInRange(
 function inferDateRange(
   years: number[],
   selectedYear?: number,
-  selectedDate?: string
+  selectedDate?: string,
 ): [RangeDate, RangeDate] {
   if (!selectedYear && !selectedDate) {
     return [
@@ -163,12 +163,12 @@ function BlogArchive({
         {postsOfSelectedDate.map((post) => (
           <TimelineItem key={post.slug} date={date} post={post} />
         ))}
-      </Timeline>
+      </Timeline>,
     );
 
     const selectedMonth = groupedPosts.get(toDate.year)!.get(toDate.month)!;
     const remainingDaysInMonth = Array.from(selectedMonth.entries()).filter(
-      ([day]) => Number(day) < Number(toDate.day)
+      ([day]) => Number(day) < Number(toDate.day),
     );
     if (remainingDaysInMonth.length > 0) {
       timelines.push(
@@ -181,9 +181,9 @@ function BlogArchive({
                 date={{ ...toDate, day }}
                 post={post}
               />
-            ))
+            )),
           )}
-        </Timeline>
+        </Timeline>,
       );
     }
   }
@@ -209,7 +209,7 @@ function BlogArchive({
                     key={post.slug}
                     date={{ year, month, day }}
                     post={post}
-                  />
+                  />,
                 );
               }
             }
@@ -222,7 +222,7 @@ function BlogArchive({
                   type="month"
                 />
                 {timelineItems}
-              </Timeline>
+              </Timeline>,
             );
           }
         }

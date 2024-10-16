@@ -47,7 +47,7 @@ function getSvgProps(_ref: _RefProps) {
   const height = sizeMap[size] || (size as number);
   const naturalHeight = closestNaturalHeight(
     Object.keys(svgDataByHeight),
-    height
+    height,
   );
   const naturalWidth = svgDataByHeight[naturalHeight].width;
   const width = height * (naturalWidth / naturalHeight);
@@ -97,7 +97,7 @@ function OctofaceIcon(props: BaseIconProps) {
   };
   return React.createElement(
     'svg',
-    getSvgProps(_extends({}, props, { svgDataByHeight: svgDataByHeight }))
+    getSvgProps(_extends({}, props, { svgDataByHeight: svgDataByHeight })),
   );
 }
 

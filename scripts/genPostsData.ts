@@ -8,6 +8,6 @@ await outputFile(
   JSON.stringify(
     Object.assign(siteDate, { posts: { totalCount: postsCount } }),
     undefined,
-    2
-  )
+    2,
+  ),
 );

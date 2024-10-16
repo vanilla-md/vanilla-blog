@@ -10,7 +10,7 @@ const feedPath = 'feed.xml';
 const name = siteData.name ?? siteData.login;
 
 const websiteUrl = padHttp(
-  siteData.websiteUrl ?? `${siteData.login}.github.io`
+  siteData.websiteUrl ?? `${siteData.login}.github.io`,
 );
 
 const channel = {

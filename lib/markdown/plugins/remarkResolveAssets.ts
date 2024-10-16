@@ -4,9 +4,11 @@ import type { Plugin, Processor } from 'unified';
 import type { Image, Root } from 'mdast';
 import path from 'path';
 
-const remarkResolveAssets: Plugin<Array<void>, Root, Root> = function remarkResolveAssets(
-  this: Processor
-) {
+const remarkResolveAssets: Plugin<
+  Array<void>,
+  Root,
+  Root
+> = function remarkResolveAssets(this: Processor) {
   return (tree: Root, file: VFile) => {
     const { srcDir } = this.data() as { srcDir: string };
 

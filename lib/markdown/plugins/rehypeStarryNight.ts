@@ -38,7 +38,7 @@ export default function rehypeStarryNight(options: Options = {}) {
       if (!Array.isArray(classes)) return;
 
       const language = classes.find(
-        (d) => typeof d === 'string' && d.startsWith(prefix)
+        (d) => typeof d === 'string' && d.startsWith(prefix),
       );
 
       if (typeof language !== 'string') return;

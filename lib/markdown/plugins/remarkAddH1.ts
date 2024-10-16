@@ -23,7 +23,7 @@ interface RemarkAddH1Options {
 }
 
 const remarkAddH1: Plugin<[RemarkAddH1Options?], Root, Root> = (
-  options = {}
+  options = {},
 ) => {
   const { title = '' } = options;
 

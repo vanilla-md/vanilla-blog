@@ -90,7 +90,7 @@ function getDoodleDays(firstSunday: Date): Day[] {
             count: value,
             level: value,
           }
-        : undefined
+        : undefined,
     )
     .filter((item) => item !== undefined) as Day[];
 }
@@ -162,7 +162,7 @@ function groupByWeeks(dataDays: Day[], range: Range) {
           date: ymd,
           count: 0,
           level: 0,
-        }
+        },
       );
       from = nextDay(from);
     }
@@ -182,7 +182,7 @@ const paletteHeight = rectStep * 2 - rectGap;
 const Calendar = forwardRef<SVGSVGElement, CalendarProps>(
   (
     { groupedPosts, selectedYear, onDateSelect, onMouseEnter, onMouseLeave },
-    ref
+    ref,
   ) => {
     const [isHovered, setIsHovered] = useState(false);
     const { theme } = useTheme();
@@ -193,7 +193,7 @@ const Calendar = forwardRef<SVGSVGElement, CalendarProps>(
     const postsWeeks = groupByWeeks(data ?? [], range);
     const doodleWeeks = groupByWeeks(
       getDoodleDays(startOfWeek(range.from)),
-      range
+      range,
     );
     const weeks = isHovered || selectedYear ? postsWeeks : doodleWeeks;
 
@@ -235,7 +235,7 @@ const Calendar = forwardRef<SVGSVGElement, CalendarProps>(
                           : theme!.colors.calendar.doodle[day.level]
                       }
                     ></rect>
-                  )
+                  ),
               )}
             </g>
           ))}
@@ -254,7 +254,7 @@ const Calendar = forwardRef<SVGSVGElement, CalendarProps>(
                 >
                   {weekday.slice(0, 3)}
                 </text>
-              )
+              ),
           )}
         </g>
         <g transform={`translate(${weekdayLabelWidth}, 0)`}>
@@ -278,7 +278,7 @@ const Calendar = forwardRef<SVGSVGElement, CalendarProps>(
                 }
                 return monthObjects;
               },
-              [] as Array<{ month: (typeof months)[number]; index: number }>
+              [] as Array<{ month: (typeof months)[number]; index: number }>,
             )
             .map(({ month, index }) => (
               <text
@@ -336,7 +336,7 @@ const Calendar = forwardRef<SVGSVGElement, CalendarProps>(
         </g>
       </svg>
     );
-  }
+  },
 );
 
 Calendar.displayName = 'Calendar';
@@ -381,7 +381,7 @@ function CalendarWithTooltip({ ...props }: CalendarWithTooltipProps) {
   } | null>(null);
 
   const showTooltip: MouseEventHandler<SVGRectElement> = useCallback(function (
-    e
+    e,
   ) {
     const rect = e.target as SVGRectElement;
     const rectBounds = rect.getBoundingClientRect();
@@ -395,7 +395,7 @@ function CalendarWithTooltip({ ...props }: CalendarWithTooltipProps) {
         direction: 'center',
         x,
         y,
-      })
+      }),
     );
 
     const svgBounds = calendarRef.current!.getBoundingClientRect();
@@ -420,7 +420,7 @@ function CalendarWithTooltip({ ...props }: CalendarWithTooltipProps) {
     function () {
       setTooltip(null);
     },
-    []
+    [],
   );
 
   return (

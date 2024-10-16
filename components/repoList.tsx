@@ -164,7 +164,7 @@ export function RepoList({ repos }: { repos: Repository[] }) {
               </Meta>
             </RepoMeta>
           </StyledRepoListItem>
-        )
+        ),
       )}
     </StyledRepoList>
   );

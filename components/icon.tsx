@@ -36,7 +36,7 @@ const importedOcticons = new Map<string, IconFC>(
     repo: RepoIcon,
     'repo-forked': RepoForkedIcon,
     law: LawIcon,
-  })
+  }),
 );
 
 type Props = { iconName: string } & IconProps;

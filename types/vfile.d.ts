@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import type { VFile } from 'vfile';
 
 // VFile.data.matter/meta set by unified plugins

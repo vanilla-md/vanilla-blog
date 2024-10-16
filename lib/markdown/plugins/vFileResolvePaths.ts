@@ -4,7 +4,7 @@ import { slash } from '@/utils';
 import type { Plugin, Processor } from 'unified';
 
 const vFileResolvePaths: Plugin<Array<void>> = function vFileResolvePaths(
-  this: Processor
+  this: Processor,
 ) {
   return (_, file: VFile) => {
     const { srcDir, websiteUrl } = this.data() as {
@@ -14,7 +14,7 @@ const vFileResolvePaths: Plugin<Array<void>> = function vFileResolvePaths(
     const relativePath = path.relative(srcDir, file.path);
     const relativePathWithoutExtname = relativePath.slice(
       0,
-      -file.extname!.length
+      -file.extname!.length,
     );
     // TODO: Is it better to prepend a dirname?
     file.data.slug = file.stem!;

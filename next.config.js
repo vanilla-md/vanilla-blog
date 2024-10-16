@@ -18,6 +18,10 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  // https://nextjs.org/docs/app/building-your-application/configuring/eslint#linting-custom-directories-and-files
+  eslint: {
+    dirs: ['app', 'lib', 'utils', 'types'], // Only run ESLint on the 'pages' and 'utils' directories during production builds (next build)
+  },
 };
 
 export default nextConfig;

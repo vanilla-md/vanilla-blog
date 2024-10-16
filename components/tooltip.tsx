@@ -85,7 +85,7 @@ export type TooltipProps = {
 const Tooltip = forwardRef(
   (
     { direction = 'center', children, className, ...rest }: TooltipProps,
-    ref: Ref<HTMLDivElement>
+    ref: Ref<HTMLDivElement>,
   ) => {
     const classes = clsx(className, direction);
     return (
@@ -99,7 +99,7 @@ const Tooltip = forwardRef(
         {children}
       </TooltipBase>
     );
-  }
+  },
 );
 
 Tooltip.displayName = 'Tooltip';

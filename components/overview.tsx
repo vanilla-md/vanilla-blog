@@ -19,7 +19,7 @@ export default function Overview({
   const [selectedDate, setSelectedDate] = useState<string>();
   const groupedPosts = useMemo(
     () => groupPostsByDate(allPostsData),
-    [allPostsData]
+    [allPostsData],
   );
 
   return (

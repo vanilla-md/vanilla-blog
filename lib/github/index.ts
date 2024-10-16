@@ -100,10 +100,10 @@ export async function getUserInfo() {
       }
     }
     ${repoInfoFragment}`,
-    { login: process.env.LOGIN }
+    { login: process.env.LOGIN },
   );
   console.log(
-    `octokit: user data fetched. login: ${response.user.login} cost: ${response.rateLimit.cost}`
+    `octokit: user data fetched. login: ${response.user.login} cost: ${response.rateLimit.cost}`,
   );
   return response.user;
 }
@@ -185,7 +185,7 @@ export async function getUserRepos() {
       }
     }
     ${repoInfoFragment}`,
-    { login: process.env.LOGIN }
+    { login: process.env.LOGIN },
   );
   return response.user.repositories;
 }
@@ -210,7 +210,7 @@ export async function getReposByName(namesWithOwner: string[]) {
   let response = await octokit.graphql<Record<string, Repository>>(query);
   // make sure all repos are PUBLIC
   response = Object.fromEntries(
-    Object.entries(response).filter(([, repo]) => repo.isPrivate !== true)
+    Object.entries(response).filter(([, repo]) => repo.isPrivate !== true),
   );
   return response;
 }
