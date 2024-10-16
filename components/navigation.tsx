@@ -7,8 +7,8 @@ import {
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { HomeIcon, BookIcon, RepoIcon } from '@primer/octicons-react';
-import OctofaceIcon from './octofaceIcon';
 import siteData from '@/generated/siteData.json';
+import OctofaceIcon from './icons/octofaceIcon';
 
 export default function Navigation() {
   const items = [

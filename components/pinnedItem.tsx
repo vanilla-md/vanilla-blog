@@ -1,7 +1,7 @@
 import type { Repository } from '@octokit/graphql-schema';
 import { Label, Link, themeGet } from '@primer/react';
 import styled from 'styled-components';
-import { Icon } from './icon';
+import { Icon } from './icons/icon';
 import BorderBox from './borderBox';
 import { RepoMeta, Meta, PrimaryLanguage, LanguageCircle } from './repoList';
 

@@ -9,8 +9,7 @@ import {
 import styled from 'styled-components';
 import type { PageData } from '@/types';
 import { type GroupedPosts } from '@/lib/blogManager';
-import { FileIcon } from '@primer/octicons-react';
-import { FlameIcon } from '@primer/styled-octicons';
+import { FileIcon, FlameIcon } from '@primer/octicons-react';
 import {
   sundayWeeksAgo,
   pad0,

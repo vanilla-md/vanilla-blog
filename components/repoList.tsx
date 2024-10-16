@@ -10,7 +10,7 @@ import {
 } from '@primer/react';
 import styled from 'styled-components';
 import { SolidLabelGroup, SolidLabel } from './solidLabel';
-import { Icon } from './icon';
+import { Icon } from './icons/icon';
 // temporary fix
 import siteData from '@/generated/siteData.json';
 type Repository = (typeof siteData.repositories.nodes)[number];

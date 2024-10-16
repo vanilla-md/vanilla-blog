@@ -2,7 +2,7 @@ import { Heading, themeGet } from '@primer/react';
 import sx, { SxProp } from '@primer/react/lib-esm/sx';
 import styled from 'styled-components';
 import { padHttp } from '@/utils/helpers';
-import { Icon } from './icon';
+import { Icon } from './icons/icon';
 import siteData from '@/generated/siteData.json';
 import MutedLink from './mutedLink';
 
