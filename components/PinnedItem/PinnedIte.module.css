@@ -1,0 +1,35 @@
+/* stylelint-disable primer/typography */
+
+.PinnedItemBase {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--base-size-16);
+  font-size: var(--text-body-size-medium);
+  padding: var(--base-size-16);
+  color: var(--fgColor-muted);
+  width: 100%;
+}
+
+/* @media (min-width: var(--breakpoints-1)) { */
+@media (min-width: 768px) {
+  .PinnedItemBase {
+    width: calc(50% - var(--base-size-8));
+  }
+}
+
+.Header > * {
+  margin-right: var(--base-size-8);
+}
+
+.Parent {
+  margin-bottom: var(--base-size-8);
+  font-size: var(--base-size-12);
+}
+
+.Desc {
+  flex: 1;
+  margin-top: var(--base-size-8);
+  margin-bottom: 0;
+  font-size: var(--base-size-12);
+}

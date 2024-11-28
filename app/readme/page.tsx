@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { getReadmePageData } from '@/lib/readme';
-import Article from '@/components/article';
+import Article from '@/components/Article';
 
 // https://html.spec.whatwg.org/multipage/semantics.html#standard-metadata-names
 export async function generateMetadata(): Promise<Metadata> {

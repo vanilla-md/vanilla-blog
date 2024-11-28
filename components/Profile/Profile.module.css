@@ -1,0 +1,21 @@
+.ProfileBse {
+  padding-top: var(--base-size-16);
+  font-style: normal;
+}
+
+.VCardList {
+  margin: 0;
+  padding-left: 0;
+}
+
+.VCardListItem {
+  padding-top: var(--base-size-4);
+  list-style: none;
+  font-style: normal;
+  font-size: var(--text-body-size-medium);
+}
+
+.VCardListIcon {
+  color: var(--fgColor-muted);
+  margin-right: var(--base-size-6);
+}

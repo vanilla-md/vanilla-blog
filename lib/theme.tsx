@@ -1,10 +1,9 @@
 'use client';
 
 import { theme, ThemeProvider as PrimerThemeProvider } from '@primer/react';
-import { ColorModeWithAuto, Theme } from '@primer/react/lib-esm/ThemeProvider';
 import deepmerge from 'deepmerge';
 
-const customTheme: Theme = deepmerge(theme, {
+const customTheme = deepmerge(theme, {
   fonts: {
     normal: 'system-ui',
     mono: 'monospace, ui-monospace',
@@ -36,7 +35,7 @@ export function ThemeProvider({
   colorMode,
   children,
 }: {
-  colorMode?: ColorModeWithAuto;
+  colorMode?: 'light' | 'dark';
   children: React.ReactNode;
 }) {
   return (

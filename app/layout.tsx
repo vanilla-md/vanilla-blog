@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import './global.css';
 import { BaseStyles } from '@primer/react';
-import { ColorModeWithAuto } from '@primer/react/lib-esm/ThemeProvider';
 import { StyledComponentsRegistry } from '../lib/registry';
-import Layout from '@/components/layout';
+import Layout from '@/components/Layout/Layout';
 import { ThemeProvider } from '@/lib/theme';
 
-const colorMode: ColorModeWithAuto = 'light';
+const colorMode = 'light';
 
 export const metadata = {
   title: 'Next.js',

@@ -1,0 +1,13 @@
+.AvatarWrapper {
+  vertical-align: 'middle';
+  display: inline-block;
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  width: 100%;
+}
+
+.AvatarImg {
+  border-radius: 50%;
+  box-shadow: var(--shadow-floating-small);
+}

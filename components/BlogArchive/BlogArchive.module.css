@@ -1,0 +1,15 @@
+.GridBox {
+  margin-top: var(--base-size-24);
+  display: grid;
+  grid:
+    'heading       yearList'
+    'activityList  yearList'/
+    1fr 165px;
+
+  @media (max-width: var(--breakpoint-medium)) {
+    grid:
+      'heading     '
+      'activityList'/
+      1fr;
+  }
+}

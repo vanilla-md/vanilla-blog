@@ -1,3 +1,4 @@
 export * from './vfile';
-export * from './pageData';
-export * from './siteData';
+export * from './PageData';
+export * from './SiteData';
+export * from './ComponentProps';

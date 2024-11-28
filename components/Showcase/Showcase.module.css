@@ -1,0 +1,11 @@
+.ShowcaseBase {
+  margin-top: var(--base-size-4);
+}
+
+.List {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+}

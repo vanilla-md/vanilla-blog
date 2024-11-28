@@ -1,0 +1,14 @@
+.SVGContainer {
+  overflow: auto;
+  text-align: center;
+  direction: rtl;
+  padding-left: var(--base-size-16);
+  padding-right: var(--base-size-16);
+  padding-top: var(--base-size-16);
+  padding-bottom: calc(var(--base-size-16) * 3 / 4);
+  color: var(--fgColor-muted);
+
+  & > svg {
+    vertical-align: middle;
+  }
+}

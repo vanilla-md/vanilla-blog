@@ -1,0 +1,7 @@
+.Footer {
+  margin-top: var(--base-size-16);
+  padding-top: var(--base-size-16);
+  border-color: var(--borderColor-muted);
+  border-top-width: var(--borderWidth-thin);
+  border-top-style: solid;
+}

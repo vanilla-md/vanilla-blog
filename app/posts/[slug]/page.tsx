@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { getAllPostSlugs, getPostDataBySlug } from '@/lib/posts';
-import Article from '@/components/article';
+import Article from '@/components/Article';
 
 export async function generateStaticParams() {
   const slugs = await getAllPostSlugs();
@@ -13,11 +13,10 @@ export async function generateStaticParams() {
 // contentHtml: string;
 // };
 
-export const generateMetadata = async ({
-  params,
-}: {
-  params: { slug: string };
+export const generateMetadata = async (props: {
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> => {
+  const params = await props.params;
   const postData = await getPostDataBySlug(decodeURI(params.slug));
   return {
     title: postData.title,
@@ -27,7 +26,10 @@ export const generateMetadata = async ({
   };
 };
 
-export default async function Post({ params }: { params: { slug: string } }) {
+export default async function Post(props: {
+  params: Promise<{ slug: string }>;
+}) {
+  const params = await props.params;
   const postData = await getPostDataBySlug(decodeURI(params.slug));
   return <Article html={postData.contentHtml} />;
 }

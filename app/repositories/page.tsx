@@ -1,5 +1,5 @@
 import siteData from '@/generated/siteData.json';
-import { RepoList } from '@/components/repoList';
+import RepoList from '@/components/RepoList/RepoList';
 
 export const metadata = {
   title: 'My GitHub Repositories',

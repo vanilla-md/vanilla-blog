@@ -1,0 +1,8 @@
+.Article {
+  border: solid var(--borderWidth-thin) var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  padding-left: var(--base-size-32);
+  padding-right: var(--base-size-32);
+  padding-top: var(--base-size-24);
+  padding-bottom: var(--base-size-24);
+}

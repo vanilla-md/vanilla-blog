@@ -1,5 +1,5 @@
 import { Box } from '@primer/react';
-import { PostItem } from '@/components/postItem';
+import PostItem from '@/components/PostItem/PostItem';
 import { getSortedPostsData } from '@/lib/posts';
 
 export const metadata = {

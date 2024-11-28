@@ -11,9 +11,9 @@ html {
 body {
   color: var(--fgColor-default);
   background-color: var(--bgColor-default);
-  font-size: var(--base-size-14);
+  font-size: var(--text-body-size-medium);
 }
 
 .markdown-body {
-  font-family: system-ui;
+  font-family: var(--fontStack-system);
 }

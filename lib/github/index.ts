@@ -13,7 +13,7 @@ if (!process.env.GITHUB_TOKEN) {
 
 const octokit = new Octokit({
   auth: process.env.GITHUB_TOKEN,
-  userAgent: 'lonr vanilla',
+  userAgent: 'vanilla-md/vanilla-blog',
 });
 
 export async function getUserInfo() {
