@@ -1,3 +1,5 @@
+// https://github.com/primer/react/blob/main/examples/app-router/src/app/registry.tsx
+
 'use client';
 
 import { useServerInsertedHTML } from 'next/navigation';

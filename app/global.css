@@ -1,6 +1,7 @@
 @import '@primer/primitives/dist/css/primitives.css';
 @import '@primer/primitives/dist/css/functional/themes/light.css';
 @import '@primer/primitives/dist/css/functional/themes/dark.css';
+/* TODO: remove duplicate CSS variables */
 @import 'github-markdown-css/github-markdown.css';
 
 html {

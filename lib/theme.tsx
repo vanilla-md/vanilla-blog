@@ -3,6 +3,9 @@
 import { theme, ThemeProvider as PrimerThemeProvider } from '@primer/react';
 import deepmerge from 'deepmerge';
 
+type ColorMode = 'day' | 'night' | 'light' | 'dark';
+export type ColorModeWithAuto = ColorMode | 'auto';
+
 const customTheme = deepmerge(theme, {
   fonts: {
     normal: 'system-ui',
@@ -35,7 +38,7 @@ export function ThemeProvider({
   colorMode,
   children,
 }: {
-  colorMode?: 'light' | 'dark';
+  colorMode?: ColorModeWithAuto;
   children: React.ReactNode;
 }) {
   return (

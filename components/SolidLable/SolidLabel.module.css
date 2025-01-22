@@ -1,0 +1,42 @@
+/* 
+export const SolidLabelGroup = styled(LabelGroup)`
+  display: flex;
+  align-items: center;
+  margin: ${themeGet('space.1')} 0;
+  font-size: ${themeGet('fontSizes.0')};
+  height: 30px;
+`;
+
+export const SolidLabel = styled(Label)`
+  font-weight: ${themeGet('fontWeights.semibold')};
+  color: ${themeGet('colors.accent.fg')};
+  border: 1px solid ${themeGet('colors.topicTag.border')};
+  background-color: ${themeGet('colors.accent.subtle')};
+
+  &:hover {
+    cursor: pointer;
+    color: ${themeGet('colors.fg.onEmphasis')};
+    background-color: ${themeGet('colors.accent.emphasis')};
+  }
+`; */
+
+.SolidLabelGroup {
+  display: flex;
+  align-items: center;
+  margin: var(--base-size-4) 0;
+  font-size: var(--text-body-size-small);
+  height: 30px;
+}
+
+.SolidLabel {
+  font-weight: var(--base-text-weight-semibold);
+  color: var(--fgColor-default);
+  border: var(--borderWidth-thin) solid var(--borderColor-transparent);
+  background-color: var(--bgColor-accent-muted);
+
+  &:hover {
+    cursor: pointer;
+    color: var(--fgColor-onEmphasis);
+    background-color: var(--bgColor-accent-emphasis);
+  }
+}

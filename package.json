@@ -70,14 +70,14 @@
     "xast-util-to-xml": "^4.0.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.6.0",
+    "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",
-    "@commitlint/cz-commitlint": "^19.5.0",
-    "@primer/stylelint-config": "^13.2.1",
+    "@commitlint/cz-commitlint": "^19.6.1",
+    "@primer/stylelint-config": "^13.2.2",
     "@types/fs-extra": "^11.0.1",
     "@types/hast": "^3.0.4",
     "@types/mdast": "^4.0.4",
-    "@types/node": "22.9.1",
+    "@types/node": "22.10.7",
     "@types/react": "18.3.11",
     "@types/react-dom": "18.3.1",
     "@types/styled-components": "^5.1.26",
@@ -87,17 +87,17 @@
     "commitizen": "^4.3.1",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "8.57.1",
-    "eslint-config-next": "15.0.3",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-next": "14.2.23",
+    "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-primer-react": "^6.1.6",
     "husky": "^9.1.7",
     "inquirer": "9",
-    "lint-staged": "^15.2.10",
+    "lint-staged": "^15.4.1",
     "micromatch": "^4.0.8",
-    "prettier": "3.3.3",
-    "stylelint": "^16.10.0",
+    "prettier": "3.4.2",
+    "stylelint": "16.3.1",
     "tsx": "^4.19.2",
-    "typescript": "5.6.3"
+    "typescript": "5.7.3"
   },
   "config": {
     "commitizen": {
