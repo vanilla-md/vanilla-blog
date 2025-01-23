@@ -1,4 +1,4 @@
-.ProfileBse {
+.ProfileBase {
   padding-top: var(--base-size-16);
   font-style: normal;
 }
@@ -18,4 +18,9 @@
 .VCardListIcon {
   color: var(--fgColor-muted);
   margin-right: var(--base-size-6);
+}
+
+.ProfileHeading {
+  margin-bottom: var(--base-size-8);
+  font-size: var(--text-title-size-medium);
 }

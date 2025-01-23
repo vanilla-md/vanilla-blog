@@ -77,8 +77,8 @@ export function VCard() {
 export default function Profile() {
   return (
     <>
-      <address className={classes.ProfileBse}>
-        <Heading as="h2" sx={{ mb: 2, fontSize: 2 }}>
+      <address className={classes.ProfileBase}>
+        <Heading as="h2" className={classes.ProfileHeading}>
           Profile
         </Heading>
         <VCard />

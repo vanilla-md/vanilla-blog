@@ -1,0 +1,18 @@
+/* Waiting for the upstream Navigation component to migrate to CSS Modules */
+/* stylelint-disable primer/spacing */
+.NavBox {
+  background-color: var(--bgColor-default);
+  padding-left: 0;
+
+  @media (min-width: 768px) {
+    padding-left: calc(256px + 24px * 2);
+  }
+
+  @media (min-width: 1012px) {
+    padding-left: calc(296px + 24px * 2);
+  }
+
+  @media (min-width: 1280px) {
+    padding-left: calc((100% - 1280px) / 2 + 296px + 24px * 2);
+  }
+}

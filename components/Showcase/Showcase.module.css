@@ -2,10 +2,16 @@
   margin-top: var(--base-size-4);
 }
 
-.List {
+.ShowcaseList {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 0;
   padding: 0;
+}
+
+.ShowcaseHeading {
+  margin-bottom: var(--base-size-8);
+  font-size: var(--text-title-size-medium);
+  font-weight: var(--base-text-weight-normal);
 }

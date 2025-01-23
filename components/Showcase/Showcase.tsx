@@ -12,10 +12,10 @@ export default function Showcase({ itemShowcase }: ShowcaseProps) {
     <>
       {itemShowcase.items.totalCount > 0 && (
         <section className={classes.ShowcaseBase}>
-          <Heading as="h2" sx={{ mb: 2, fontSize: 2, fontWeight: 'normal' }}>
+          <Heading as="h2" className={classes.ShowcaseHeading}>
             {itemShowcase.hasPinnedItems ? 'Pinned' : 'Popular'}
           </Heading>
-          <ol className={classes.List}>
+          <ol className={classes.ShowcaseList}>
             {itemShowcase.items.nodes?.map(
               (node) =>
                 node && (

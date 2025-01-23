@@ -18,9 +18,7 @@ import type { JSX } from 'react';
 import FilterList from '../FilterList/FilterList';
 
 function inferYearRangeArray(groupedPosts: GroupedPosts): number[] {
-  const from = Math.min(
-    ...Array.from(groupedPosts.keys()).map((year) => parseInt(year)),
-  );
+  const from = Math.min(...groupedPosts.keys().map((year) => parseInt(year)));
   const to = new Date().getFullYear();
   return Array.from({ length: to - from + 1 }, (_, i) => to - i);
 }

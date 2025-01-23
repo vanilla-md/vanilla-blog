@@ -2,8 +2,8 @@
 
 import { Box, Text, Heading, RelativeTime } from '@primer/react';
 import { CalendarIcon, ClockIcon, PencilIcon } from '@primer/octicons-react';
-import Link from '../Link/Link';
-import { SolidLabel, SolidLabelGroup } from '../SolidLable/SolidLabel';
+import { Link } from '../Link';
+import { SolidLabel, SolidLabelGroup } from '../SolidLable';
 import { isSameDay } from '@/utils';
 import type { PageData } from '@/types';
 
