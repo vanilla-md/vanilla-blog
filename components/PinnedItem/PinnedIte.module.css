@@ -9,11 +9,8 @@
   padding: var(--base-size-16);
   color: var(--fgColor-muted);
   width: 100%;
-}
 
-/* @media (min-width: var(--breakpoints-1)) { */
-@media (min-width: 768px) {
-  .PinnedItemBase {
+  @media (min-width: 768px) {
     width: calc(50% - var(--base-size-8));
   }
 }

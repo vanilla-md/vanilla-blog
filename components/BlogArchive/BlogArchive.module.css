@@ -2,14 +2,18 @@
   margin-top: var(--base-size-24);
   display: grid;
   grid:
-    'heading       yearList'
-    'activityList  yearList'/
-    1fr 165px;
+    'heading     '
+    'activityList'/
+    1fr;
 
-  @media (max-width: var(--breakpoint-medium)) {
+  @media screen and (min-width: 768px) {
     grid:
-      'heading     '
-      'activityList'/
-      1fr;
+      'heading       yearList'
+      'activityList  yearList'/
+      1fr 165px;
   }
+}
+
+.TimelinePost {
+  padding: var(--base-size-16);
 }

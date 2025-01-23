@@ -317,7 +317,7 @@ function TimelineItem({ post, date }: { post: PageData; date: RangeDate }) {
             {months[Number(date.month) - 1].slice(0, 3) + ' ' + trim0(date.day)}
           </Text>
         </Heading>
-        <BorderBox sx={{ padding: 3 }}>
+        <BorderBox className={classes.TimelinePost}>
           <StyledFileIcon />
           <Box sx={{ mx: 4 }}>
             <Heading as="h3" sx={{ fontSize: 3 }}>
