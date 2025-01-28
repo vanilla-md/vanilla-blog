@@ -30,6 +30,7 @@ export default async function Post(props: {
   params: Promise<{ slug: string }>;
 }) {
   const params = await props.params;
-  const postData = await getPostDataBySlug(decodeURI(params.slug));
-  return <Article html={postData.contentHtml} />;
+  const result = (await getPostDataBySlug(decodeURI(params.slug)))
+    .renderedElement;
+  return <Article>{result}</Article>;
 }

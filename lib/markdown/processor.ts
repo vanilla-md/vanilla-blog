@@ -22,14 +22,20 @@ import rehypeExternalLinks from 'rehype-external-links';
 import rehypeInferTitleMeta from 'rehype-infer-title-meta';
 import rehypeInferDescriptionMeta from 'rehype-infer-description-meta';
 import rehypeInferReadingTimeMeta from 'rehype-infer-reading-time-meta';
-import rehypeStringify from 'rehype-stringify';
+// import rehypeStringify from 'rehype-stringify';
+
+import * as prod from 'react/jsx-runtime';
+import rehypeReact from 'rehype-react';
+
 import type { Root as MdastRoot } from 'mdast';
 import type { Root as HastRoot } from 'hast';
 import { h } from 'hastscript';
 
+const production = { Fragment: prod.Fragment, jsx: prod.jsx, jsxs: prod.jsxs };
+
 // const p1 = unified().use(remarkParse);
 // const p2 = unified().use(remarkParse).use(remarkRehype);
-// const p3 = unified().use(remarkParse).use(remarkRehype).use(rehypeStringify);
+// const p3 = unified().use(remarkParse).use(remarkRehype).use(rehypeReact);
 
 export interface MarkdownOptions {
   srcDir: string;
@@ -46,7 +52,7 @@ export const createProcessor = ({
   HastRoot,
   HastRoot,
   HastRoot,
-  string
+  JSX.Element
 > => {
   const SKIP = () => undefined;
   return (
@@ -84,7 +90,6 @@ export const createProcessor = ({
       .use(rehypeInferTitleMeta)
       .use(rehypeInferDescriptionMeta, { inferDescriptionHast: true })
       .use(rehypeInferReadingTimeMeta)
-      // TODO: add a dumb stringify plugin when in metaOnly mode
-      .use(rehypeStringify)
+      .use(rehypeReact, production)
   );
 };

@@ -17,7 +17,7 @@ export default async function About() {
   const postData = await getReadmePageData();
   return (
     <>
-      <Article html={postData.contentHtml} />
+      <Article>{postData.renderedElement}</Article>
     </>
   );
 }

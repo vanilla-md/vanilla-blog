@@ -14,10 +14,10 @@ export const getReadmePageData = cache(async () => {
   console.timeEnd(label);
 
   const pageData = resolvePageDate(processedFile);
-  const contentHtml = processedFile.toString();
+  const renderedElement = processedFile.result;
 
   return {
     ...pageData,
-    contentHtml,
+    renderedElement,
   };
 });
