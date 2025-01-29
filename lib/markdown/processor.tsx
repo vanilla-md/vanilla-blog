@@ -25,13 +25,19 @@ import rehypeInferReadingTimeMeta from 'rehype-infer-reading-time-meta';
 // import rehypeStringify from 'rehype-stringify';
 
 import * as prod from 'react/jsx-runtime';
-import rehypeReact from 'rehype-react';
+import rehypeReact, { Options as RehypeReactOptions } from 'rehype-react';
+import { Anchor } from '@/md-components/Anchor';
 
 import type { Root as MdastRoot } from 'mdast';
 import type { Root as HastRoot } from 'hast';
 import { h } from 'hastscript';
 
-const production = { Fragment: prod.Fragment, jsx: prod.jsx, jsxs: prod.jsxs };
+const production = {
+  components: { a: Anchor },
+  Fragment: prod.Fragment,
+  jsx: prod.jsx,
+  jsxs: prod.jsxs,
+};
 
 // const p1 = unified().use(remarkParse);
 // const p2 = unified().use(remarkParse).use(remarkRehype);
@@ -90,6 +96,6 @@ export const createProcessor = ({
       .use(rehypeInferTitleMeta)
       .use(rehypeInferDescriptionMeta, { inferDescriptionHast: true })
       .use(rehypeInferReadingTimeMeta)
-      .use(rehypeReact, production)
+      .use(rehypeReact, { ...production } as RehypeReactOptions)
   );
 };
