@@ -11,7 +11,7 @@
     "build": "next build",
     "dev": "next dev -H 127.0.0.1",
     "lint": "next lint",
-    "move-assets": "tsx scripts/moveAssetsToPublic.ts",
+    "copy-assets": "tsx scripts/copyAssetsToPublic.ts",
     "gen-site-data": "tsx scripts/genSiteData.ts",
     "gen-posts-data": "tsx scripts/genPostsData.ts",
     "gen-rss": "tsx scripts/genRss.ts",
