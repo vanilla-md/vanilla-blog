@@ -19,6 +19,7 @@ import rehypeAutolinkHeadings, {
   Options as AutolinkHeadingsOptions,
 } from 'rehype-autolink-headings';
 import rehypeExternalLinks from 'rehype-external-links';
+import rehypeAddImageSize from './plugins/rehypeAddImageSize';
 import rehypeInferTitleMeta from 'rehype-infer-title-meta';
 import rehypeInferDescriptionMeta from 'rehype-infer-description-meta';
 import rehypeInferReadingTimeMeta from 'rehype-infer-reading-time-meta';
@@ -31,9 +32,10 @@ import { Anchor } from '@/md-components/Anchor';
 import type { Root as MdastRoot } from 'mdast';
 import type { Root as HastRoot } from 'hast';
 import { h } from 'hastscript';
+import { Image } from '@/md-components/Image';
 
 const production = {
-  components: { a: Anchor },
+  components: { a: Anchor, img: Image },
   Fragment: prod.Fragment,
   jsx: prod.jsx,
   jsxs: prod.jsxs,
@@ -93,6 +95,7 @@ export const createProcessor = ({
         content: h('span.octicon.octicon-link'),
       } as AutolinkHeadingsOptions)
       .use(rehypeExternalLinks, { rel: ['nofollow noopener noreferrer'] })
+      .use(rehypeAddImageSize)
       .use(rehypeInferTitleMeta)
       .use(rehypeInferDescriptionMeta, { inferDescriptionHast: true })
       .use(rehypeInferReadingTimeMeta)

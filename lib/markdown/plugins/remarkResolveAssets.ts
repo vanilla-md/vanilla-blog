@@ -3,6 +3,7 @@ import type { VFile } from 'vfile';
 import type { Plugin, Processor } from 'unified';
 import type { Image, Root } from 'mdast';
 import path from 'path';
+import { isUrlExternal } from '@/utils';
 
 const remarkResolveAssets: Plugin<
   Array<void>,
@@ -13,12 +14,7 @@ const remarkResolveAssets: Plugin<
     const { srcDir } = this.data() as { srcDir: string };
 
     visit(tree, 'image', (image: Image) => {
-      if (
-        image.url.startsWith('https://') ||
-        image.url.startsWith('http://') ||
-        image.url.startsWith('//') ||
-        image.url.startsWith('/')
-      ) {
+      if (isUrlExternal(image.url)) {
         return;
       }
       // path.resolve('/somewhere/blog/posts/post.md', '../assets/figure.png')

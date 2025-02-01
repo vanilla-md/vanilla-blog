@@ -11,3 +11,7 @@ export function padHttp(url: string): string {
 export function slash(p: string): string {
   return p.replace(/\\/g, '/');
 }
+
+export function isUrlExternal(url: string): boolean {
+  return url.startsWith('http://') || url.startsWith('https://');
+}

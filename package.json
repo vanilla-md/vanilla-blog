@@ -36,6 +36,7 @@
     "hast-util-to-html": "^9.0.3",
     "hast-util-to-string": "^3.0.1",
     "hastscript": "^9.0.0",
+    "image-size": "^1.2.0",
     "mime": "^4.0.4",
     "next": "14.2.15",
     "react": "18.3.0-canary-c3048aab4-20240326",
