@@ -119,8 +119,7 @@ function normalizeRange(from?: string, to?: string): Range {
   return { from: dateFrom, to: dateTo };
 }
 
-// TODO: Change a better name
-function postsToDataDays(GroupedPosts: GroupedPosts): Day[] {
+function convertPostsToDays(GroupedPosts: GroupedPosts): Day[] {
   const result: Day[] = [];
   for (const [year, months] of GroupedPosts) {
     for (const [month, days] of months) {
@@ -189,7 +188,7 @@ const Calendar = forwardRef<SVGSVGElement, CalendarProps>(
     const range = selectedYear
       ? normalizeRange(`${selectedYear}-01-01`, `${selectedYear}-12-31`)
       : normalizeRange();
-    const data = postsToDataDays(groupedPosts);
+    const data = convertPostsToDays(groupedPosts);
     const postsWeeks = groupByWeeks(data ?? [], range);
     const doodleWeeks = groupByWeeks(
       getDoodleDays(startOfWeek(range.from)),
@@ -417,8 +416,10 @@ function CalendarWithTooltip({ ...props }: CalendarWithTooltipProps) {
       }}
     >
       <Heading as="h2" sx={{ mb: 2, fontSize: 2, fontWeight: 'normal' }}>
-        {postCount === 1 ? '1 post' : `${postCount} posts`} in{' '}
-        {selectedYear ? selectedYear : 'the last year'}
+        {postCount === 1
+          ? '1 post'
+          : `${postCount === 0 ? 'No' : postCount} posts `}
+        in {selectedYear ? selectedYear : 'the last year'}
       </Heading>
       <BorderBox className={classes.SVGContainer}>
         <MemoizedCalendar

@@ -31,7 +31,7 @@ export function VCard() {
             iconName="mark-github"
             key={'github:' + siteData.login}
           >
-            <MutedLink href={siteData.url} sx={{ fontWeight: 'bold' }}>
+            <MutedLink href={siteData.url} className={classes.LoginLink}>
               @{siteData.login}
             </MutedLink>
           </VCardListItem>

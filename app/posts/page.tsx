@@ -1,6 +1,6 @@
-import { Box } from '@primer/react';
 import PostItem from '@/components/PostItem/PostItem';
 import { getSortedPostsData } from '@/lib/posts';
+import classes from './page.module.css';
 
 export const metadata = {
   title: 'My Blog Posts',
@@ -11,11 +11,11 @@ export default async function Posts() {
   const allPostsData = await getSortedPostsData();
   return (
     <>
-      <Box as="ul" sx={{ padding: 0, margin: 0 }}>
+      <ul className={classes.PostList}>
         {allPostsData.map((postData) => (
           <PostItem key={postData.slug} {...postData} />
         ))}
-      </Box>
+      </ul>
     </>
   );
 }

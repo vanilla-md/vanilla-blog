@@ -14,6 +14,7 @@ export default function Avatar({ href }: AvatarProps) {
         src={siteData.avatarUrl}
         className={classes.AvatarImg}
         fill
+        priority
         alt="avatar"
       />
     </Link>

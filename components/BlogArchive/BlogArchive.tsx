@@ -1,21 +1,14 @@
-import { Box, Text, Heading, Timeline, themeGet } from '@primer/react';
-import styled from 'styled-components';
-import type { PageData } from '@/types';
+'use client';
+
+import { Heading, Timeline } from '@primer/react';
 import { type GroupedPosts } from '@/lib/blogManager';
-import { FileIcon, FlameIcon } from '@primer/octicons-react';
-import {
-  sundayWeeksAgo,
-  pad0,
-  months,
-  lastDayInPreviousMonth,
-  trim0,
-} from '@/utils';
-import BorderBox from '../BorderBox';
-import Link from '../Link/Link';
+import { sundayWeeksAgo, pad0, lastDayInPreviousMonth } from '@/utils';
 import classes from './BlogArchive.module.css';
 
 import type { JSX } from 'react';
 import FilterList from '../FilterList/FilterList';
+import TimelineHeading from './TimelineHeading';
+import TimelineItem from './TimelineItem';
 
 function inferYearRangeArray(groupedPosts: GroupedPosts): number[] {
   const from = Math.min(...groupedPosts.keys().map((year) => parseInt(year)));
@@ -23,7 +16,7 @@ function inferYearRangeArray(groupedPosts: GroupedPosts): number[] {
   return Array.from({ length: to - from + 1 }, (_, i) => to - i);
 }
 
-type RangeDate = { year: string; month: string; day: string };
+export type RangeDate = { year: string; month: string; day: string };
 
 function rangeDateToDate(rangeDate: RangeDate) {
   const { year, month, day } = rangeDate;
@@ -134,7 +127,7 @@ function BlogArchive({
   if (postsOfSelectedDate) {
     const date = dateToRangeDate(new Date(selectedDate));
     timelines.push(
-      <Timeline key={`${selectedDate!}-selected`} sx={{ pb: 4 }}>
+      <Timeline key={`${selectedDate!}-selected`} className={classes.Timeline}>
         <TimelineHeading date={date} type="selected" />
         {postsOfSelectedDate.map((post) => (
           <TimelineItem key={post.slug} date={date} post={post} />
@@ -148,7 +141,10 @@ function BlogArchive({
     );
     if (remainingDaysInMonth.length > 0) {
       timelines.push(
-        <Timeline key={`${selectedDate!}-remaining`} sx={{ pb: 4 }}>
+        <Timeline
+          key={`${selectedDate!}-remaining`}
+          className={classes.Timeline}
+        >
           <TimelineHeading date={{ ...toDate }} type="remaining" />
           {remainingDaysInMonth.map(([day, posts]) =>
             posts.map((post) => (
@@ -192,7 +188,7 @@ function BlogArchive({
           }
           if (timelineItems.length > 0) {
             timelines.push(
-              <Timeline key={`${year}-${month}`} sx={{ pb: 4 }}>
+              <Timeline key={`${year}-${month}`} className={classes.Timeline}>
                 <TimelineHeading
                   date={{ year, month, day: '01' }}
                   type="month"
@@ -207,29 +203,19 @@ function BlogArchive({
   }
 
   return (
-    <section className={classes.GridBox}>
-      <Heading
-        as="h2"
-        sx={{ mb: 3, fontSize: 2, fontWeight: 'normal', gridArea: 'heading' }}
-      >
+    <section className={classes.Archive}>
+      <Heading as="h2" className={classes.Heading}>
         Archive
       </Heading>
-      <Box sx={{ gridArea: 'activityList' }}>{timelines}</Box>
-      <FilterList
-        sx={{
-          gridArea: 'yearList',
-          display: ['none', 'none', 'block'],
-          ml: 4,
-          px: 3,
-        }}
-      >
+      <div className={classes.activityList}>{timelines}</div>
+      <FilterList className={classes.YearList}>
         {years.map((year) => (
           <FilterList.Item
+            className={classes.YearListItem}
             key={year}
             selected={year === (selectedYear ?? years[0])}
             // href={`?from=${year.from}&to=${year.to}`}
             onClick={() => onYearSelect(year)}
-            sx={{ borderRadius: 2, fontSize: 0, mb: 2 }}
           >
             {year}
           </FilterList.Item>
@@ -240,95 +226,3 @@ function BlogArchive({
 }
 
 export default BlogArchive;
-
-function TimelineHeading({
-  date,
-  type = 'month',
-}: {
-  date: RangeDate;
-  type?: 'selected' | 'remaining' | 'month';
-}) {
-  return (
-    <Heading
-      as="h3"
-      sx={{
-        fontSize: 0,
-        height: '14px',
-        py: 1,
-        mb: 3,
-        borderBottomStyle: 'solid',
-        borderBottomColor: 'border.default',
-        borderBottomWidth: 1,
-      }}
-    >
-      <Text sx={{ bg: 'canvas.default', pl: 2, pr: 3 }}>
-        {type === 'selected' && (
-          <>
-            {months[Number(date.month) - 1]} {date.day.replace(/^0/, '') + ','}
-            <Text sx={{ color: 'fg.muted' }}> {date.year}</Text>
-          </>
-        )}
-        {type === 'remaining' && (
-          <>
-            {months[Number(date.month) - 1]} 1{' '}
-            <Text sx={{ color: 'fg.muted' }}>to</Text>{' '}
-            {months[Number(date.month) - 1]} {trim0(date.day) + ','}
-            <Text sx={{ color: 'fg.muted' }}> {date.year}</Text>
-          </>
-        )}
-        {type === 'month' && (
-          <>
-            {months[Number(date.month) - 1]}
-            <Text sx={{ color: 'fg.muted' }}> {date.year}</Text>
-          </>
-        )}
-      </Text>
-    </Heading>
-  );
-}
-
-const StyledFileIcon = styled(FileIcon)`
-  float: left;
-  margin-top: 5px;
-  fill: ${themeGet('colors.success.fg')};
-`;
-
-function TimelineItem({ post, date }: { post: PageData; date: RangeDate }) {
-  return (
-    <Timeline.Item key={post.slug}>
-      <Timeline.Badge>
-        <FlameIcon />
-      </Timeline.Badge>
-      <Timeline.Body sx={{ color: 'fg.default' }}>
-        <Heading
-          as="h4"
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            mb: 3,
-            fontSize: 2,
-            fontWeight: 'normal',
-          }}
-        >
-          <span>Published a post</span>
-          <Text sx={{ fontSize: 0, color: 'fg.muted' }}>
-            {months[Number(date.month) - 1].slice(0, 3) + ' ' + trim0(date.day)}
-          </Text>
-        </Heading>
-        <BorderBox className={classes.TimelinePost}>
-          <StyledFileIcon />
-          <Box sx={{ mx: 4 }}>
-            <Heading as="h3" sx={{ fontSize: 3 }}>
-              <Link href={post.relativePath.replace(/\.md$/, '')}>
-                {post.title}
-              </Link>
-            </Heading>
-            <Box sx={{ my: 2, fontSize: 1, color: 'fg.muted' }}>
-              {post.description}
-            </Box>
-          </Box>
-        </BorderBox>
-      </Timeline.Body>
-    </Timeline.Item>
-  );
-}

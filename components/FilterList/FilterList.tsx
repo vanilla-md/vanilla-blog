@@ -1,19 +1,15 @@
 // https://github.com/primer/react/blob/v36.14.0/packages/react/src/deprecated/FilterList/FilterList.tsx
-import { ComponentProps } from '@/types';
-import { sx, SxProp, themeGet } from '@primer/react';
 import React from 'react';
-import styled from 'styled-components';
+import { clsx } from 'clsx';
 
-const FilterListBase = styled.ul<SxProp>`
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  ${sx};
-`;
+import classes from './FilterList.module.css';
 
-export type FilterListProps = ComponentProps<typeof FilterListBase>;
+export type FilterListProps = React.ComponentProps<'ul'> & {
+  className?: string;
+};
 
 const FilterList = ({
+  className,
   children,
   ...rest
 }: React.PropsWithChildren<FilterListProps>) => {
@@ -21,64 +17,38 @@ const FilterList = ({
     return <li>{child}</li>;
   });
 
-  return <FilterListBase {...rest}>{items}</FilterListBase>;
+  return (
+    <ul className={clsx(classes.FilterList, className)} {...rest}>
+      {items}
+    </ul>
+  );
 };
 
-type StyledFilterListItemBaseProps = {
+type FilterListItemProps = {
+  className?: string;
   small?: boolean;
   selected?: boolean;
-} & SxProp;
-
-const FilterListItemBase = styled.a<StyledFilterListItemBaseProps>`
-  position: relative;
-  display: block;
-  padding: ${(props) =>
-    props.small
-      ? `${themeGet('space.1')(props)} 10px`
-      : `${themeGet('space.2')(props)} 11px`};
-  margin: ${(props) => (props.small ? '0 0 2px' : '0 0 5px 0')};
-  overflow: hidden;
-  font-size: ${themeGet('fontSizes.1')};
-  color: ${(props) =>
-    props.selected
-      ? themeGet('colors.fg.onEmphasis')
-      : themeGet('colors.fg.muted')};
-  background-color: ${(props) =>
-    props.selected ? themeGet('colors.accent.emphasis') : ''}!important;
-  text-decoration: none;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  cursor: pointer;
-  border-radius: ${themeGet('radii.1')};
-  &:hover {
-    text-decoration: none;
-    background-color: ${themeGet('colors.canvas.subtle')};
-  }
-  &:active {
-    color: ${themeGet('colors.fg.onEmphasis')};
-    background-color: ${themeGet('colors.accent.emphasis')};
-  }
-  .count {
-    float: right;
-    font-weight: ${themeGet('fontWeights.bold')};
-  }
-  ${sx};
-`;
-
-export type FilterListItemProps = { count?: number } & ComponentProps<
-  typeof FilterListItemBase
->;
+  count?: number;
+} & React.ComponentProps<'a'>;
 
 const FilterListItem = ({
+  className,
   children,
   count,
+  small,
+  selected,
   ...rest
 }: React.PropsWithChildren<FilterListItemProps>) => {
   return (
-    <FilterListItemBase {...rest}>
-      {count && <span className="count">{count}</span>}
+    <a
+      className={clsx(classes.FilterListItem, className)}
+      data-small={small}
+      data-active={selected}
+      {...rest}
+    >
+      {count && <span className={classes.count}>{count}</span>}
       {children}
-    </FilterListItemBase>
+    </a>
   );
 };
 

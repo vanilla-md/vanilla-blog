@@ -1,0 +1,20 @@
+.Heading {
+  margin-bottom: var(--base-size-16);
+  border-bottom-style: solid;
+  border-bottom-color: var(--borderColor-default);
+  border-bottom-width: var(--borderWidth-thin);
+  padding-top: var(--base-size-4);
+  padding-bottom: var(--base-size-4);
+  height: 14px;
+  font-size: var(--text-body-size-small);
+}
+
+.Text {
+  background: var(--bgColor-default);
+  padding-left: var(--base-size-8);
+  padding-right: var(--base-size-16);
+}
+
+.MutedText {
+  color: var(--fgColor-muted);
+}

@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react';
 import siteData from '@/generated/siteData.json';
 import Showcase from '@/components/Showcase';
 import { ProfileItemShowcase } from '@octokit/graphql-schema';
-import CalendarWithTooltip from '@/components/Calednar/Calendar';
+import CalendarWithTooltip from '@/components/Calendar/Calendar';
 import BlogArchive from '@/components/BlogArchive';
 import type { PageData } from '@/types';
 import { groupPostsByDate } from '@/lib/blogManager';

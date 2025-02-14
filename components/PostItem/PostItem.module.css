@@ -1,0 +1,34 @@
+.PostItem {
+  list-style: none;
+  padding-top: var(--base-size-24);
+  padding-bottom: var(--base-size-24);
+  border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted);
+}
+
+.Title {
+  margin-bottom: var(--base-size-4);
+  font-size: var(--text-title-size-medium);
+}
+
+.Description {
+  font-size: var(--text-body-size-medium);
+  max-width: 70%;
+  margin-top: 0;
+  margin-bottom: var(--base-size-8);
+  color: var(--fgColor-muted);
+}
+
+.LabelsBox {
+  margin: 0 var(--base-size-4);
+  vertical-align: middle;
+}
+
+.TextMarginRight {
+  margin-right: var(--base-size-16);
+}
+
+.Meta {
+  margin-top: var(--base-size-8);
+  font-size: var(--text-body-size-small);
+  color: var(--fgColor-muted);
+}

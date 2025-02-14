@@ -6,7 +6,7 @@ import type { Plugin, Processor } from 'unified';
 const vFileResolvePaths: Plugin<Array<void>> = function vFileResolvePaths(
   this: Processor,
 ) {
-  return (_, file: VFile) => {
+  return (_: unknown, file: VFile) => {
     const { srcDir, websiteUrl } = this.data() as {
       srcDir: string;
       websiteUrl: string;

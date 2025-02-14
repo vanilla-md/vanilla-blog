@@ -11,7 +11,7 @@ import siteData from '@/generated/siteData.json';
 import OctofaceIcon from '../Icons/octofaceIcon';
 
 export default function Navigation() {
-  const items = [
+  const navItems = [
     { navigation: 'Home', href: '/', icon: HomeIcon },
     {
       navigation: 'Repositories',
@@ -56,7 +56,7 @@ export default function Navigation() {
         bg: 'canvas.default',
       }}
     >
-      {items.map((item) => (
+      {navItems.map((item) => (
         <UnderlineNavItem
           href={item.href}
           aria-current={isCurrent(item.href) ? 'page' : undefined}

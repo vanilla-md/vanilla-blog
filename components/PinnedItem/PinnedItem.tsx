@@ -31,11 +31,11 @@ export default function PinnedItem({ pinnedItem }: PinnedItemProps) {
     <BorderBox as="li" className={classes.PinnedItemBase}>
       <header className={classes.Header}>
         <Icon iconName="repo" />
-        <Link href={url} sx={{ fontWeight: 'bold' }}>
+        <Link href={url} className={classes.RepoLink}>
           {name}
         </Link>
         {!isPrivate && (
-          <Label variant="secondary" sx={{ fontWeight: 'normal' }}>
+          <Label variant="secondary" className={classes.RepoLinkLabel}>
             Public
           </Label>
         )}

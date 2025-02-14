@@ -1,6 +1,6 @@
-.GridBox {
-  margin-top: var(--base-size-24);
+.Archive {
   display: grid;
+  margin-top: var(--base-size-24);
   grid:
     'heading     '
     'activityList'/
@@ -14,6 +14,35 @@
   }
 }
 
-.TimelinePost {
-  padding: var(--base-size-16);
+.Timeline {
+  padding-bottom: var(--base-size-24);
+}
+
+.Heading {
+  grid-area: heading;
+  margin-bottom: var(--base-size-16);
+  font-size: var(--text-title-size-small);
+  font-weight: var(--base-text-weight-normal);
+}
+
+.ActivityList {
+  grid-area: activityList;
+}
+
+.YearList {
+  grid-area: yearList;
+  display: none;
+
+  @media screen and (min-width: 768px) {
+    display: block;
+    margin-left: var(--base-size-24);
+    padding-left: var(--base-size-16);
+    padding-right: var(--base-size-16);
+  }
+}
+
+.YearListItem {
+  margin-bottom: var(--base-size-8);
+  border-radius: var(--borderRadius-medium);
+  font-size: var(--text-body-size-small);
 }

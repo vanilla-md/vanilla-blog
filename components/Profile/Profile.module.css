@@ -22,5 +22,9 @@
 
 .ProfileHeading {
   margin-bottom: var(--base-size-8);
-  font-size: var(--text-title-size-medium);
+  font-size: var(--text-title-size-small);
+}
+
+.LoginLink {
+  font-weight: var(--base-text-weight-semibold);
 }

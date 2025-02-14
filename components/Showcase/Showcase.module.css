@@ -1,5 +1,5 @@
 .ShowcaseBase {
-  margin-top: var(--base-size-4);
+  margin-top: var(--base-size-24);
 }
 
 .ShowcaseList {
@@ -12,6 +12,6 @@
 
 .ShowcaseHeading {
   margin-bottom: var(--base-size-8);
-  font-size: var(--text-title-size-medium);
+  font-size: var(--text-title-size-small);
   font-weight: var(--base-text-weight-normal);
 }

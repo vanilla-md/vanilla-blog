@@ -1,0 +1,49 @@
+:where(.FilterList) {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+:where(.FilterListItem) {
+  position: relative;
+  display: block;
+  /* stylelint-disable-next-line primer/spacing */
+  padding: var(--base-size-8) 11px;
+  /* stylelint-disable-next-line primer/spacing */
+  margin: 0 0 5px;
+  overflow: hidden;
+  font-size: var(--text-body-size-small);
+  color: var(--fgColor-muted);
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  border-radius: var(--borderRadius-medium);
+
+  &:where([data-small]) {
+    /* stylelint-disable-next-line primer/spacing */
+    margin: 0 0 2px;
+    /* stylelint-disable-next-line primer/spacing */
+    padding: var(--base-size-4) 10px;
+  }
+
+  &:where([data-active='true']) {
+    color: var(--fgColor-onEmphasis);
+    background-color: var(--bgColor-accent-emphasis) !important;
+  }
+
+  &:hover {
+    text-decoration: none;
+    background-color: var(--bgColor-muted);
+  }
+
+  &:active {
+    color: var(--fgColor-onEmphasis);
+    background-color: var(--bgColor-accent-emphasis);
+  }
+}
+
+:where(.Count) {
+  float: right;
+  font-weight: var(--base-text-weight-semibold);
+}

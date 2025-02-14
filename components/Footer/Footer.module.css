@@ -5,3 +5,12 @@
   border-top-width: var(--borderWidth-thin);
   border-top-style: solid;
 }
+
+.FooterHeading {
+  margin-bottom: var(--base-size-8);
+  font-size: var(--text-title-size-small);
+}
+
+.LinkContainer {
+  font-size: var(--text-body-size-medium);
+}

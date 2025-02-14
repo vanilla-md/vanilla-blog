@@ -1,11 +1,13 @@
 'use client';
 
-import { Box, Text, Heading, RelativeTime } from '@primer/react';
+import { Heading, RelativeTime } from '@primer/react';
 import { CalendarIcon, ClockIcon, PencilIcon } from '@primer/octicons-react';
 import { Link } from '../Link';
 import { SolidLabel, SolidLabelGroup } from '../SolidLable';
 import { isSameDay } from '@/utils';
 import type { PageData } from '@/types';
+
+import classes from './PostItem.module.css';
 
 export default function PostItem({
   slug,
@@ -17,32 +19,15 @@ export default function PostItem({
   tags,
 }: PageData) {
   return (
-    <Box
-      as="li"
-      sx={{
-        listStyle: 'none',
-        py: 4,
-        borderBottomColor: 'border.muted',
-        borderBottomStyle: 'solid',
-        borderBottomWidth: 1,
-      }}
-    >
-      <Box sx={{ mb: 1 }}>
-        <Heading as="h3" sx={{ fontSize: 3 }}>
-          <Link href={`/posts/${slug}`}>{title}</Link>
-        </Heading>
-      </Box>
+    <li className={classes.PostItem}>
+      <Heading as="h3" className={classes.Title}>
+        <Link href={`/posts/${slug}`}>{title}</Link>
+      </Heading>
       <div>
-        <Text
-          as="p"
-          title={description}
-          sx={{ fontSize: 1, maxWidth: '70%', mt: 0, mb: 2, color: 'fg.muted' }}
-        >
-          {description}
-        </Text>
+        <p className={classes.Description}>{description}</p>
       </div>
       {tags.length > 0 && (
-        <Box sx={{ my: 1, verticalAlign: 'middle' }}>
+        <div className={classes.LabelsBox}>
           <SolidLabelGroup>
             {tags.map((tag) => (
               <SolidLabel key={tag} size="large">
@@ -50,21 +35,21 @@ export default function PostItem({
               </SolidLabel>
             ))}
           </SolidLabelGroup>
-        </Box>
+        </div>
       )}
-      <Box sx={{ mt: 2, fontSize: 0, color: 'fg.muted' }}>
-        <Text sx={{ mr: 3 }}>
+      <div className={classes.Meta}>
+        <span className={classes.TextMarginRight}>
           <CalendarIcon /> Published <RelativeTime datetime={published} />
-        </Text>
+        </span>
         {!isSameDay(new Date(published), new Date(modified)) && (
-          <Text sx={{ mr: 3 }}>
+          <span className={classes.TextMarginRight}>
             <PencilIcon /> Modified <RelativeTime datetime={modified} />
-          </Text>
+          </span>
         )}
         <span>
           <ClockIcon /> Reading Time: {readingTime}
         </span>
-      </Box>
-    </Box>
+      </div>
+    </li>
   );
 }

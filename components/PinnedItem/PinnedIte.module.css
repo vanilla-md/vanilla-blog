@@ -19,6 +19,14 @@
   margin-right: var(--base-size-8);
 }
 
+.RepoLink {
+  font-weight: var(--base-text-weight-semibold);
+}
+
+.RepoLinkLabel {
+  font-weight: var(--base-text-weight-normal);
+}
+
 .Parent {
   margin-bottom: var(--base-size-8);
   font-size: var(--base-size-12);

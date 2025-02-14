@@ -1,0 +1,38 @@
+.TimelineItemHeading {
+  display: flex;
+  margin-bottom: var(--base-size-16);
+  justify-content: space-between;
+  font-size: var(--text-title-size-small);
+  font-weight: var(--base-text-weight-normal);
+}
+
+.TimelineItemHeadingDate {
+  font-size: var(--text-body-size-small);
+  color: var(--fgColor-muted);
+}
+
+.TimelinePost {
+  padding: var(--base-size-16);
+}
+
+.FileIcon {
+  float: left;
+  margin-top: var(--base-size-4);
+  fill: var(--bgColor-success-emphasis);
+}
+
+.PostContainer {
+  margin-left: var(--base-size-24);
+  margin-right: var(--base-size-24);
+}
+
+.PostTitle {
+  font-size: var(--text-title-size-medium);
+}
+
+.PostDescription {
+  margin-top: var(--base-size-8);
+  margin-bottom: var(--base-size-8);
+  font-size: var(--text-body-size-medium);
+  color: var(--fgColor-muted);
+}

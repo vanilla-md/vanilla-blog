@@ -1,0 +1,11 @@
+.Title {
+  margin: 0;
+  /* stylelint-disable-next-line primer/typography */
+  font-size: var(--base-size-24);
+  line-height: var(--text-title-lineHeight-medium);
+}
+
+.Description {
+  font-size: var(--text-title-size-medium);
+  color: var(--fgColor-muted);
+}
