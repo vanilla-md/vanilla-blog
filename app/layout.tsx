@@ -1,3 +1,4 @@
+import { PropsWithChildren } from 'react';
 import { BaseStyles } from '@primer/react';
 import { StyledComponentsRegistry } from '../lib/registry';
 import { ColorModeWithAuto, ThemeProvider } from '@/lib/theme';
@@ -7,11 +8,7 @@ import './global.css';
 
 const colorMode: ColorModeWithAuto = 'auto';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: PropsWithChildren) {
   return (
     // Note: the focus-visible polyfill adds additional attributes to `html`
     // that cause hydration mismatch errors

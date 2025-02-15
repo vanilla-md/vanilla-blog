@@ -1,0 +1,7 @@
+.MutedLink {
+  color: var(--fgColor-default);
+
+  &:hover {
+    color: var(--fgColor-accent);
+  }
+}

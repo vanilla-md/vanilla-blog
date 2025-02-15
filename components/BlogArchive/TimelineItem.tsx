@@ -7,14 +7,14 @@ import { months, trim0 } from '@/utils';
 
 import classes from './TimelineItem.module.css';
 import BorderBox from '../BorderBox';
+import type { PropsWithChildren } from 'react';
 
-export default function TimelineItem({
-  post,
-  date,
-}: {
+type TimelineItemProps = PropsWithChildren<{
   post: PageData;
   date: RangeDate;
-}) {
+}>;
+
+export default function TimelineItem({ post, date }: TimelineItemProps) {
   return (
     <Timeline.Item key={post.slug}>
       <Timeline.Badge>

@@ -1,16 +1,19 @@
+import { PropsWithChildren } from 'react';
 import { Heading } from '@primer/react';
 import { RangeDate } from './BlogArchive';
 import { months, trim0 } from '@/utils';
 
 import classes from './TimelineHeading.module.css';
 
+type TimelineHeadingProps = PropsWithChildren<{
+  date: RangeDate;
+  type?: 'selected' | 'remaining' | 'month';
+}>;
+
 export default function TimelineHeading({
   date,
   type = 'month',
-}: {
-  date: RangeDate;
-  type?: 'selected' | 'remaining' | 'month';
-}) {
+}: TimelineHeadingProps) {
   return (
     <Heading as="h3" className={classes.Heading}>
       <span className={classes.Text}>

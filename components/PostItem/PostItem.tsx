@@ -3,7 +3,7 @@
 import { Heading, RelativeTime } from '@primer/react';
 import { CalendarIcon, ClockIcon, PencilIcon } from '@primer/octicons-react';
 import { Link } from '../Link';
-import { SolidLabel, SolidLabelGroup } from '../SolidLable';
+import { SolidLabel, SolidLabelGroup } from '../SolidLabel';
 import { isSameDay } from '@/utils';
 import type { PageData } from '@/types';
 

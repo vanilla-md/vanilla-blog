@@ -9,6 +9,7 @@ import type { JSX } from 'react';
 import FilterList from '../FilterList/FilterList';
 import TimelineHeading from './TimelineHeading';
 import TimelineItem from './TimelineItem';
+import type { PropsWithChildren } from 'react';
 
 function inferYearRangeArray(groupedPosts: GroupedPosts): number[] {
   const from = Math.min(...groupedPosts.keys().map((year) => parseInt(year)));
@@ -105,17 +106,19 @@ function inferDateRange(
   ];
 }
 
+type BlogArchiveProps = PropsWithChildren<{
+  groupedPosts: GroupedPosts;
+  selectedYear?: number;
+  selectedDate?: string;
+  onYearSelect: (year: number) => void;
+}>;
+
 function BlogArchive({
   groupedPosts,
   selectedYear,
   selectedDate,
   onYearSelect,
-}: {
-  groupedPosts: GroupedPosts;
-  selectedYear?: number;
-  selectedDate?: string;
-  onYearSelect: (year: number) => void;
-}) {
+}: BlogArchiveProps) {
   const years = inferYearRangeArray(groupedPosts);
   const [fromDate, toDate] = inferDateRange(years, selectedYear, selectedDate);
   const postsOfSelectedDate =

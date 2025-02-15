@@ -1,6 +1,6 @@
-/* Waiting for the upstream Navigation component to migrate to CSS Modules */
+/* TODO: Waiting for the upstream Navigation component to migrate to CSS Modules */
 /* stylelint-disable primer/spacing */
-.NavBox {
+.UnderlineNav {
   background-color: var(--bgColor-default);
   padding-left: 0;
 

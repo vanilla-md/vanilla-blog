@@ -1,14 +1,34 @@
 // https://github.com/primer/react/blob/main/src/deprecated/BorderBox.tsx
-import { Box, BoxProps, themeGet } from '@primer/react';
-import styled from 'styled-components';
+import React from 'react';
+import { clsx } from 'clsx';
 
-export type BorderBoxProps = BoxProps;
+import classes from './BorderBox.module.css';
+import type { PropsWithChildren } from 'react';
 
-const BorderBox = styled(Box)`
-  border-width: ${themeGet('borderWidths.1')};
-  border-style: solid;
-  border-color: ${themeGet('colors.border.default')};
-  border-radius: ${themeGet('radii.2')};
-`;
+export interface BorderBoxProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  as?: keyof React.JSX.IntrinsicElements | React.JSXElementConstructor<any>;
+  className?: string;
+}
+
+type BorderBoxComponentProps = PropsWithChildren<BorderBoxProps>;
+
+/**
+ * A polymorphic component that applies a border box style using CSS Modules.
+ */
+export function BorderBox({
+  as: Component = 'div',
+  children,
+  className,
+  ...rest
+}: BorderBoxComponentProps) {
+  return (
+    <Component className={clsx(classes.BorderBox, className)} {...rest}>
+      {children}
+    </Component>
+  );
+}
+
+BorderBox.displayName = 'BorderBox';
 
 export default BorderBox;

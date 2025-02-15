@@ -4,18 +4,21 @@ import { Icon } from '../Icons/Icon';
 import siteData from '@/generated/siteData.json';
 import MutedLink from '../Link/MutedLink';
 import classes from './Profile.module.css';
+import { PropsWithChildren } from 'react';
 
-const VCardListIcon = ({ iconName }: { iconName: string }) => (
+interface VCardListIconProps {
+  iconName: string;
+}
+
+const VCardListIcon = ({ iconName }: VCardListIconProps) => (
   <Icon className={classes.VCardListIcon} iconName={iconName} />
 );
 
-const VCardListItem = ({
-  iconName,
-  children,
-}: {
+type VCardListItemProps = PropsWithChildren<{
   iconName: string;
-  children: React.ReactNode;
-}) => (
+}>;
+
+const VCardListItem = ({ iconName, children }: VCardListItemProps) => (
   <li className={classes.VCardListItem}>
     <VCardListIcon iconName={iconName} />
     {children}

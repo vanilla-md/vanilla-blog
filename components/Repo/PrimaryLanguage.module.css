@@ -1,0 +1,15 @@
+.PrimaryLanguage {
+  margin-right: var(--base-size-16);
+}
+
+.LanguageCircle {
+  position: relative;
+  /* stylelint-disable-next-line primer/spacing */
+  top: 1px;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  /* stylelint-disable-next-line primer/colors */
+  border: var(--borderWidth-thin) solid var(--primer-border-contrast, #ccc);
+  border-radius: 50%;
+}

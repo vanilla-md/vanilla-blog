@@ -1,6 +1,6 @@
 // refer to https://github.com/grubersjoe/react-activity-calendar/blob/bd9b2712846442b8f2ee09d9e45ab887d9785ef8/src/component/ActivityCalendar.tsx#L150
 'use client';
-import { Box, Heading, useTheme } from '@primer/react';
+import { Heading, useTheme } from '@primer/react';
 import React, { forwardRef, useRef } from 'react';
 import { MouseEventHandler, useCallback, useState } from 'react';
 import { flushSync } from 'react-dom';
@@ -409,13 +409,8 @@ function CalendarWithTooltip({ ...props }: CalendarWithTooltipProps) {
   );
 
   return (
-    <Box
-      as="section"
-      sx={{
-        mt: 4,
-      }}
-    >
-      <Heading as="h2" sx={{ mb: 2, fontSize: 2, fontWeight: 'normal' }}>
+    <section className={classes.CalendarContainer}>
+      <Heading as="h2" className={classes.Heading}>
         {postCount === 1
           ? '1 post'
           : `${postCount === 0 ? 'No' : postCount} posts `}
@@ -442,7 +437,7 @@ function CalendarWithTooltip({ ...props }: CalendarWithTooltipProps) {
         <strong>{tooltip && tooltipLabelText(tooltip.count)}</strong>
         {tooltip && ` on ${YMDToWMDY(tooltip.date)}`}
       </Tooltip>
-    </Box>
+    </section>
   );
 }
 

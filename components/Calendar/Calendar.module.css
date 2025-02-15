@@ -12,3 +12,13 @@
     vertical-align: middle;
   }
 }
+
+.CalendarContainer {
+  margin-top: var(--base-size-24);
+}
+
+.Heading {
+  margin-bottom: var(--base-size-8);
+  font-size: var(--text-body-size-large, --text-title-size-small);
+  font-weight: var(--base-text-weight-normal);
+}

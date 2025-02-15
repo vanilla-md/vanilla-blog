@@ -1,12 +1,10 @@
-import { Link, themeGet } from '@primer/react';
-import styled from 'styled-components';
+import React from 'react';
+import { Link, LinkProps } from '@primer/react';
+import clsx from 'clsx';
+import classes from './MutedLink.module.css';
 
-// muted link like the one in the GitHub profile page
-const MutedLink = styled(Link)`
-  color: ${themeGet('colors.fg.default')};
-  &:hover {
-    color: ${themeGet('colors.accent.fg')};
-  }
-`;
+export function MutedLink({ className, ...rest }: LinkProps) {
+  return <Link className={clsx(classes.MutedLink, className)} {...rest} />;
+}
 
 export default MutedLink;

@@ -6,8 +6,9 @@ import Avatar from '../Avatar';
 import Profile from '../Profile';
 import Footer from '../Footer';
 import classes from './Layout.module.css';
+import { PropsWithChildren } from 'react';
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children }: PropsWithChildren) {
   return (
     <div className={classes.LayoutContainer}>
       <div className={classes.HeaderBox}>

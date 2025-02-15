@@ -1,6 +1,4 @@
-import { Label, LabelGroup, themeGet } from '@primer/react';
-import styled from 'styled-components';
-
+/* 
 export const SolidLabelGroup = styled(LabelGroup)`
   display: flex;
   align-items: center;
@@ -20,4 +18,25 @@ export const SolidLabel = styled(Label)`
     color: ${themeGet('colors.fg.onEmphasis')};
     background-color: ${themeGet('colors.accent.emphasis')};
   }
-`;
+`; */
+
+:where(.SolidLabelGroup) {
+  display: flex;
+  align-items: center;
+  margin: var(--base-size-4) 0;
+  font-size: var(--text-body-size-small);
+  height: 30px;
+}
+
+.SolidLabel {
+  font-weight: var(--base-text-weight-medium);
+  color: var(--fgColor-accent);
+  border: var(--borderWidth-thin) solid var(--borderColor-transparent);
+  background-color: var(--bgColor-accent-muted);
+
+  &:hover {
+    cursor: pointer;
+    color: var(--fgColor-onEmphasis);
+    background-color: var(--bgColor-accent-emphasis);
+  }
+}

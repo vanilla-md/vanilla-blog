@@ -1,0 +1,6 @@
+.RepoMetaGroup {
+  margin-top: var(--base-size-8);
+  margin-bottom: 0;
+  color: var(--fgColor-muted);
+  font-size: var(--text-body-size-small);
+}

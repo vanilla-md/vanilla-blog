@@ -1,0 +1,6 @@
+:where(.BorderBox) {
+  border-width: var(--borderWidth-thin);
+  border-style: solid;
+  border-color: var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+}

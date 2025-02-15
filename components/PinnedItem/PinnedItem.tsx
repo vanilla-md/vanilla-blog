@@ -2,13 +2,8 @@ import type { Repository } from '@octokit/graphql-schema';
 import { Label, Link } from '@primer/react';
 import { Icon } from '../Icons/Icon';
 import BorderBox from '../BorderBox';
-import {
-  RepoMeta,
-  Meta,
-  PrimaryLanguage,
-  LanguageCircle,
-} from '../RepoList/RepoList';
 import classes from './PinnedIte.module.css';
+import { PrimaryLanguage, RepoMeta, RepoMetaGroup } from '../Repo';
 
 type PinnedItemProps = {
   pinnedItem: Repository;
@@ -49,30 +44,28 @@ export default function PinnedItem({ pinnedItem }: PinnedItemProps) {
         </p>
       )}
       <p className={classes.Desc}>{description}</p>
-      <RepoMeta>
-        {primaryLanguage?.color && (
-          <PrimaryLanguage>
-            <LanguageCircle
-              languageColor={primaryLanguage.color}
-            ></LanguageCircle>{' '}
-            <span>{primaryLanguage.name}</span>
-          </PrimaryLanguage>
+      <RepoMetaGroup>
+        {primaryLanguage?.name && (
+          <PrimaryLanguage
+            name={primaryLanguage.name}
+            color={primaryLanguage?.color ?? undefined}
+          />
         )}
         {stargazerCount > 0 && (
-          <Meta>
+          <RepoMeta>
             <Link href={url + '/stargazers'} muted>
               <Icon iconName="star" /> {stargazerCount}
             </Link>
-          </Meta>
+          </RepoMeta>
         )}
         {forkCount > 0 && (
-          <Meta>
+          <RepoMeta>
             <Link href={url + '/network/members'} muted>
               <Icon iconName="repo-forked" /> {forkCount}
             </Link>
-          </Meta>
+          </RepoMeta>
         )}
-      </RepoMeta>
+      </RepoMetaGroup>
     </BorderBox>
   );
 }

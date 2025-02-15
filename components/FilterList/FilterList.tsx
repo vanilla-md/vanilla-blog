@@ -3,16 +3,14 @@ import React from 'react';
 import { clsx } from 'clsx';
 
 import classes from './FilterList.module.css';
+import { PropsWithChildren } from 'react';
 
-export type FilterListProps = React.ComponentProps<'ul'> & {
+export type FilterListProps = PropsWithChildren<{
   className?: string;
-};
+}> &
+  React.ComponentProps<'ul'>;
 
-const FilterList = ({
-  className,
-  children,
-  ...rest
-}: React.PropsWithChildren<FilterListProps>) => {
+const FilterList = ({ className, children, ...rest }: FilterListProps) => {
   const items = React.Children.map(children, (child) => {
     return <li>{child}</li>;
   });
@@ -24,12 +22,13 @@ const FilterList = ({
   );
 };
 
-type FilterListItemProps = {
+type FilterListItemProps = PropsWithChildren<{
   className?: string;
   small?: boolean;
   selected?: boolean;
   count?: number;
-} & React.ComponentProps<'a'>;
+}> &
+  React.ComponentProps<'a'>;
 
 const FilterListItem = ({
   className,
@@ -38,7 +37,7 @@ const FilterListItem = ({
   small,
   selected,
   ...rest
-}: React.PropsWithChildren<FilterListItemProps>) => {
+}: FilterListItemProps) => {
   return (
     <a
       className={clsx(classes.FilterListItem, className)}

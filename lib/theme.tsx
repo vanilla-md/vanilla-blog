@@ -2,6 +2,7 @@
 
 import { theme, ThemeProvider as PrimerThemeProvider } from '@primer/react';
 import deepmerge from 'deepmerge';
+import { PropsWithChildren } from 'react';
 
 type ColorMode = 'day' | 'night' | 'light' | 'dark';
 export type ColorModeWithAuto = ColorMode | 'auto';
@@ -34,13 +35,11 @@ const customTheme = deepmerge(theme, {
   // breakpoints: ['768px', '1012px'],
 });
 
-export function ThemeProvider({
-  colorMode,
-  children,
-}: {
+type ThemeProviderProps = PropsWithChildren<{
   colorMode?: ColorModeWithAuto;
-  children: React.ReactNode;
-}) {
+}>;
+
+export function ThemeProvider({ colorMode, children }: ThemeProviderProps) {
   return (
     <PrimerThemeProvider theme={customTheme} colorMode={colorMode}>
       {children}

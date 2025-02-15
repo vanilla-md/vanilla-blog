@@ -1,65 +1,24 @@
 'use client';
-import {
-  Box,
-  Text,
-  Heading,
-  Label,
-  Link,
-  RelativeTime,
-  themeGet,
-} from '@primer/react';
-import styled from 'styled-components';
-import { SolidLabelGroup, SolidLabel } from '../SolidLable/SolidLabel';
+import { Heading, Label, Link, RelativeTime } from '@primer/react';
+import { SolidLabelGroup, SolidLabel } from '../SolidLabel';
 import { Icon } from '../Icons/Icon';
 // temporary fix
 import siteData from '@/generated/siteData.json';
 type Repository = (typeof siteData.repositories.nodes)[number];
 
-const StyledRepoList = styled.ol`
-  margin-top: 0;
-  padding-left: 0;
-`;
+import classes from './RepoList.module.css';
+import { RepoMeta } from '../Repo';
+import PrimaryLanguage from '../Repo/PrimaryLanguage';
+import RepoMetaGroup from '../Repo/MetaGroup';
+import { PropsWithChildren } from 'react';
 
-const StyledRepoListItem = styled.li`
-  list-style: none;
-  padding-top: ${themeGet('space.4')};
-  padding-bottom: ${themeGet('space.4')};
-  border-bottom-color: ${themeGet('colors.border.muted')};
-  border-bottom-width: ${themeGet('borderWidths.1')};
-  border-bottom-style: solid;
-`;
+type RepoListProps = PropsWithChildren<{
+  repos: Repository[];
+}>;
 
-export const RepoMeta = styled.p`
-  margin-top: ${themeGet('space.2')};
-  margin-bottom: 0;
-  color: ${themeGet('colors.fg.muted')};
-  font-size: ${themeGet('fontSizes.0')};
-`;
-
-export const Meta = styled.span`
-  & + & {
-    margin-left: ${themeGet('space.3')};
-  }
-`;
-
-export const PrimaryLanguage = styled.span`
-  margin-right: ${themeGet('space.3')};
-`;
-
-export const LanguageCircle = styled.span<{ languageColor: string }>`
-  position: relative;
-  top: 1px;
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  border: 1px solid ${themeGet('colors.primer.border.contrast')};
-  border-radius: 50%;
-  background-color: ${(props) => props.languageColor};
-`;
-
-export default function RepoList({ repos }: { repos: Repository[] }) {
+export default function RepoList({ repos }: RepoListProps) {
   return (
-    <StyledRepoList>
+    <ol className={classes.RepoList}>
       {repos.map(
         ({
           isPrivate,
@@ -76,50 +35,30 @@ export default function RepoList({ repos }: { repos: Repository[] }) {
           updatedAt,
           repositoryTopics,
         }) => (
-          <StyledRepoListItem key={id}>
-            <Box sx={{ display: 'inline-block', mb: 1, fontSize: 1 }}>
-              <Heading as="h3" sx={{ fontSize: 3 }}>
-                <Link href={url} sx={{ fontSize: 3 }}>
+          <li className={classes.RepoListItem} key={id}>
+            <div className={classes.Header}>
+              <Heading as="h3" className={classes.Heading}>
+                <Link href={url} className={classes.Heading}>
                   {name}
                 </Link>{' '}
                 {!isPrivate && (
-                  <Label
-                    variant="secondary"
-                    sx={{
-                      ml: 1,
-                      mb: 1,
-                      fontWeight: 'normal',
-                      verticalAlign: 'middle',
-                    }}
-                  >
+                  <Label variant="secondary" className={classes.Label}>
                     Public
                   </Label>
                 )}
               </Heading>
               {isFork && parent && (
-                <Text sx={{ mb: 1, color: 'fg.muted', fontSize: 0 }}>
+                <span className={classes.Forked}>
                   Forked from{' '}
                   <Link muted href={parent.url}>
                     {parent.nameWithOwner}
                   </Link>
-                </Text>
+                </span>
               )}
-            </Box>
+            </div>
 
             <div>
-              <Text
-                as="p"
-                sx={{
-                  display: 'inline-block',
-                  mb: 2,
-                  mt: 0,
-                  fontSize: 1,
-                  color: 'fg.muted',
-                  maxWidth: '70%',
-                }}
-              >
-                {description}
-              </Text>
+              <p className={classes.Description}>{description}</p>
             </div>
             {repositoryTopics.totalCount > 0 && (
               <SolidLabelGroup as="div">
@@ -130,42 +69,42 @@ export default function RepoList({ repos }: { repos: Repository[] }) {
                 ))}
               </SolidLabelGroup>
             )}
-            <RepoMeta>
-              {primaryLanguage?.color && (
-                <Meta>
-                  <LanguageCircle
-                    languageColor={primaryLanguage.color}
-                  ></LanguageCircle>{' '}
-                  <span>{primaryLanguage.name}</span>
-                </Meta>
+            <RepoMetaGroup>
+              {primaryLanguage?.name && (
+                <PrimaryLanguage
+                  name={primaryLanguage.name}
+                  color={primaryLanguage.color}
+                />
               )}
               {stargazerCount > 0 && (
-                <Meta>
+                <RepoMeta>
                   <Link muted href={url + '/stargazers'}>
                     <Icon iconName="star" /> {stargazerCount}
                   </Link>
-                </Meta>
+                </RepoMeta>
               )}
               {forkCount > 0 && (
-                <Meta>
+                <RepoMeta>
                   <Link muted href={url + '/network/members'}>
                     <Icon iconName="repo-forked" /> {forkCount}
                   </Link>
-                </Meta>
+                </RepoMeta>
               )}
               {licenseInfo && (
-                <Meta>
+                <RepoMeta>
                   <Icon iconName="law" />
-                  <Text sx={{ ml: 1 }}>{licenseInfo.name}</Text>
-                </Meta>
+                  <span className={classes.LicenseName}>
+                    {licenseInfo.name}
+                  </span>
+                </RepoMeta>
               )}
-              <Meta>
+              <RepoMeta>
                 Updated <RelativeTime datetime={updatedAt} />
-              </Meta>
-            </RepoMeta>
-          </StyledRepoListItem>
+              </RepoMeta>
+            </RepoMetaGroup>
+          </li>
         ),
       )}
-    </StyledRepoList>
+    </ol>
   );
 }
